@@ -23,7 +23,7 @@ const About: React.FC = () => {
           >
             <div className="relative w-full">
               <img
-                src="/src/assets/images/hero-cleaning.jpg"
+                src="/images/hero-cleaning.jpg"
                 alt="Clean & Care PRO professional cleaning team"
                 className="w-full h-[500px] object-cover rounded-3xl shadow-xl"
               />

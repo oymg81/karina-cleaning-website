@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
               {/* Ensure logo is visible on dark background. A white logo is ideal, but we will use the provided one and give it a slight background if needed, or rely on transparency. */}
               <div className="bg-white/10 p-2 rounded-lg inline-block backdrop-blur-sm">
                 <img
-                  src="/src/assets/logo/logo.png"
+                  src="/images/logo.png"
                   alt="Clean & Care PRO Logo"
                   className="h-10 w-auto object-contain brightness-0 invert"
                   style={{ filter: 'brightness(0) invert(1)' }}

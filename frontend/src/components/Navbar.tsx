@@ -39,7 +39,7 @@ const Navbar: React.FC = () => {
           className="flex items-center gap-2"
         >
           <img
-            src="/src/assets/logo/logo.png"
+            src="/images/logo.png"
             alt="Clean & Care PRO Logo"
             className="h-16 w-auto object-contain"
           />

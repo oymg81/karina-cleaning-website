@@ -32,7 +32,7 @@ const CtaSection: React.FC = () => {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/src/assets/images/about-team.jpg"
+          src="/images/about-team.jpg"
           alt="Cleaning service professional"
           className="w-full h-full object-cover"
         />

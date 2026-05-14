@@ -57,7 +57,7 @@ const Hero: React.FC = () => {
           >
             <div className="relative">
               <img
-                src="/src/assets/images/cta-cleaning.jpg"
+                src="/images/cta-cleaning.jpg"
                 alt="Professional cleaner in a modern living room"
                 className="w-full max-w-[550px] h-[500px] object-cover rounded-3xl shadow-2xl"
               />
