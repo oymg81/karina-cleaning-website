@@ -36,10 +36,6 @@ const Hero: React.FC = () => {
               <a href="#contact" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-all text-center">
                 {t.hero.bookNow}
               </a>
-              <a href="tel:714-473-1140" className="border border-blue-600 text-blue-600 hover:bg-blue-50 px-6 py-3 rounded-xl flex items-center justify-center gap-2 font-semibold transition-all">
-                <Phone className="w-5 h-5" />
-                714-473-1140
-              </a>
             </div>
             
             <div className="flex items-center gap-2 text-slate-500 font-medium text-sm sm:text-base">

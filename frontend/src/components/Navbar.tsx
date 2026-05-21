@@ -31,7 +31,7 @@ const Navbar: React.FC = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm">
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
         {/* Logo */}
         <a
           href="#home"
@@ -41,7 +41,7 @@ const Navbar: React.FC = () => {
           <img
             src="/images/logo.png"
             alt="Clean & Care PRO Logo"
-            className="h-16 w-auto object-contain"
+            className="h-20 w-auto object-contain"
           />
         </a>
 
@@ -61,21 +61,23 @@ const Navbar: React.FC = () => {
             ))}
           </ul>
           
-          <div className="flex items-center gap-4 border-l border-slate-200 pl-6">
-            <button 
-              onClick={toggleLanguage}
-              className="flex items-center gap-1 text-slate-600 hover:text-blue-600 font-medium transition-colors bg-slate-100 px-3 py-1.5 rounded-full"
-            >
-              <Globe className="w-4 h-4" />
-              <span>{language === 'en' ? '🇺🇸 EN' : '🇪🇸 ES'}</span>
-            </button>
-            <a
-              href="tel:714-473-1140"
-              className="flex items-center gap-2 text-navy font-semibold hover:text-blue-600 transition-colors"
-            >
-              <Phone className="w-4 h-4 text-blue-600" />
-              714-473-1140
-            </a>
+          <div className="flex items-center gap-6 border-l border-slate-200 pl-6">
+            <div className="flex items-center gap-3">
+              <button 
+                onClick={() => setLanguage('en')}
+                className={`text-xl transition-all ${language === 'en' ? 'border-b-2 border-blue-600 pb-1' : 'opacity-50 hover:opacity-100 pb-1'}`}
+                title="English"
+              >
+                🇺🇸 EN
+              </button>
+              <button 
+                onClick={() => setLanguage('es')}
+                className={`text-xl transition-all ${language === 'es' ? 'border-b-2 border-blue-600 pb-1' : 'opacity-50 hover:opacity-100 pb-1'}`}
+                title="Español"
+              >
+                🇪🇸 ES
+              </button>
+            </div>
             <a
               href="#contact"
               onClick={(e) => handleScrollTo(e, '#contact')}
@@ -88,13 +90,20 @@ const Navbar: React.FC = () => {
 
         {/* Mobile Menu Toggle & Lang */}
         <div className="flex items-center gap-4 lg:hidden">
-          <button 
-            onClick={toggleLanguage}
-            className="flex items-center gap-1 text-slate-600 font-medium bg-slate-100 px-2 py-1 rounded-full text-sm"
-          >
-            <Globe className="w-3 h-3" />
-            <span>{language === 'en' ? 'EN' : 'ES'}</span>
-          </button>
+          <div className="flex items-center gap-2 mr-2">
+            <button 
+              onClick={() => setLanguage('en')}
+              className={`text-lg transition-all ${language === 'en' ? 'border-b-2 border-blue-600 pb-0.5' : 'opacity-50 hover:opacity-100 pb-0.5'}`}
+            >
+              🇺🇸
+            </button>
+            <button 
+              onClick={() => setLanguage('es')}
+              className={`text-lg transition-all ${language === 'es' ? 'border-b-2 border-blue-600 pb-0.5' : 'opacity-50 hover:opacity-100 pb-0.5'}`}
+            >
+              🇪🇸
+            </button>
+          </div>
           <button
             className="text-navy p-1 focus:outline-none"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -129,13 +138,6 @@ const Navbar: React.FC = () => {
               </ul>
               
               <div className="flex flex-col gap-4 mt-4 pt-4 border-t border-slate-100">
-                <a
-                  href="tel:714-473-1140"
-                  className="flex items-center justify-center gap-2 text-navy font-semibold py-3 bg-slate-50 rounded-lg"
-                >
-                  <Phone className="w-5 h-5 text-blue-600" />
-                  714-473-1140
-                </a>
                 <a
                   href="#contact"
                   onClick={(e) => handleScrollTo(e, '#contact')}

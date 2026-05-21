@@ -11,7 +11,7 @@ export const translations = {
       quote: 'Get a Quote'
     },
     hero: {
-      topRated: 'Top-Rated in California',
+      topRated: 'Top-Rated in Los Angeles - CA',
       title1: 'Professional',
       title2: 'Cleaning Services',
       title3: 'in California',
@@ -139,7 +139,7 @@ export const translations = {
       quote: 'Cotizar'
     },
     hero: {
-      topRated: 'Mejor Calificados en California',
+      topRated: 'Mejor Calificados en Los Angeles - CA',
       title1: 'Servicios de',
       title2: 'Limpieza Profesional',
       title3: 'en California',

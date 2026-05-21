@@ -15,13 +15,11 @@ const Footer: React.FC = () => {
           {/* Company Info */}
           <div className="space-y-4 flex flex-col items-center md:items-start">
             <a href="#home" className="inline-block mb-2">
-              {/* Ensure logo is visible on dark background. A white logo is ideal, but we will use the provided one and give it a slight background if needed, or rely on transparency. */}
-              <div className="bg-white/10 p-2 rounded-lg inline-block backdrop-blur-sm">
+              <div className="inline-block">
                 <img
                   src="/images/logo.png"
                   alt="Clean & Care PRO Logo"
-                  className="h-10 w-auto object-contain brightness-0 invert"
-                  style={{ filter: 'brightness(0) invert(1)' }}
+                  className="h-16 w-auto object-contain"
                 />
               </div>
             </a>
@@ -90,6 +88,15 @@ const Footer: React.FC = () => {
           <p className="text-sm text-slate-500">
             &copy; {currentYear} {t.footer.rights}
           </p>
+          <div className="flex items-center justify-center gap-2 text-sm text-slate-400">
+            <span>Powered by</span>
+            <a href="https://codingsoft.tech" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-blue-500 hover:text-blue-400 font-medium transition-colors">
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/>
+              </svg>
+              CodingSoft Platform
+            </a>
+          </div>
           <div className="flex gap-6 text-sm text-slate-500">
             <a href="#" className="hover:text-white transition-colors">{t.footer.privacy}</a>
             <a href="#" className="hover:text-white transition-colors">{t.footer.terms}</a>

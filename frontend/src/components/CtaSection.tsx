@@ -57,26 +57,32 @@ const CtaSection: React.FC = () => {
               {t.cta.desc}
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a href="tel:714-473-1140" className="bg-white text-blue-600 hover:bg-slate-50 px-6 py-3 rounded-xl font-semibold transition-all flex items-center justify-center gap-2">
-                <Phone className="w-5 h-5" />
-                {t.cta.call} 714-473-1140
-              </a>
+            <div className="mt-12 space-y-6">
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 rounded-2xl bg-blue-500/20 flex items-center justify-center shrink-0 border border-blue-500/30">
+                  <div className="w-4 h-4 rounded-full bg-blue-500" />
+                </div>
+                <div>
+                  <h4 className="text-xl font-bold text-white">{t.cta.fastQuotes}</h4>
+                  <p className="text-slate-300 text-sm mt-1">Get your personalized quote quickly and easily.</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center shrink-0 border border-white/20">
+                  <div className="w-4 h-4 rounded-full bg-white" />
+                </div>
+                <div>
+                  <h4 className="text-xl font-bold text-white">{t.cta.flexible}</h4>
+                  <p className="text-slate-300 text-sm mt-1">We work around your schedule, not the other way around.</p>
+                </div>
+              </div>
             </div>
             
-            <div className="mt-12 space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">
-                  <div className="w-2.5 h-2.5 rounded-full bg-blue-500" />
-                </div>
-                <p className="text-slate-200">{t.cta.fastQuotes}</p>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
-                  <div className="w-2.5 h-2.5 rounded-full bg-white" />
-                </div>
-                <p className="text-white">{t.cta.flexible}</p>
-              </div>
+            <div className="flex flex-col sm:flex-row gap-4 mt-10">
+              <a href="tel:714-473-1140" className="bg-white text-blue-600 hover:bg-slate-50 px-8 py-4 rounded-2xl font-bold text-lg transition-all flex items-center justify-center gap-3 shadow-xl w-full sm:w-auto">
+                <Phone className="w-6 h-6" />
+                {t.cta.call} 714-473-1140
+              </a>
             </div>
           </motion.div>
 
