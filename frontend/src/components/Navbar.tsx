@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, X, Phone, Globe } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../LanguageContext';
 
@@ -25,9 +25,6 @@ const Navbar: React.FC = () => {
     setMobileMenuOpen(false);
   };
 
-  const toggleLanguage = () => {
-    setLanguage(language === 'en' ? 'es' : 'en');
-  };
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm">
@@ -60,17 +57,17 @@ const Navbar: React.FC = () => {
               </li>
             ))}
           </ul>
-          
+
           <div className="flex items-center gap-6 border-l border-slate-200 pl-6">
             <div className="flex items-center gap-3">
-              <button 
+              <button
                 onClick={() => setLanguage('en')}
                 className={`text-xl transition-all ${language === 'en' ? 'border-b-2 border-blue-600 pb-1' : 'opacity-50 hover:opacity-100 pb-1'}`}
                 title="English"
               >
                 🇺🇸 EN
               </button>
-              <button 
+              <button
                 onClick={() => setLanguage('es')}
                 className={`text-xl transition-all ${language === 'es' ? 'border-b-2 border-blue-600 pb-1' : 'opacity-50 hover:opacity-100 pb-1'}`}
                 title="Español"
@@ -91,13 +88,13 @@ const Navbar: React.FC = () => {
         {/* Mobile Menu Toggle & Lang */}
         <div className="flex items-center gap-4 lg:hidden">
           <div className="flex items-center gap-2 mr-2">
-            <button 
+            <button
               onClick={() => setLanguage('en')}
               className={`text-lg transition-all ${language === 'en' ? 'border-b-2 border-blue-600 pb-0.5' : 'opacity-50 hover:opacity-100 pb-0.5'}`}
             >
               🇺🇸
             </button>
-            <button 
+            <button
               onClick={() => setLanguage('es')}
               className={`text-lg transition-all ${language === 'es' ? 'border-b-2 border-blue-600 pb-0.5' : 'opacity-50 hover:opacity-100 pb-0.5'}`}
             >
@@ -136,7 +133,7 @@ const Navbar: React.FC = () => {
                   </li>
                 ))}
               </ul>
-              
+
               <div className="flex flex-col gap-4 mt-4 pt-4 border-t border-slate-100">
                 <a
                   href="#contact"
