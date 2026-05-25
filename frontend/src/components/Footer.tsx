@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
   const { t } = useLanguage();
 
   return (
-    <footer className="bg-slate-950 text-slate-300 pt-16 pb-8 border-t border-slate-900">
+    <footer className="bg-green-50 text-slate-600 pt-16 pb-8 border-t border-green-200/50">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12 text-center md:text-left">
 
@@ -23,17 +23,17 @@ const Footer: React.FC = () => {
                 />
               </div>
             </a>
-            <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
+            <p className="text-slate-500 text-sm leading-relaxed max-w-xs">
               {t.footer.desc}
             </p>
             <div className="flex gap-4 pt-2">
-              <a href="#" className="w-10 h-10 rounded-full bg-slate-800 hover:bg-blue-600 flex items-center justify-center transition-all hover:text-white">
+              <a href="#" className="w-10 h-10 rounded-full bg-white border border-green-200/60 text-slate-600 hover:bg-green-600 hover:text-white hover:border-green-600 flex items-center justify-center transition-all">
                 <FaFacebookF className="w-4 h-4" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-slate-800 hover:bg-blue-600 flex items-center justify-center transition-all hover:text-white">
+              <a href="#" className="w-10 h-10 rounded-full bg-white border border-green-200/60 text-slate-600 hover:bg-green-600 hover:text-white hover:border-green-600 flex items-center justify-center transition-all">
                 <FaInstagram className="w-4 h-4" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-slate-800 hover:bg-blue-600 flex items-center justify-center transition-all hover:text-white">
+              <a href="#" className="w-10 h-10 rounded-full bg-white border border-green-200/60 text-slate-600 hover:bg-green-600 hover:text-white hover:border-green-600 flex items-center justify-center transition-all">
                 <FaLinkedinIn className="w-4 h-4" />
               </a>
             </div>
@@ -41,56 +41,56 @@ const Footer: React.FC = () => {
 
           {/* Quick Links */}
           <div className="flex flex-col items-center md:items-start">
-            <h4 className="text-white font-bold text-lg mb-6">{t.footer.quickLinks}</h4>
+            <h4 className="text-slate-900 font-bold text-lg mb-6">{t.footer.quickLinks}</h4>
             <ul className="space-y-3">
-              <li><a href="#home" className="hover:text-blue-500 transition-colors">{t.navbar.home}</a></li>
-              <li><a href="#services" className="hover:text-blue-500 transition-colors">{t.navbar.services}</a></li>
-              <li><a href="#about" className="hover:text-blue-500 transition-colors">{t.navbar.about}</a></li>
-              <li><a href="#reviews" className="hover:text-blue-500 transition-colors">{t.navbar.reviews}</a></li>
-              <li><a href="#contact" className="hover:text-blue-500 transition-colors">{t.navbar.contact}</a></li>
+              <li><a href="#home" className="hover:text-green-600 transition-colors">{t.navbar.home}</a></li>
+              <li><a href="#services" className="hover:text-green-600 transition-colors">{t.navbar.services}</a></li>
+              <li><a href="#about" className="hover:text-green-600 transition-colors">{t.navbar.about}</a></li>
+              <li><a href="#reviews" className="hover:text-green-600 transition-colors">{t.navbar.reviews}</a></li>
+              <li><a href="#contact" className="hover:text-green-600 transition-colors">{t.navbar.contact}</a></li>
             </ul>
           </div>
 
           {/* Services */}
           <div className="flex flex-col items-center md:items-start">
-            <h4 className="text-white font-bold text-lg mb-6">{t.footer.services}</h4>
+            <h4 className="text-slate-900 font-bold text-lg mb-6">{t.footer.services}</h4>
             <ul className="space-y-3">
-              <li><a href="#services" className="hover:text-blue-500 transition-colors">{t.services.list[0].title}</a></li>
-              <li><a href="#services" className="hover:text-blue-500 transition-colors">{t.services.list[1].title}</a></li>
-              <li><a href="#services" className="hover:text-blue-500 transition-colors">{t.services.list[2].title}</a></li>
-              <li><a href="#services" className="hover:text-blue-500 transition-colors">{t.services.list[3].title}</a></li>
-              <li><a href="#services" className="hover:text-blue-500 transition-colors">{t.services.list[5].title}</a></li>
+              <li><a href="#services" className="hover:text-green-600 transition-colors">{t.services.list[0].title}</a></li>
+              <li><a href="#services" className="hover:text-green-600 transition-colors">{t.services.list[1].title}</a></li>
+              <li><a href="#services" className="hover:text-green-600 transition-colors">{t.services.list[2].title}</a></li>
+              <li><a href="#services" className="hover:text-green-600 transition-colors">{t.services.list[3].title}</a></li>
+              <li><a href="#services" className="hover:text-green-600 transition-colors">{t.services.list[5].title}</a></li>
             </ul>
           </div>
 
           {/* Contact Info */}
           <div className="flex flex-col items-center md:items-start">
-            <h4 className="text-white font-bold text-lg mb-6">{t.footer.contactInfo}</h4>
+            <h4 className="text-slate-900 font-bold text-lg mb-6">{t.footer.contactInfo}</h4>
             <ul className="space-y-4">
               <li className="flex items-center md:items-start gap-3">
-                <Phone className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
-                <span>714-473-1140</span>
+                <Phone className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
+                <span className="text-slate-700">714-473-1140</span>
               </li>
               <li className="flex items-center md:items-start gap-3">
-                <Mail className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
-                <span>info@cleancarepro.com</span>
+                <Mail className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
+                <span className="text-slate-700">info@cleancarepro.com</span>
               </li>
               <li className="flex items-center md:items-start gap-3 text-center md:text-left">
-                <MapPin className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
-                <span>{t.footer.serving}</span>
+                <MapPin className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
+                <span className="text-slate-700">{t.footer.serving}</span>
               </li>
             </ul>
           </div>
 
         </div>
 
-        <div className="border-t border-slate-900 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center">
+        <div className="border-t border-green-200/60 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center">
           <p className="text-sm text-slate-500">
             &copy; {currentYear} {t.footer.rights}
           </p>
-          <div className="flex items-center justify-center gap-2 text-sm text-slate-400">
+          <div className="flex items-center justify-center gap-2 text-sm text-slate-500">
             <span>Powered by</span>
-            <a href="https://codingsoft.tech" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-blue-500 hover:text-blue-400 font-medium transition-colors">
+            <a href="https://codingsoft.tech" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-green-600 hover:text-green-700 font-medium transition-colors">
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/>
               </svg>
@@ -98,8 +98,8 @@ const Footer: React.FC = () => {
             </a>
           </div>
           <div className="flex gap-6 text-sm text-slate-500">
-            <a href="#" className="hover:text-white transition-colors">{t.footer.privacy}</a>
-            <a href="#" className="hover:text-white transition-colors">{t.footer.terms}</a>
+            <a href="#" className="hover:text-slate-800 transition-colors">{t.footer.privacy}</a>
+            <a href="#" className="hover:text-slate-800 transition-colors">{t.footer.terms}</a>
           </div>
         </div>
       </div>
