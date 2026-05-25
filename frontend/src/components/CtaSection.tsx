@@ -28,7 +28,7 @@ const CtaSection: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-24 bg-blue-600 text-white relative overflow-hidden">
+    <section id="contact" className="py-24 bg-[#00FF00] text-slate-900 relative overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img
@@ -36,7 +36,7 @@ const CtaSection: React.FC = () => {
           alt="Cleaning service professional"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-blue-600/95 backdrop-blur-sm" />
+        <div className="absolute inset-0 bg-[#00FF00]/90 backdrop-blur-sm" />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
@@ -48,39 +48,39 @@ const CtaSection: React.FC = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
-            className="text-white"
+            className="text-slate-900"
           >
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight text-white tracking-tight">
-              {t.cta.title1} <span className="text-blue-500">{t.cta.title2}</span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight text-slate-900 tracking-tight">
+              {t.cta.title1} <span className="text-green-800">{t.cta.title2}</span>
             </h2>
-            <p className="text-lg text-slate-300 mb-8 max-w-lg leading-relaxed">
+            <p className="text-lg text-slate-800 mb-8 max-w-lg leading-relaxed font-medium">
               {t.cta.desc}
             </p>
             
             <div className="mt-12 space-y-6">
               <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-blue-500/20 flex items-center justify-center shrink-0 border border-blue-500/30">
-                  <div className="w-4 h-4 rounded-full bg-blue-500" />
+                <div className="w-14 h-14 rounded-2xl bg-green-800/20 flex items-center justify-center shrink-0 border border-green-800/30">
+                  <div className="w-4 h-4 rounded-full bg-green-800" />
                 </div>
                 <div>
-                  <h4 className="text-xl font-bold text-white">{t.cta.fastQuotes}</h4>
-                  <p className="text-slate-300 text-sm mt-1">Get your personalized quote quickly and easily.</p>
+                  <h4 className="text-xl font-bold text-slate-900">{t.cta.fastQuotes}</h4>
+                  <p className="text-slate-800 text-sm mt-1">Get your personalized quote quickly and easily.</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center shrink-0 border border-white/20">
-                  <div className="w-4 h-4 rounded-full bg-white" />
+                <div className="w-14 h-14 rounded-2xl bg-slate-900/10 flex items-center justify-center shrink-0 border border-slate-900/20">
+                  <div className="w-4 h-4 rounded-full bg-slate-900" />
                 </div>
                 <div>
-                  <h4 className="text-xl font-bold text-white">{t.cta.flexible}</h4>
-                  <p className="text-slate-300 text-sm mt-1">We work around your schedule, not the other way around.</p>
+                  <h4 className="text-xl font-bold text-slate-900">{t.cta.flexible}</h4>
+                  <p className="text-slate-800 text-sm mt-1">We work around your schedule, not the other way around.</p>
                 </div>
               </div>
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4 mt-10">
-              <a href="tel:714-473-1140" className="bg-white text-blue-600 hover:bg-slate-50 px-8 py-4 rounded-2xl font-bold text-lg transition-all flex items-center justify-center gap-3 shadow-xl w-full sm:w-auto">
-                <Phone className="w-6 h-6" />
+              <a href="tel:714-473-1140" className="bg-white text-slate-900 hover:bg-slate-50 px-8 py-4 rounded-2xl font-bold text-lg transition-all flex items-center justify-center gap-3 shadow-xl w-full sm:w-auto border border-green-200">
+                <Phone className="w-6 h-6 text-green-700" />
                 {t.cta.call} 714-473-1140
               </a>
             </div>
@@ -106,7 +106,7 @@ const CtaSection: React.FC = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full rounded-xl border border-slate-300 px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+                  className="w-full rounded-xl border border-slate-300 px-4 py-3 focus:ring-2 focus:ring-green-500 outline-none"
                   placeholder="John Doe"
                 />
               </div>
@@ -121,7 +121,7 @@ const CtaSection: React.FC = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full rounded-xl border border-slate-300 px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+                    className="w-full rounded-xl border border-slate-300 px-4 py-3 focus:ring-2 focus:ring-green-500 outline-none"
                     placeholder="john@example.com"
                   />
                 </div>
@@ -134,7 +134,7 @@ const CtaSection: React.FC = () => {
                     value={formData.phone}
                     onChange={handleChange}
                     required
-                    className="w-full rounded-xl border border-slate-300 px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+                    className="w-full rounded-xl border border-slate-300 px-4 py-3 focus:ring-2 focus:ring-green-500 outline-none"
                     placeholder="(714) 473-1140"
                   />
                 </div>
@@ -147,7 +147,7 @@ const CtaSection: React.FC = () => {
                   name="service"
                   value={formData.service}
                   onChange={handleChange}
-                  className="w-full rounded-xl border border-slate-300 px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none bg-white"
+                  className="w-full rounded-xl border border-slate-300 px-4 py-3 focus:ring-2 focus:ring-green-500 outline-none bg-white"
                 >
                   <option value="residential">{t.services.list[0].title}</option>
                   <option value="commercial">{t.services.list[1].title}</option>
@@ -166,13 +166,13 @@ const CtaSection: React.FC = () => {
                   value={formData.message}
                   onChange={handleChange}
                   rows={3}
-                  className="w-full rounded-xl border border-slate-300 px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none resize-none"
+                  className="w-full rounded-xl border border-slate-300 px-4 py-3 focus:ring-2 focus:ring-green-500 outline-none resize-none"
                   placeholder={t.cta.messagePlaceholder}
                 ></textarea>
               </div>
               
-              <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 mt-2">
-                <Send className="w-5 h-5" />
+              <button type="submit" className="w-full bg-[#00FF00] hover:bg-[#00dd00] text-slate-900 px-6 py-3 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 mt-2">
+                <Send className="w-5 h-5 text-slate-900" />
                 {t.cta.sendRequest}
               </button>
             </form>
