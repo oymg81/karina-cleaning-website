@@ -28,27 +28,175 @@ export const translations = {
       list: [
         {
           title: 'Residential Cleaning',
-          description: 'Comprehensive cleaning for your home, ensuring a healthy and spotless living environment for your family.'
-        },
-        {
-          title: 'Commercial Cleaning',
-          description: 'Professional cleaning solutions for businesses, retail stores, and commercial facilities to impress your clients.'
+          description: 'Comprehensive cleaning for your home, ensuring a healthy and spotless living environment for your family.',
+          modal: {
+            intro: 'Our residential cleaning services help keep your home fresh, comfortable, and professionally cared for. Whether you need recurring cleaning, weekly service, bi-weekly service, monthly cleaning, or same-day support when scheduling allows, our team focuses on reliable results and attention to detail.',
+            whatsIncludedTitle: "What's Included",
+            whatsIncluded: [
+              'Dusting furniture, décor, shelves, and light fixtures',
+              'Cleaning countertops, sinks, and kitchen surfaces',
+              'Bathroom cleaning and sanitizing',
+              'Vacuuming carpets and mopping hard floors',
+              'Cleaning mirrors, glass, and high-touch surfaces',
+              'Emptying bins and replacing liners',
+              'Making beds or changing linens when requested',
+              'General tidying and home refresh'
+            ],
+            bestForTitle: 'Best For',
+            bestFor: [
+              'Single-family homes',
+              'Townhomes and condos',
+              'Apartments and studios',
+              'Luxury homes and estates',
+              'New homeowners',
+              'Realtors preparing for open houses',
+              'Seniors who need an extra hand'
+            ]
+          }
         },
         {
           title: 'Deep Cleaning',
-          description: 'Intensive top-to-bottom cleaning targeting hidden dirt and grime in hard-to-reach areas of your property.'
+          description: 'Intensive top-to-bottom cleaning targeting hidden dirt and grime in hard-to-reach areas of your property.',
+          modal: {
+            intro: 'Our deep cleaning services are designed to give your home a complete refresh with detailed attention to areas that need extra care. This service focuses on removing built-up dust, dirt, and grime from kitchens, bathrooms, floors, surfaces, and hard-to-reach spaces.',
+            whatsIncludedTitle: "What's Included",
+            whatsIncluded: [
+              'Detailed bathroom cleaning',
+              'Kitchen deep cleaning',
+              'Dusting surfaces and baseboards',
+              'Vacuuming and mopping floors',
+              'Cleaning hard-to-reach areas',
+              'Interior window cleaning',
+              'Appliance exterior cleaning',
+              'Removing dust and buildup',
+              'Sanitizing high-touch surfaces',
+              'Light organization touch-ups'
+            ],
+            bestForTitle: 'Best For',
+            bestFor: [
+              'Seasonal cleaning',
+              'First-time cleaning service',
+              'Special occasions',
+              'Homes that need extra attention',
+              'Preparing for guests or events'
+            ]
+          }
         },
         {
           title: 'Move In / Out Cleaning',
-          description: 'Detailed cleaning to prepare your new home or leave your old space spotless for the next occupants.'
+          description: 'Detailed cleaning to prepare your new home or leave your old space spotless for the next occupants.',
+          modal: {
+            intro: 'Our move-in and move-out cleaning services help prepare homes, apartments, and properties before or after a move. We carefully clean every room so the space feels fresh, spotless, and ready for the next occupant.',
+            whatsIncludedTitle: "What's Included",
+            whatsIncluded: [
+              'Deep cleaning of all rooms and surfaces',
+              'Dusting baseboards, vents, blinds, and light fixtures',
+              'Scrubbing and sanitizing bathrooms and kitchens',
+              'Wiping cabinets, appliances, and countertops',
+              'Interior window and mirror cleaning',
+              'Sweeping, vacuuming, and mopping all floors',
+              'Trash removal and minor debris pickup',
+              'Final walkthrough readiness'
+            ],
+            bestForTitle: 'Best For',
+            bestFor: [
+              'Tenants preparing to move out',
+              'Landlords preparing for new renters',
+              'Realtors staging properties',
+              'Property managers',
+              'New homeowners',
+              'Students moving in or out',
+              'Short-term rental owners between stays'
+            ]
+          }
         },
         {
           title: 'Office Cleaning',
-          description: 'Reliable office maintenance promoting a productive and hygienic workspace for your employees.'
+          description: 'Reliable office maintenance promoting a productive and hygienic workspace for your employees.',
+          modal: {
+            intro: 'Our office and workspace cleaning services help maintain a clean, organized, and professional environment that supports productivity and leaves a positive impression on employees, clients, and visitors.',
+            whatsIncludedTitle: "What's Included",
+            whatsIncluded: [
+              'Wiping desks, chairs, and office surfaces',
+              'Sanitizing shared areas and electronics',
+              'Cleaning windows and partitions',
+              'Vacuuming carpets and mopping floors',
+              'Tidying reception areas and entryways',
+              'Emptying bins and removing rubbish',
+              'Maintaining meeting rooms and break areas',
+              'Cleaning high-touch workplace surfaces'
+            ],
+            bestForTitle: 'Best For',
+            bestFor: [
+              'Offices',
+              'Workspaces',
+              'Real estate offices',
+              'Meeting rooms',
+              'Reception areas',
+              'Small business work environments'
+            ]
+          }
         },
         {
-          title: 'Airbnb & Vacation Rental',
-          description: 'Quick turnover cleaning services to guarantee 5-star reviews from your short-term rental guests.'
+          title: 'Commercial Cleaning',
+          description: 'Professional cleaning solutions for businesses, retail stores, and commercial facilities to impress your clients.',
+          modal: {
+            intro: 'Our commercial cleaning services help businesses maintain a clean, organized, and professional environment without adding stress to daily operations. We offer flexible schedules, including evenings, overnight service, weekends, and customized cleaning plans.',
+            whatsIncludedTitle: "What's Included",
+            whatsIncluded: [
+              'Cleaning floors, windows, blinds, desks, and furniture',
+              'Vacuuming and spot-treating carpets',
+              'Bathroom and kitchen cleaning',
+              'Restocking bathroom and kitchen paper products',
+              'Ceiling and wall dusting',
+              'Cobweb removal',
+              'Emptying trash bins and managing waste disposal',
+              'High-touch disinfecting services',
+              'Green cleaning options when requested'
+            ],
+            bestForTitle: 'Businesses We Serve',
+            bestFor: [
+              'Office buildings',
+              'Coffee shops',
+              'Restaurants',
+              'Gyms and fitness studios',
+              'Medical offices and clinics',
+              'Retail stores',
+              'Art galleries',
+              'Event venues',
+              'Banks and churches',
+              'Childcare facilities',
+              'Dealerships and commercial properties'
+            ]
+          }
+        },
+        {
+          title: 'Airbnb & Vacation Cleaning',
+          description: 'Quick turnover cleaning services to guarantee 5-star reviews from your short-term rental guests.',
+          modal: {
+            intro: 'Our Airbnb and vacation cleaning services help hosts keep their properties spotless, welcoming, and guest-ready after every stay. We focus on reliable turnover cleaning, fresh presentation, and attention to detail to help support 5-star guest experiences.',
+            whatsIncludedTitle: "What's Included",
+            whatsIncluded: [
+              'Full cleaning between guest stays',
+              'Bathroom sanitizing and detailing',
+              'Kitchen cleaning and surface disinfecting',
+              'Bed making and linen replacement',
+              'Vacuuming and mopping floors',
+              'Dusting furniture and surfaces',
+              'Trash removal and replacement',
+              'Restocking basic guest supplies',
+              'Guest-ready presentation check',
+              'Flexible scheduling for check-ins and check-outs'
+            ],
+            bestForTitle: 'Best For',
+            bestFor: [
+              'Airbnb hosts',
+              'Vacation rental owners',
+              'Short-term rental managers',
+              'Property managers',
+              'Hosts managing multiple units'
+            ]
+          }
         }
       ]
     },
@@ -170,27 +318,175 @@ export const translations = {
       list: [
         {
           title: 'Limpieza Residencial',
-          description: 'Limpieza integral para su hogar, asegurando un ambiente de vida saludable e impecable para su familia.'
-        },
-        {
-          title: 'Limpieza Comercial',
-          description: 'Soluciones de limpieza profesional para empresas, tiendas minoristas y locales comerciales para impresionar a sus clientes.'
+          description: 'Limpieza integral para su hogar, asegurando un ambiente de vida saludable e impecable para su familia.',
+          modal: {
+            intro: 'Nuestros servicios de limpieza residencial ayudan a mantener tu hogar fresco, cómodo y cuidado profesionalmente. Ya sea que necesites limpieza recurrente, semanal, quincenal, mensual o servicio el mismo día cuando haya disponibilidad, nuestro equipo se enfoca en resultados confiables y atención al detalle.',
+            whatsIncludedTitle: 'Qué incluye',
+            whatsIncluded: [
+              'Limpieza de muebles, decoración, repisas y lámparas',
+              'Limpieza de superficies, lavamanos y áreas de cocina',
+              'Limpieza y desinfección de baños',
+              'Aspirado de alfombras y trapeado de pisos',
+              'Limpieza de espejos, vidrios y superficies de alto contacto',
+              'Retiro de basura y reemplazo de bolsas',
+              'Tendido de camas o cambio de sábanas cuando se solicite',
+              'Orden general y refrescado del hogar'
+            ],
+            bestForTitle: 'Ideal para',
+            bestFor: [
+              'Casas familiares',
+              'Townhomes y condominios',
+              'Apartamentos y estudios',
+              'Casas de lujo',
+              'Nuevos propietarios',
+              'Realtors preparando open houses',
+              'Personas mayores que necesitan apoyo adicional'
+            ]
+          }
         },
         {
           title: 'Limpieza Profunda',
-          description: 'Limpieza intensiva de arriba a abajo enfocada en la suciedad oculta en áreas de difícil acceso de su propiedad.'
+          description: 'Limpieza intensiva de arriba a abajo enfocada en la suciedad oculta en áreas de difícil acceso de su propiedad.',
+          modal: {
+            intro: 'Nuestros servicios de limpieza profunda están diseñados para darle a tu hogar una renovación completa con atención detallada en las áreas que necesitan mayor cuidado. Este servicio se enfoca en remover polvo acumulado, suciedad y residuos en cocinas, baños, pisos, superficies y espacios difíciles de alcanzar.',
+            whatsIncludedTitle: 'Qué incluye',
+            whatsIncluded: [
+              'Limpieza detallada de baños',
+              'Limpieza profunda de cocina',
+              'Limpieza de superficies y zócalos',
+              'Aspirado y trapeado de pisos',
+              'Limpieza de áreas difíciles de alcanzar',
+              'Limpieza interior de ventanas',
+              'Limpieza exterior de electrodomésticos',
+              'Remoción de polvo y acumulación',
+              'Desinfección de superficies de alto contacto',
+              'Organización ligera cuando sea necesario'
+            ],
+            bestForTitle: 'Ideal para',
+            bestFor: [
+              'Limpieza de temporada',
+              'Primera limpieza con el servicio',
+              'Ocasiones especiales',
+              'Hogares que necesitan atención extra',
+              'Preparación para invitados o eventos'
+            ]
+          }
         },
         {
           title: 'Limpieza de Mudanza',
-          description: 'Limpieza detallada para preparar su nuevo hogar o dejar su antiguo espacio impecable para los próximos ocupantes.'
+          description: 'Limpieza detallada para preparar su nuevo hogar o dejar su antiguo espacio impecable para los próximos ocupantes.',
+          modal: {
+            intro: 'Nuestros servicios de limpieza para mudanza ayudan a preparar casas, apartamentos y propiedades antes o después de una mudanza. Limpiamos cada habitación cuidadosamente para que el espacio quede fresco, impecable y listo para el próximo ocupante.',
+            whatsIncludedTitle: 'Qué incluye',
+            whatsIncluded: [
+              'Limpieza profunda de habitaciones y superficies',
+              'Limpieza de zócalos, ventilas, persianas y lámparas',
+              'Limpieza y desinfección de baños y cocinas',
+              'Limpieza de gabinetes, electrodomésticos y encimeras',
+              'Limpieza interior de ventanas y espejos',
+              'Barrido, aspirado y trapeado de pisos',
+              'Retiro de basura y residuos menores',
+              'Preparación final para inspección o entrega'
+            ],
+            bestForTitle: 'Ideal para',
+            bestFor: [
+              'Inquilinos que se están mudando',
+              'Dueños preparando la propiedad para nuevos inquilinos',
+              'Realtors preparando propiedades',
+              'Administradores de propiedades',
+              'Nuevos propietarios',
+              'Estudiantes que se mudan',
+              'Dueños de alquileres temporales entre estadías'
+            ]
+          }
         },
         {
           title: 'Limpieza de Oficina',
-          description: 'Mantenimiento de oficina confiable que promueve un espacio de trabajo productivo e higiénico para sus empleados.'
+          description: 'Mantenimiento de oficina confiable que promueve un espacio de trabajo productivo e higiénico para sus empleados.',
+          modal: {
+            intro: 'Nuestros servicios de limpieza de oficinas y espacios de trabajo ayudan a mantener un ambiente limpio, organizado y profesional que apoya la productividad y deja una buena impresión en empleados, clientes y visitantes.',
+            whatsIncludedTitle: 'Qué incluye',
+            whatsIncluded: [
+              'Limpieza de escritorios, sillas y superficies de oficina',
+              'Desinfección de áreas compartidas y electrónicos',
+              'Limpieza de ventanas y divisiones',
+              'Aspirado de alfombras y trapeado de pisos',
+              'Orden de recepción y entradas',
+              'Retiro de basura',
+              'Mantenimiento de salas de reuniones y áreas de descanso',
+              'Limpieza de superficies de alto contacto'
+            ],
+            bestForTitle: 'Ideal para',
+            bestFor: [
+              'Oficinas',
+              'Espacios de trabajo',
+              'Oficinas de bienes raíces',
+              'Salas de reuniones',
+              'Áreas de recepción',
+              'Pequeños negocios'
+            ]
+          }
         },
         {
-          title: 'Airbnb y Alquileres Vacacionales',
-          description: 'Servicios de limpieza rápidos para garantizar reseñas de 5 estrellas de sus huéspedes de alquiler a corto plazo.'
+          title: 'Limpieza Comercial',
+          description: 'Soluciones de limpieza profesional para empresas, tiendas minoristas y locales comerciales para impresionar a sus clientes.',
+          modal: {
+            intro: 'Nuestros servicios de limpieza comercial ayudan a los negocios a mantener un ambiente limpio, organizado y profesional sin agregar estrés a sus operaciones diarias. Ofrecemos horarios flexibles, incluyendo tardes, servicio nocturno, fines de semana y planes personalizados.',
+            whatsIncludedTitle: 'Qué incluye',
+            whatsIncluded: [
+              'Limpieza de pisos, ventanas, persianas, escritorios y muebles',
+              'Aspirado y tratamiento puntual de alfombras',
+              'Limpieza de baños y cocinas',
+              'Reposición de productos de papel en baños y cocinas',
+              'Limpieza de techos y paredes',
+              'Remoción de telarañas',
+              'Retiro de basura y manejo de residuos',
+              'Desinfección de superficies de alto contacto',
+              'Opciones de limpieza ecológica cuando se solicite'
+            ],
+            bestForTitle: 'Negocios que atendemos',
+            bestFor: [
+              'Edificios de oficinas',
+              'Cafeterías',
+              'Restaurantes',
+              'Gimnasios y estudios fitness',
+              'Oficinas médicas y clínicas',
+              'Tiendas minoristas',
+              'Galerías de arte',
+              'Locales para eventos',
+              'Bancos e iglesias',
+              'Guarderías',
+              'Dealerships y propiedades comerciales'
+            ]
+          }
+        },
+        {
+          title: 'Limpieza para Airbnb y Alquileres Vacacionales',
+          description: 'Servicios de limpieza rápidos para garantizar reseñas de 5 estrellas de sus huéspedes de alquiler a corto plazo.',
+          modal: {
+            intro: 'Nuestros servicios de limpieza para Airbnb y alquileres vacacionales ayudan a los anfitriones a mantener sus propiedades impecables, acogedoras y listas para cada huésped. Nos enfocamos en limpieza entre estadías, presentación fresca y atención al detalle para apoyar experiencias de 5 estrellas.',
+            whatsIncludedTitle: 'Qué incluye',
+            whatsIncluded: [
+              'Limpieza completa entre estadías',
+              'Limpieza y desinfección de baños',
+              'Limpieza de cocina y desinfección de superficies',
+              'Tendido de camas y reemplazo de ropa de cama',
+              'Aspirado y trapeado de pisos',
+              'Limpieza de muebles y superficies',
+              'Retiro y reemplazo de basura',
+              'Reposición de suministros básicos para huéspedes',
+              'Revisión de presentación lista para huéspedes',
+              'Horarios flexibles para check-ins y check-outs'
+            ],
+            bestForTitle: 'Ideal para',
+            bestFor: [
+              'Anfitriones de Airbnb',
+              'Dueños de alquileres vacacionales',
+              'Administradores de alquileres temporales',
+              'Administradores de propiedades',
+              'Anfitriones con múltiples unidades'
+            ]
+          }
         }
       ]
     },
