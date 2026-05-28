@@ -50,7 +50,7 @@ const Services: React.FC = () => {
               <motion.div
                 key={index}
                 variants={cardVariants}
-                className="bg-gradient-to-br from-slate-50 via-slate-100/90 to-slate-200/60 border border-slate-200/80 rounded-2xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col h-full group"
+                className="bg-[linear-gradient(135deg,#F4F6F8_0%,#B6BBC2_100%)] border border-[#B6BBC2]/55 rounded-2xl p-8 shadow-[0_12px_28px_rgba(15,23,42,0.10)] hover:shadow-[0_18px_36px_rgba(15,23,42,0.14)] hover:-translate-y-1 transition-all duration-300 flex flex-col h-full group"
               >
                 <div className="w-14 h-14 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center mb-6">
                   <IconComponent className="w-7 h-7" />
