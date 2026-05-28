@@ -46,7 +46,6 @@ const Footer: React.FC = () => {
               <li><a href="#home" className="hover:text-green-600 transition-colors">{t.navbar.home}</a></li>
               <li><a href="#services" className="hover:text-green-600 transition-colors">{t.navbar.services}</a></li>
               <li><a href="#about" className="hover:text-green-600 transition-colors">{t.navbar.about}</a></li>
-              <li><a href="#reviews" className="hover:text-green-600 transition-colors">{t.navbar.reviews}</a></li>
               <li><a href="#contact" className="hover:text-green-600 transition-colors">{t.navbar.contact}</a></li>
             </ul>
           </div>
@@ -89,7 +88,7 @@ const Footer: React.FC = () => {
             &copy; {currentYear} {t.footer.rights}
           </p>
           <div className="flex items-center justify-center gap-2 text-sm text-slate-500">
-            <span>Powered by</span>
+            <span>Designed & Developed by</span>
             <a href="https://codingsoft.tech" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-green-600 hover:text-green-700 font-medium transition-colors">
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/>

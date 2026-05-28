@@ -1,9 +1,9 @@
 
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import BusinessHours from './components/BusinessHours';
 import Services from './components/Services';
 import About from './components/About';
-import Reviews from './components/Reviews';
 import CtaSection from './components/CtaSection';
 import Footer from './components/Footer';
 
@@ -14,9 +14,9 @@ function App() {
       
       <main className="flex-grow">
         <Hero />
+        <BusinessHours />
         <Services />
         <About />
-        <Reviews />
         <CtaSection />
       </main>
       

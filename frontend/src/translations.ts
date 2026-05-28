@@ -8,7 +8,7 @@ export const translations = {
       about: 'About Us',
       reviews: 'Reviews',
       contact: 'Contact',
-      quote: 'Get a Quote'
+      quote: 'Free Estimate'
     },
     hero: {
       topRated: 'Top-Rated in Los Angeles - CA',
@@ -75,6 +75,19 @@ export const translations = {
         }
       ]
     },
+    schedule: {
+      subtitle: 'SCHEDULE',
+      title: '🏢 Cleaning That Fits Your Business Hours',
+      desc: 'We provide flexible commercial cleaning schedules designed to minimize interruptions to your operations.',
+      residentialTitle: '🕘 Residential Cleaning',
+      residentialDays: 'Monday – Friday',
+      residentialHours: '8:00 AM – 6:00 PM',
+      commercialTitle: '🌙 Commercial Cleaning',
+      commercialHours: 'Evenings & Overnight Available',
+      weekendTitle: '📅 Weekend Service',
+      weekendHours: 'Available By Appointment',
+      customPlans: '📞 Customized Cleaning Plans Available for Offices & Businesses'
+    },
     reviews: {
       subtitle: 'Testimonials',
       title: 'What Our Clients Say',
@@ -136,7 +149,7 @@ export const translations = {
       about: 'Nosotros',
       reviews: 'Reseñas',
       contact: 'Contacto',
-      quote: 'Cotizar'
+      quote: 'Estimado Gratis'
     },
     hero: {
       topRated: 'Mejor Calificados en Los Angeles - CA',
@@ -202,6 +215,19 @@ export const translations = {
           description: 'Utilizamos productos de limpieza seguros y ecológicos que son duros con la suciedad pero seguros para su familia y mascotas.'
         }
       ]
+    },
+    schedule: {
+      subtitle: 'HORARIO',
+      title: '🏢 Limpieza Que Se Adapta al Horario de Tu Negocio',
+      desc: 'Ofrecemos horarios flexibles de limpieza comercial diseñados para minimizar interrupciones en tus operaciones.',
+      residentialTitle: '🕘 Limpieza Residencial',
+      residentialDays: 'Lunes – Viernes',
+      residentialHours: '8:00 AM – 6:00 PM',
+      commercialTitle: '🌙 Limpieza Comercial',
+      commercialHours: 'Disponible en las tardes y durante la noche',
+      weekendTitle: '📅 Servicio de Fin de Semana',
+      weekendHours: 'Disponible con cita previa',
+      customPlans: '📞 Planes de Limpieza Personalizados Disponibles para Oficinas y Negocios'
     },
     reviews: {
       subtitle: 'Testimonios',
