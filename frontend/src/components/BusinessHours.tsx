@@ -22,7 +22,7 @@ const BusinessHours: React.FC = () => {
   const { t } = useLanguage();
 
   return (
-    <section id="hours" className="py-20 bg-white relative overflow-hidden border-b border-slate-100">
+    <section id="hours" className="py-20 bg-[linear-gradient(180deg,#F8FBFF_0%,#EAF4FF_100%)] relative overflow-hidden border-b border-slate-100">
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Header */}
