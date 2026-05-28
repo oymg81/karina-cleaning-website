@@ -50,7 +50,7 @@ const BusinessHours: React.FC = () => {
           {/* Card 1: Residential Cleaning */}
           <motion.div
             variants={cardVariants}
-            className="bg-slate-50 rounded-2xl p-8 border border-slate-100 flex flex-col items-center text-center shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 h-full"
+            className="bg-[linear-gradient(135deg,#F4F6F8_0%,#B6BBC2_100%)] border border-[#B6BBC2]/55 rounded-2xl p-8 shadow-[0_12px_28px_rgba(15,23,42,0.10)] hover:shadow-[0_18px_36px_rgba(15,23,42,0.14)] hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center h-full"
           >
             <div className="w-14 h-14 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mb-6 shadow-inner">
               <Clock className="w-7 h-7" />
@@ -63,7 +63,7 @@ const BusinessHours: React.FC = () => {
           {/* Card 2: Commercial Cleaning */}
           <motion.div
             variants={cardVariants}
-            className="bg-slate-50 rounded-2xl p-8 border border-slate-100 flex flex-col items-center text-center shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 h-full justify-between"
+            className="bg-[linear-gradient(135deg,#F4F6F8_0%,#B6BBC2_100%)] border border-[#B6BBC2]/55 rounded-2xl p-8 shadow-[0_12px_28px_rgba(15,23,42,0.10)] hover:shadow-[0_18px_36px_rgba(15,23,42,0.14)] hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center h-full justify-between"
           >
             <div className="flex flex-col items-center w-full">
               <div className="w-14 h-14 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mb-6 shadow-inner">
@@ -77,7 +77,7 @@ const BusinessHours: React.FC = () => {
           {/* Card 3: Weekend Service */}
           <motion.div
             variants={cardVariants}
-            className="bg-slate-50 rounded-2xl p-8 border border-slate-100 flex flex-col items-center text-center shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 h-full justify-between"
+            className="bg-[linear-gradient(135deg,#F4F6F8_0%,#B6BBC2_100%)] border border-[#B6BBC2]/55 rounded-2xl p-8 shadow-[0_12px_28px_rgba(15,23,42,0.10)] hover:shadow-[0_18px_36px_rgba(15,23,42,0.14)] hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center h-full justify-between"
           >
             <div className="flex flex-col items-center w-full">
               <div className="w-14 h-14 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mb-6 shadow-inner">
