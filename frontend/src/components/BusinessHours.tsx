@@ -26,7 +26,7 @@ const BusinessHours: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 text-blue-600 font-medium text-sm mb-4 border border-blue-100">
             <Building2 className="w-4 h-4" />
             <span>{t.schedule.subtitle}</span>

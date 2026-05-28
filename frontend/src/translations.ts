@@ -76,17 +76,17 @@ export const translations = {
       ]
     },
     schedule: {
-      subtitle: 'SCHEDULE',
+      subtitle: 'FLEXIBLE SCHEDULES',
       title: '🏢 Cleaning That Fits Your Business Hours',
       desc: 'We provide flexible commercial cleaning schedules designed to minimize interruptions to your operations.',
-      residentialTitle: '🕘 Residential Cleaning',
+      residentialTitle: 'Residential Cleaning',
       residentialDays: 'Monday – Friday',
       residentialHours: '8:00 AM – 6:00 PM',
-      commercialTitle: '🌙 Commercial Cleaning',
+      commercialTitle: 'Commercial Cleaning',
       commercialHours: 'Evenings & Overnight Available',
-      weekendTitle: '📅 Weekend Service',
+      weekendTitle: 'Weekend Service',
       weekendHours: 'Available By Appointment',
-      customPlans: '📞 Customized Cleaning Plans Available for Offices & Businesses'
+      customPlans: 'Customized cleaning plans available for offices, businesses, and commercial spaces.'
     },
     reviews: {
       subtitle: 'Testimonials',
@@ -139,7 +139,8 @@ export const translations = {
       serving: 'Serving all major areas in California',
       rights: 'Clean & Care PRO. All rights reserved.',
       privacy: 'Privacy Policy',
-      terms: 'Terms of Service'
+      terms: 'Terms of Service',
+      developedBy: 'Designed & Developed by'
     }
   },
   es: {
@@ -217,17 +218,17 @@ export const translations = {
       ]
     },
     schedule: {
-      subtitle: 'HORARIO',
+      subtitle: 'HORARIOS FLEXIBLES',
       title: '🏢 Limpieza Que Se Adapta al Horario de Tu Negocio',
       desc: 'Ofrecemos horarios flexibles de limpieza comercial diseñados para minimizar interrupciones en tus operaciones.',
-      residentialTitle: '🕘 Limpieza Residencial',
+      residentialTitle: 'Limpieza Residencial',
       residentialDays: 'Lunes – Viernes',
       residentialHours: '8:00 AM – 6:00 PM',
-      commercialTitle: '🌙 Limpieza Comercial',
+      commercialTitle: 'Limpieza Comercial',
       commercialHours: 'Disponible en las tardes y durante la noche',
-      weekendTitle: '📅 Servicio de Fin de Semana',
+      weekendTitle: 'Servicio de Fin de Semana',
       weekendHours: 'Disponible con cita previa',
-      customPlans: '📞 Planes de Limpieza Personalizados Disponibles para Oficinas y Negocios'
+      customPlans: 'Planes de limpieza personalizados disponibles para oficinas, negocios y espacios comerciales.'
     },
     reviews: {
       subtitle: 'Testimonios',
@@ -280,7 +281,8 @@ export const translations = {
       serving: 'Sirviendo todas las áreas principales de California',
       rights: 'Clean & Care PRO. Todos los derechos reservados.',
       privacy: 'Política de Privacidad',
-      terms: 'Términos de Servicio'
+      terms: 'Términos de Servicio',
+      developedBy: 'Diseñado y desarrollado por'
     }
   }
 };

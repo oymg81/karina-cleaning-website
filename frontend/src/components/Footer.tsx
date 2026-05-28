@@ -88,12 +88,12 @@ const Footer: React.FC = () => {
             &copy; {currentYear} {t.footer.rights}
           </p>
           <div className="flex items-center justify-center gap-2 text-sm text-slate-500">
-            <span>Designed & Developed by</span>
-            <a href="https://codingsoft.tech" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-green-600 hover:text-green-700 font-medium transition-colors">
+            <span>{t.footer.developedBy}</span>
+            <a href="https://www.codingsoft.tech/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-green-600 hover:text-green-700 font-medium transition-colors">
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/>
               </svg>
-              CodingSoft Platform
+              CodingSoft
             </a>
           </div>
           <div className="flex gap-6 text-sm text-slate-500">
