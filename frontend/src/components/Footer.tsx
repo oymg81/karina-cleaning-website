@@ -3,37 +3,48 @@ import { Phone, Mail, MapPin } from 'lucide-react';
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
 import { useLanguage } from '../LanguageContext';
 
+const locations = [
+  'Los Angeles',
+  'Beverly Hills',
+  'Bel Air',
+  'Brentwood',
+  'Culver City',
+  'Glendale',
+  'Hollywood',
+  'Malibu',
+  'Manhattan Beach',
+  'Pasadena'
+];
+
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
   const { t } = useLanguage();
 
   return (
-    <footer className="bg-green-50 text-slate-600 pt-16 pb-8 border-t border-green-200/50">
+    <footer className="bg-[#ECFDF3] text-slate-800 pt-20 pb-8 border-t border-green-200">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12 text-center md:text-left">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1.2fr_1.1fr_1.4fr] gap-10 mb-12 text-center md:text-left">
 
           {/* Company Info */}
-          <div className="space-y-4 flex flex-col items-center md:items-start">
-            <a href="#home" className="inline-block mb-2">
-              <div className="inline-block">
-                <img
-                  src="/images/logo.png"
-                  alt="Clean & Care PRO Logo"
-                  className="h-16 w-auto object-contain"
-                />
-              </div>
+          <div className="space-y-6 flex flex-col items-center md:items-start">
+            <a href="#home" className="inline-block">
+              <img
+                src="/images/logo1.png"
+                alt="Clean & Care PRO Cleaning Services"
+                className="h-12 md:h-14 w-auto object-contain"
+              />
             </a>
-            <p className="text-slate-500 text-sm leading-relaxed max-w-xs">
+            <p className="text-slate-600 text-sm leading-relaxed max-w-xs">
               {t.footer.desc}
             </p>
             <div className="flex gap-4 pt-2">
-              <a href="#" className="w-10 h-10 rounded-full bg-white border border-green-200/60 text-slate-600 hover:bg-green-600 hover:text-white hover:border-green-600 flex items-center justify-center transition-all">
+              <a href="#" className="w-10 h-10 rounded-full bg-white border border-green-200/60 text-green-600 hover:bg-green-600 hover:text-white hover:border-green-600 flex items-center justify-center transition-all shadow-sm" aria-label="Facebook">
                 <FaFacebookF className="w-4 h-4" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white border border-green-200/60 text-slate-600 hover:bg-green-600 hover:text-white hover:border-green-600 flex items-center justify-center transition-all">
+              <a href="#" className="w-10 h-10 rounded-full bg-white border border-green-200/60 text-green-600 hover:bg-green-600 hover:text-white hover:border-green-600 flex items-center justify-center transition-all shadow-sm" aria-label="Instagram">
                 <FaInstagram className="w-4 h-4" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white border border-green-200/60 text-slate-600 hover:bg-green-600 hover:text-white hover:border-green-600 flex items-center justify-center transition-all">
+              <a href="#" className="w-10 h-10 rounded-full bg-white border border-green-200/60 text-green-600 hover:bg-green-600 hover:text-white hover:border-green-600 flex items-center justify-center transition-all shadow-sm" aria-label="LinkedIn">
                 <FaLinkedinIn className="w-4 h-4" />
               </a>
             </div>
@@ -41,62 +52,77 @@ const Footer: React.FC = () => {
 
           {/* Quick Links */}
           <div className="flex flex-col items-center md:items-start">
-            <h4 className="text-slate-900 font-bold text-lg mb-6">{t.footer.quickLinks}</h4>
+            <h4 className="text-slate-900 font-bold text-xl mb-6">{t.footer.quickLinks}</h4>
             <ul className="space-y-3">
-              <li><a href="#home" className="hover:text-green-600 transition-colors">{t.navbar.home}</a></li>
-              <li><a href="#services" className="hover:text-green-600 transition-colors">{t.navbar.services}</a></li>
-              <li><a href="#about" className="hover:text-green-600 transition-colors">{t.navbar.about}</a></li>
-              <li><a href="#contact" className="hover:text-green-600 transition-colors">{t.navbar.contact}</a></li>
+              <li><a href="#home" className="text-slate-600 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.home}</a></li>
+              <li><a href="#services" className="text-slate-600 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.services}</a></li>
+              <li><a href="#about" className="text-slate-600 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.about}</a></li>
+              <li><a href="#contact" className="text-slate-600 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.contact}</a></li>
             </ul>
           </div>
 
           {/* Services */}
           <div className="flex flex-col items-center md:items-start">
-            <h4 className="text-slate-900 font-bold text-lg mb-6">{t.footer.services}</h4>
+            <h4 className="text-slate-900 font-bold text-xl mb-6">{t.footer.services}</h4>
             <ul className="space-y-3">
-              <li><a href="#services" className="hover:text-green-600 transition-colors">{t.services.list[0].title}</a></li>
-              <li><a href="#services" className="hover:text-green-600 transition-colors">{t.services.list[1].title}</a></li>
-              <li><a href="#services" className="hover:text-green-600 transition-colors">{t.services.list[2].title}</a></li>
-              <li><a href="#services" className="hover:text-green-600 transition-colors">{t.services.list[3].title}</a></li>
-              <li><a href="#services" className="hover:text-green-600 transition-colors">{t.services.list[5].title}</a></li>
+              <li><a href="#services" className="text-slate-600 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[0].title}</a></li>
+              <li><a href="#services" className="text-slate-600 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[1].title}</a></li>
+              <li><a href="#services" className="text-slate-600 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[2].title}</a></li>
+              <li><a href="#services" className="text-slate-600 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[3].title}</a></li>
+              <li><a href="#services" className="text-slate-600 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[5].title}</a></li>
+            </ul>
+          </div>
+
+          {/* Locations */}
+          <div className="flex flex-col items-center md:items-start">
+            <h4 className="text-slate-900 font-bold text-xl mb-6">{t.footer.locations}</h4>
+            <ul className="space-y-3 text-center md:text-left">
+              {locations.map((loc, idx) => (
+                <li key={idx} className="text-slate-600 text-sm font-medium">{loc}</li>
+              ))}
+              <li className="pt-2">
+                <a href="#contact" className="text-green-600 hover:text-green-700 font-bold text-sm transition-colors">
+                  {t.footer.seeAllLocations}
+                </a>
+              </li>
             </ul>
           </div>
 
           {/* Contact Info */}
           <div className="flex flex-col items-center md:items-start">
-            <h4 className="text-slate-900 font-bold text-lg mb-6">{t.footer.contactInfo}</h4>
+            <h4 className="text-slate-900 font-bold text-xl mb-6">{t.footer.contactInfo}</h4>
             <ul className="space-y-4">
               <li className="flex items-center md:items-start gap-3">
                 <Phone className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
-                <span className="text-slate-700">714-473-1140</span>
+                <span className="text-slate-600 text-sm font-medium">714-473-1140</span>
               </li>
               <li className="flex items-center md:items-start gap-3">
                 <Mail className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
-                <span className="text-slate-700">info@cleancarepro.com</span>
+                <span className="text-slate-600 text-sm font-medium">info@cleancarepro.com</span>
               </li>
               <li className="flex items-center md:items-start gap-3 text-center md:text-left">
                 <MapPin className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
-                <span className="text-slate-700">{t.footer.serving}</span>
+                <span className="text-slate-600 text-sm font-medium">{t.footer.serving}</span>
               </li>
             </ul>
           </div>
 
         </div>
 
-        <div className="border-t border-green-200/60 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center">
-          <p className="text-sm text-slate-500">
+        <div className="border-t border-green-200 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center">
+          <p className="text-sm text-slate-500 font-medium">
             &copy; {currentYear} {t.footer.rights}
           </p>
-          <div className="flex items-center justify-center gap-2 text-sm text-slate-500">
+          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 font-medium">
             <span>{t.footer.developedBy}</span>
-            <a href="https://www.codingsoft.tech/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-green-600 hover:text-green-700 font-medium transition-colors">
+            <a href="https://www.codingsoft.tech/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-green-600 hover:text-green-700 font-bold transition-colors">
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/>
               </svg>
               CodingSoft
             </a>
           </div>
-          <div className="flex gap-6 text-sm text-slate-500">
+          <div className="flex gap-6 text-sm text-slate-500 font-medium">
             <a href="#" className="hover:text-slate-800 transition-colors">{t.footer.privacy}</a>
             <a href="#" className="hover:text-slate-800 transition-colors">{t.footer.terms}</a>
           </div>

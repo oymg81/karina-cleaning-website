@@ -32,12 +32,12 @@ const Navbar: React.FC = () => {
         <a
           href="#home"
           onClick={(e) => handleScrollTo(e, '#home')}
-          className="flex items-center gap-2"
+          className="flex items-center"
         >
           <img
-            src="/images/logo.png"
-            alt="Clean & Care PRO Logo"
-            className="h-20 w-auto object-contain"
+            src="/images/logo1.png"
+            alt="Clean & Care PRO Cleaning Services"
+            className="h-12 md:h-14 w-auto object-contain"
           />
         </a>
 
