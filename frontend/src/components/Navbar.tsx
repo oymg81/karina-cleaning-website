@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../LanguageContext';
@@ -6,6 +6,38 @@ import { useLanguage } from '../LanguageContext';
 const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { language, setLanguage, t } = useLanguage();
+  const [activeSection, setActiveSection] = useState('home');
+
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '-50% 0px -50% 0px',
+      threshold: 0,
+    };
+
+    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          if (id) {
+            setActiveSection(id);
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersection, observerOptions);
+
+    const sectionIds = ['home', 'services', 'about', 'contact'];
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   const navLinks = [
     { name: t.navbar.home, href: '#home' },
@@ -42,22 +74,29 @@ const Navbar: React.FC = () => {
         </a>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center gap-8">
-          <ul className="flex items-center gap-6">
-            {navLinks.map((link, index) => (
-              <li key={index}>
-                <a
-                  href={link.href}
-                  onClick={(e) => handleScrollTo(e, link.href)}
-                  className="text-slate-600 hover:text-blue-600 font-medium transition-colors duration-200"
-                >
-                  {link.name}
-                </a>
-              </li>
-            ))}
+        <div className="hidden lg:flex items-center gap-3">
+          <ul className="flex items-center gap-2">
+            {navLinks.map((link, index) => {
+              const isActive = activeSection === link.href.slice(1);
+              return (
+                <li key={index}>
+                  <a
+                    href={link.href}
+                    onClick={(e) => handleScrollTo(e, link.href)}
+                    className={`rounded-full px-4 py-2 text-sm font-semibold transition-all duration-200 block ${
+                      isActive
+                        ? "bg-[#5FE873] text-slate-900 shadow-md ring-1 ring-green-300"
+                        : "bg-[#5FE873] text-slate-900 hover:bg-[#4edc63] hover:shadow-md"
+                    }`}
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
 
-          <div className="flex items-center gap-6 border-l border-slate-200 pl-6">
+          <div className="flex items-center gap-4 border-l border-slate-200 pl-4">
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setLanguage('en')}
@@ -119,18 +158,25 @@ const Navbar: React.FC = () => {
             className="lg:hidden bg-white border-t border-slate-100 overflow-hidden"
           >
             <div className="px-6 py-6 flex flex-col gap-4">
-              <ul className="flex flex-col gap-4">
-                {navLinks.map((link, index) => (
-                  <li key={index}>
-                    <a
-                      href={link.href}
-                      onClick={(e) => handleScrollTo(e, link.href)}
-                      className="block text-lg text-navy font-medium"
-                    >
-                      {link.name}
-                    </a>
-                  </li>
-                ))}
+              <ul className="flex flex-col gap-3">
+                {navLinks.map((link, index) => {
+                  const isActive = activeSection === link.href.slice(1);
+                  return (
+                    <li key={index}>
+                      <a
+                        href={link.href}
+                        onClick={(e) => handleScrollTo(e, link.href)}
+                        className={`w-full rounded-2xl px-4 py-3 text-left font-semibold transition-colors block text-base ${
+                          isActive
+                            ? "bg-[#5FE873] text-slate-900 shadow-md ring-2 ring-green-300"
+                            : "bg-[#5FE873] text-slate-900 hover:bg-[#4edc63]"
+                        }`}
+                      >
+                        {link.name}
+                      </a>
+                    </li>
+                  );
+                })}
               </ul>
 
               <div className="flex flex-col gap-4 mt-4 pt-4 border-t border-slate-100">
