@@ -31,7 +31,7 @@ const Footer: React.FC = () => {
               <img
                 src="/images/logo1.png"
                 alt="Clean & Care PRO Cleaning Services"
-                className="h-12 md:h-14 w-auto object-contain"
+                className="h-16 md:h-20 w-auto object-contain"
               />
             </a>
             <p className="text-slate-600 text-sm leading-relaxed max-w-xs">

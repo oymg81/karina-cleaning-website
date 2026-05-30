@@ -22,7 +22,19 @@ const CtaSection: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // In the future, this will connect to the backend API
+    
+    const subject = encodeURIComponent(`Clean & Care PRO - New Quote Request from ${formData.name}`);
+    const body = encodeURIComponent(
+      `New Quote Request Details:\n\n` +
+      `Name: ${formData.name}\n` +
+      `Email: ${formData.email}\n` +
+      `Phone: ${formData.phone}\n` +
+      `Service Type: ${formData.service}\n` +
+      `Message: ${formData.message || 'No additional message'}\n`
+    );
+
+    window.location.href = `mailto:cleancareproservices2@gmail.com?subject=${subject}&body=${body}`;
+
     alert(t.cta.successMessage);
     setFormData({ name: '', email: '', phone: '', service: 'residential', message: '' });
   };
