@@ -290,7 +290,13 @@ export const translations = {
       rights: 'Clean & Care PRO. All rights reserved.',
       privacy: 'Privacy Policy',
       terms: 'Terms of Service',
-      developedBy: 'Designed & Developed by'
+      developedBy: 'Designed & Developed by',
+      callUsNow: 'CALL US NOW',
+      sendUsEmail: 'SEND US AN EMAIL',
+      servingAreas: 'Serving all major areas in California',
+      privacyPolicy: 'Privacy Policy',
+      termsOfService: 'Terms of Service',
+      designedBy: 'Designed & Developed by'
     }
   },
   es: {
@@ -582,7 +588,13 @@ export const translations = {
       rights: 'Clean & Care PRO. Todos los derechos reservados.',
       privacy: 'Política de Privacidad',
       terms: 'Términos de Servicio',
-      developedBy: 'Diseñado y desarrollado por'
+      developedBy: 'Diseñado y desarrollado por',
+      callUsNow: 'LLÁMENOS AHORA',
+      sendUsEmail: 'ENVÍENOS UN EMAIL',
+      servingAreas: 'Sirviendo todas las áreas principales de California',
+      privacyPolicy: 'Política de Privacidad',
+      termsOfService: 'Términos de Servicio',
+      designedBy: 'Diseñado y desarrollado por'
     }
   }
 };

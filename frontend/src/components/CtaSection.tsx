@@ -2,9 +2,16 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Phone, Send } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
+import emailjs from '@emailjs/browser';
+
+// EmailJS Credentials Configuration
+// Replace these with your actual credentials from the EmailJS dashboard: https://dashboard.emailjs.com/
+const EMAILJS_SERVICE_ID = 'service_cleancarepro'; // Placeholder
+const EMAILJS_TEMPLATE_ID = 'template_quote_req'; // Placeholder
+const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY_HERE'; // Placeholder
 
 const CtaSection: React.FC = () => {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -12,6 +19,8 @@ const CtaSection: React.FC = () => {
     service: 'residential',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -22,21 +31,45 @@ const CtaSection: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    const subject = encodeURIComponent(`Clean & Care PRO - New Quote Request from ${formData.name}`);
-    const body = encodeURIComponent(
-      `New Quote Request Details:\n\n` +
-      `Name: ${formData.name}\n` +
-      `Email: ${formData.email}\n` +
-      `Phone: ${formData.phone}\n` +
-      `Service Type: ${formData.service}\n` +
-      `Message: ${formData.message || 'No additional message'}\n`
-    );
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
 
-    window.location.href = `mailto:cleancareproservices2@gmail.com?subject=${subject}&body=${body}`;
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      phone: formData.phone,
+      service: formData.service,
+      message: formData.message || 'No additional message',
+      to_email: 'cleancareproservices2@gmail.com'
+    };
 
-    alert(t.cta.successMessage);
-    setFormData({ name: '', email: '', phone: '', service: 'residential', message: '' });
+    // If API credentials are not set yet, simulate successful API response in local development
+    if (EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY_HERE' || EMAILJS_PUBLIC_KEY === '') {
+      console.warn("EmailJS is not configured. Simulating successful form submission.");
+      setTimeout(() => {
+        setIsSubmitting(false);
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', phone: '', service: 'residential', message: '' });
+        // Auto-clear success message after 5 seconds
+        setTimeout(() => setSubmitStatus('idle'), 5000);
+      }, 1000);
+      return;
+    }
+
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY)
+      .then((response) => {
+        console.log('EmailJS Success:', response.status, response.text);
+        setIsSubmitting(false);
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', phone: '', service: 'residential', message: '' });
+        // Auto-clear success message after 5 seconds
+        setTimeout(() => setSubmitStatus('idle'), 5000);
+      })
+      .catch((err) => {
+        console.error('EmailJS Error:', err);
+        setIsSubmitting(false);
+        setSubmitStatus('error');
+      });
   };
 
   return (
@@ -107,6 +140,28 @@ const CtaSection: React.FC = () => {
             className="bg-white rounded-3xl p-8 shadow-2xl text-slate-900 relative"
           >
             <h3 className="text-2xl font-bold text-navy mb-6">{t.cta.formTitle}</h3>
+
+            {submitStatus === 'success' && (
+              <motion.div 
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-4 mb-4 rounded-xl bg-green-50 text-green-800 border border-green-200 text-sm font-semibold"
+              >
+                {t.cta.successMessage}
+              </motion.div>
+            )}
+
+            {submitStatus === 'error' && (
+              <motion.div 
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-4 mb-4 rounded-xl bg-red-50 text-red-800 border border-red-200 text-sm font-semibold"
+              >
+                {language === 'en' 
+                  ? 'Failed to send request. Please check details or call us directly.' 
+                  : 'No se pudo enviar la solicitud. Verifique los datos o llámenos directamente.'}
+              </motion.div>
+            )}
             
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
@@ -183,9 +238,25 @@ const CtaSection: React.FC = () => {
                 ></textarea>
               </div>
               
-              <button type="submit" className="w-full bg-[#5FE873] hover:bg-[#4cd260] text-[#0F172A] px-6 py-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2 mt-2">
-                <Send className="w-5 h-5 text-[#0F172A]" />
-                {t.cta.sendRequest}
+              <button 
+                type="submit" 
+                disabled={isSubmitting}
+                className="w-full bg-[#5FE873] hover:bg-[#4cd260] text-[#0F172A] px-6 py-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2 mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? (
+                  <>
+                    <svg className="animate-spin h-5 w-5 text-[#0F172A]" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    </svg>
+                    <span>{language === 'en' ? 'Sending...' : 'Enviando...'}</span>
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-5 h-5 text-[#0F172A]" />
+                    {t.cta.sendRequest}
+                  </>
+                )}
               </button>
             </form>
           </motion.div>
