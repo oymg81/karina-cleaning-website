@@ -1,6 +1,6 @@
 import React from 'react';
 import { Phone, Mail, MapPin, ArrowRight } from 'lucide-react';
-import { FaFacebookF, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaTiktok } from 'react-icons/fa';
 import { useLanguage } from '../LanguageContext';
 
 const locations = [
@@ -47,25 +47,31 @@ const Footer: React.FC = () => {
             </p>
             <div className="flex gap-4 pt-2">
               <a 
-                href="#" 
+                href="https://www.facebook.com/cleankarinaservices" 
+                target="_blank"
+                rel="noreferrer"
                 className="flex h-11 w-11 items-center justify-center rounded-full bg-white border border-green-100 text-green-600 hover:bg-green-600 hover:text-white transition-colors shadow-sm"
                 aria-label="Facebook"
               >
                 <FaFacebookF className="w-4 h-4" />
               </a>
               <a 
-                href="#" 
+                href="https://www.instagram.com/casitaslimpias2?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
+                target="_blank"
+                rel="noreferrer"
                 className="flex h-11 w-11 items-center justify-center rounded-full bg-white border border-green-100 text-green-600 hover:bg-green-600 hover:text-white transition-colors shadow-sm"
                 aria-label="Instagram"
               >
                 <FaInstagram className="w-4 h-4" />
               </a>
               <a 
-                href="#" 
+                href="https://www.tiktok.com/@cleancare.resident" 
+                target="_blank"
+                rel="noreferrer"
                 className="flex h-11 w-11 items-center justify-center rounded-full bg-white border border-green-100 text-green-600 hover:bg-green-600 hover:text-white transition-colors shadow-sm"
-                aria-label="LinkedIn"
+                aria-label="TikTok"
               >
-                <FaLinkedinIn className="w-4 h-4" />
+                <FaTiktok className="w-4 h-4" />
               </a>
             </div>
           </div>
