@@ -92,7 +92,15 @@ const CtaSection: React.FC = () => {
       message: message || "N/A",
     };
 
-    emailjs.send(serviceId, templateId, templateParams, publicKey)
+    // Temporary debug log before sending
+    console.log("Sending EmailJS request with:", {
+      serviceId,
+      templateId,
+      hasPublicKey: Boolean(publicKey),
+      templateParams,
+    });
+
+    emailjs.send(serviceId, templateId, templateParams, { publicKey })
       .then((response) => {
         console.log('EmailJS Success:', response.status, response.text);
         setIsSubmitting(false);
@@ -102,7 +110,7 @@ const CtaSection: React.FC = () => {
         setTimeout(() => setSubmitStatus('idle'), 5000);
       })
       .catch((err) => {
-        console.error('EmailJS Error:', err);
+        console.error('EmailJS send failed:', err);
         setIsSubmitting(false);
         setSubmitStatus('error');
       });
