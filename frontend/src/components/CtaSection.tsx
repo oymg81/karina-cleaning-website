@@ -4,9 +4,9 @@ import { Phone, Send } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import emailjs from '@emailjs/browser';
 
-const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+const serviceId = (import.meta.env.VITE_EMAILJS_SERVICE_ID as string | undefined)?.trim();
+const templateId = (import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string | undefined)?.trim();
+const publicKey = (import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string | undefined)?.trim();
 
 const CtaSection: React.FC = () => {
   const { language, t } = useLanguage();
@@ -36,8 +36,8 @@ const CtaSection: React.FC = () => {
     if (!serviceId || !templateId || !publicKey) {
       console.error(
         "EmailJS configuration error: Missing environment variable(s). " +
-        "Please check that NEXT_PUBLIC_EMAILJS_SERVICE_ID, NEXT_PUBLIC_EMAILJS_TEMPLATE_ID, " +
-        "and NEXT_PUBLIC_EMAILJS_PUBLIC_KEY are defined in .env.local or production settings."
+        "Please check that VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, " +
+        "and VITE_EMAILJS_PUBLIC_KEY are defined in .env.local or production settings."
       );
       setIsSubmitting(false);
       setSubmitStatus('error');
@@ -92,15 +92,22 @@ const CtaSection: React.FC = () => {
       message: message || "N/A",
     };
 
-    // Temporary debug log before sending
-    console.log("Sending EmailJS request with:", {
+    // Required Test 1: Confirm Runtime Env Values
+    console.log("EmailJS env check:", {
       serviceId,
       templateId,
-      hasPublicKey: Boolean(publicKey),
-      templateParams,
+      publicKey,
+      serviceIdLength: serviceId?.length,
+      templateIdLength: templateId?.length,
+      publicKeyLength: publicKey?.length,
     });
 
-    emailjs.send(serviceId, templateId, templateParams, { publicKey })
+    // Required Test 4: Try EmailJS Init
+    if (publicKey) {
+      emailjs.init(publicKey);
+    }
+
+    emailjs.send(serviceId || '', templateId || '', templateParams)
       .then((response) => {
         console.log('EmailJS Success:', response.status, response.text);
         setIsSubmitting(false);
@@ -109,8 +116,16 @@ const CtaSection: React.FC = () => {
         // Auto-clear success message after 5 seconds
         setTimeout(() => setSubmitStatus('idle'), 5000);
       })
-      .catch((err) => {
-        console.error('EmailJS send failed:', err);
+      .catch((error) => {
+        console.error("EmailJS send failed:", error);
+
+        if (error && typeof error === "object") {
+          console.error("EmailJS error details:", {
+            status: (error as any).status,
+            text: (error as any).text,
+          });
+        }
+
         setIsSubmitting(false);
         setSubmitStatus('error');
       });
