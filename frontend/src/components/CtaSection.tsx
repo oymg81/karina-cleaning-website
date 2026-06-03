@@ -4,11 +4,9 @@ import { Phone, Send } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import emailjs from '@emailjs/browser';
 
-// EmailJS Credentials Configuration
-// Replace these with your actual credentials from the EmailJS dashboard: https://dashboard.emailjs.com/
-const EMAILJS_SERVICE_ID = 'service_cleancarepro'; // Placeholder
-const EMAILJS_TEMPLATE_ID = 'template_quote_req'; // Placeholder
-const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY_HERE'; // Placeholder
+const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
 const CtaSection: React.FC = () => {
   const { language, t } = useLanguage();
@@ -34,29 +32,67 @@ const CtaSection: React.FC = () => {
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
-    const templateParams = {
-      from_name: formData.name,
-      from_email: formData.email,
-      phone: formData.phone,
-      service: formData.service,
-      message: formData.message || 'No additional message',
-      to_email: 'cleancareproservices2@gmail.com'
-    };
-
-    // If API credentials are not set yet, simulate successful API response in local development
-    if (EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY_HERE' || EMAILJS_PUBLIC_KEY === '') {
-      console.warn("EmailJS is not configured. Simulating successful form submission.");
-      setTimeout(() => {
-        setIsSubmitting(false);
-        setSubmitStatus('success');
-        setFormData({ name: '', email: '', phone: '', service: 'residential', message: '' });
-        // Auto-clear success message after 5 seconds
-        setTimeout(() => setSubmitStatus('idle'), 5000);
-      }, 1000);
+    // Validate EmailJS environment variables
+    if (!serviceId || !templateId || !publicKey) {
+      console.error(
+        "EmailJS configuration error: Missing environment variable(s). " +
+        "Please check that NEXT_PUBLIC_EMAILJS_SERVICE_ID, NEXT_PUBLIC_EMAILJS_TEMPLATE_ID, " +
+        "and NEXT_PUBLIC_EMAILJS_PUBLIC_KEY are defined in .env.local or production settings."
+      );
+      setIsSubmitting(false);
+      setSubmitStatus('error');
       return;
     }
 
-    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY)
+    // Validate form inputs
+    const name = formData.name.trim();
+    const email = formData.email.trim();
+    const phone = formData.phone.trim();
+    const service = formData.service.trim();
+    const message = formData.message.trim();
+
+    if (!name) {
+      console.warn("Validation failed: Name is required.");
+      setIsSubmitting(false);
+      setSubmitStatus('error');
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRegex.test(email)) {
+      console.warn("Validation failed: Email is required and must be valid.");
+      setIsSubmitting(false);
+      setSubmitStatus('error');
+      return;
+    }
+
+    if (!phone) {
+      console.warn("Validation failed: Phone is required.");
+      setIsSubmitting(false);
+      setSubmitStatus('error');
+      return;
+    }
+
+    if (!service && !message) {
+      console.warn("Validation failed: Service details or message must not be empty.");
+      setIsSubmitting(false);
+      setSubmitStatus('error');
+      return;
+    }
+
+    const templateParams = {
+      name: name || "N/A",
+      email: email || "N/A",
+      phone: phone || "N/A",
+      service: service || "N/A",
+      property_type: "N/A",
+      bedrooms: "N/A",
+      bathrooms: "N/A",
+      frequency: "N/A",
+      message: message || "N/A",
+    };
+
+    emailjs.send(serviceId, templateId, templateParams, publicKey)
       .then((response) => {
         console.log('EmailJS Success:', response.status, response.text);
         setIsSubmitting(false);
@@ -147,7 +183,9 @@ const CtaSection: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 className="p-4 mb-4 rounded-xl bg-green-50 text-green-800 border border-green-200 text-sm font-semibold"
               >
-                {t.cta.successMessage}
+                {language === 'en' 
+                  ? 'Thank you! Your request has been sent successfully. We will contact you soon.' 
+                  : '¡Gracias! Su solicitud ha sido enviada con éxito. Nos pondremos en contacto con usted pronto.'}
               </motion.div>
             )}
 
@@ -158,8 +196,8 @@ const CtaSection: React.FC = () => {
                 className="p-4 mb-4 rounded-xl bg-red-50 text-red-800 border border-red-200 text-sm font-semibold"
               >
                 {language === 'en' 
-                  ? 'Failed to send request. Please check details or call us directly.' 
-                  : 'No se pudo enviar la solicitud. Verifique los datos o llámenos directamente.'}
+                  ? 'Sorry, something went wrong. Please try again or contact us directly.' 
+                  : 'Lo sentimos, algo salió mal. Por favor, inténtelo de nuevo o contáctenos directamente.'}
               </motion.div>
             )}
             
