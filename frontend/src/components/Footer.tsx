@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, Mail, MapPin, ArrowRight } from 'lucide-react';
+import { Phone, Mail, MapPin } from 'lucide-react';
 import { FaFacebookF, FaInstagram, FaTiktok, FaWhatsapp } from 'react-icons/fa';
 import { useLanguage } from '../LanguageContext';
 
@@ -18,7 +18,7 @@ const locations = [
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
 
   const emailSubject = encodeURIComponent("Cleaning Service Inquiry - Clean & Care PRO");
   const emailBody = encodeURIComponent(
@@ -73,6 +73,15 @@ const Footer: React.FC = () => {
               <FaTiktok className="w-4 h-4" />
             </a>
           </div>
+          
+          {/* Call CTA Button */}
+          <a
+            href="tel:7144731140"
+            className="mt-6 inline-flex items-center gap-3 rounded-2xl bg-[#5FE873] hover:bg-[#4cd260] px-5 py-3 text-slate-950 font-bold text-sm shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+          >
+            <Phone className="w-4 h-4 shrink-0 text-slate-950" />
+            <span>{language === 'en' ? 'Call 714-473-1140' : 'Llamar 714-473-1140'}</span>
+          </a>
         </div>
 
         {/* Column 2: Quick Links */}
@@ -84,6 +93,17 @@ const Footer: React.FC = () => {
             <li><a href="#about" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.about}</a></li>
             <li><a href="#contact" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.contact}</a></li>
           </ul>
+
+          {/* WhatsApp CTA Button */}
+          <a
+            href="https://wa.me/message/NZGNL4QE5S6OD1"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex items-center gap-3 rounded-2xl bg-[#5FE873] hover:bg-[#4cd260] px-5 py-3 text-slate-950 font-bold text-sm shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+          >
+            <FaWhatsapp className="w-4 h-4 shrink-0 text-slate-950" />
+            <span>{language === 'en' ? 'Message on WhatsApp' : 'Mensaje por WhatsApp'}</span>
+          </a>
         </div>
 
         {/* Column 3: Services */}
@@ -96,6 +116,15 @@ const Footer: React.FC = () => {
             <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[3].title}</a></li>
             <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[5].title}</a></li>
           </ul>
+
+          {/* Email CTA Button */}
+          <a
+            href={emailHref}
+            className="mt-6 inline-flex items-center gap-3 rounded-2xl bg-[#5FE873] hover:bg-[#4cd260] px-5 py-3 text-slate-950 font-bold text-sm shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+          >
+            <Mail className="w-4 h-4 shrink-0 text-slate-950" />
+            <span>{language === 'en' ? 'Send Email' : 'Enviar Correo'}</span>
+          </a>
         </div>
 
         {/* Column 4: Locations */}
@@ -131,85 +160,6 @@ const Footer: React.FC = () => {
             </li>
           </ul>
         </div>
-
-      </div>
-
-      {/* 2. Contact CTA Cards Section */}
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-5 px-6 pb-12 md:grid-cols-3">
-        
-        {/* Card 1: Call Us */}
-        <a
-          href="tel:7144731140"
-          className="group flex min-h-[120px] items-center justify-between gap-4 rounded-3xl bg-green-500 p-6 text-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
-        >
-          <div className="flex items-center gap-5 min-w-0">
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/20 shrink-0">
-              <Phone className="h-7 w-7 text-white" />
-            </div>
-            <div className="text-left min-w-0">
-              <p className="text-xs font-bold uppercase tracking-widest text-white/80">
-                {t.footer.callUsNow}
-              </p>
-              <p className="mt-1 text-xl font-bold text-white truncate">
-                714-473-1140
-              </p>
-            </div>
-          </div>
-
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-green-600 group-hover:translate-x-1 transition-transform shrink-0">
-            <ArrowRight className="h-5 w-5" />
-          </div>
-        </a>
-
-        {/* Card 2: Message Us on WhatsApp */}
-        <a
-          href="https://wa.me/message/NZGNL4QE5S6OD1"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group flex min-h-[120px] items-center justify-between gap-4 rounded-3xl bg-green-500 p-6 text-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
-        >
-          <div className="flex items-center gap-5 min-w-0">
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/20 shrink-0">
-              <FaWhatsapp className="h-7 w-7 text-white" />
-            </div>
-            <div className="text-left min-w-0">
-              <p className="text-xs font-bold uppercase tracking-widest text-white/80">
-                {t.footer.messageUsWhatsApp}
-              </p>
-              <p className="mt-1 text-xl font-bold text-white truncate">
-                WhatsApp
-              </p>
-            </div>
-          </div>
-
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-green-600 group-hover:translate-x-1 transition-transform shrink-0">
-            <ArrowRight className="h-5 w-5" />
-          </div>
-        </a>
-
-        {/* Card 3: Send Us Email */}
-        <a
-          href={emailHref}
-          className="group flex min-h-[120px] items-center justify-between gap-4 rounded-3xl bg-white p-6 border border-green-100 text-slate-800 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
-        >
-          <div className="flex items-center gap-5 min-w-0">
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-green-100 shrink-0">
-              <Mail className="h-7 w-7 text-green-600" />
-            </div>
-            <div className="text-left min-w-0">
-              <p className="text-xs font-bold uppercase tracking-widest text-green-700">
-                {t.footer.sendUsEmail}
-              </p>
-              <p className="mt-1 text-base font-bold leading-tight break-all xl:text-lg text-slate-700">
-                cleancareproservices2@gmail.com
-              </p>
-            </div>
-          </div>
-
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-green-500 text-white group-hover:translate-x-1 transition-transform shrink-0">
-            <ArrowRight className="h-5 w-5" />
-          </div>
-        </a>
 
       </div>
 
