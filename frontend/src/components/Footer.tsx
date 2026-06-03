@@ -1,6 +1,6 @@
 import React from 'react';
 import { Phone, Mail, MapPin, ArrowRight } from 'lucide-react';
-import { FaFacebookF, FaInstagram, FaTiktok } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaTiktok, FaWhatsapp } from 'react-icons/fa';
 import { useLanguage } from '../LanguageContext';
 
 const locations = [
@@ -136,7 +136,7 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Premium Bottom Contact Cards */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="mt-16 grid grid-cols-1 lg:grid-cols-3 gap-6">
           <a
             href="tel:7144731140"
             className="group rounded-3xl bg-green-500 px-8 py-7 flex items-center justify-between shadow-sm hover:shadow-md transition-all"
@@ -152,6 +152,32 @@ const Footer: React.FC = () => {
                 </p>
                 <p className="mt-2 text-2xl font-bold text-white">
                   714-473-1140
+                </p>
+              </div>
+            </div>
+
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-green-600 group-hover:translate-x-1 transition-transform shrink-0">
+              <ArrowRight className="h-5 w-5" />
+            </div>
+          </a>
+
+          <a
+            href="https://wa.me/message/NZGNL4QE5S6OD1"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group rounded-3xl bg-[#25D366] px-8 py-7 flex items-center justify-between shadow-sm hover:shadow-md transition-all"
+          >
+            <div className="flex items-center gap-5">
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/20 shrink-0">
+                <FaWhatsapp className="h-7 w-7 text-white" />
+              </div>
+
+              <div className="text-left">
+                <p className="text-sm font-bold uppercase tracking-widest text-white/80">
+                  {t.footer.messageUsWhatsApp}
+                </p>
+                <p className="mt-2 text-2xl font-bold text-white">
+                  WhatsApp
                 </p>
               </div>
             </div>

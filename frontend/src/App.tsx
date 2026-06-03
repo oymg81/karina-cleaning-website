@@ -6,6 +6,7 @@ import Services from './components/Services';
 import About from './components/About';
 import CtaSection from './components/CtaSection';
 import Footer from './components/Footer';
+import WhatsAppFloatingButton from './components/WhatsAppFloatingButton';
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
       </main>
       
       <Footer />
+
+      <WhatsAppFloatingButton />
     </div>
   );
 }
