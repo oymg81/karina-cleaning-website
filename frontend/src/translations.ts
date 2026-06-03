@@ -297,7 +297,12 @@ export const translations = {
       servingAreas: 'Serving all major areas in California',
       privacyPolicy: 'Privacy Policy',
       termsOfService: 'Terms of Service',
-      designedBy: 'Designed & Developed by'
+      designedBy: 'Designed & Developed by',
+      cta: {
+        call: 'Call 714-473-1140',
+        whatsapp: 'WhatsApp',
+        email: 'Send Email'
+      }
     }
   },
   es: {
@@ -596,7 +601,12 @@ export const translations = {
       servingAreas: 'Sirviendo todas las áreas principales de California',
       privacyPolicy: 'Política de Privacidad',
       termsOfService: 'Términos de Servicio',
-      designedBy: 'Diseñado y desarrollado por'
+      designedBy: 'Diseñado y desarrollado por',
+      cta: {
+        call: 'Llamar 714-473-1140',
+        whatsapp: 'WhatsApp',
+        email: 'Enviar Email'
+      }
     }
   }
 };

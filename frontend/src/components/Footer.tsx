@@ -18,7 +18,7 @@ const locations = [
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
-  const { language, t } = useLanguage();
+  const { t } = useLanguage();
 
   const emailSubject = encodeURIComponent("Cleaning Service Inquiry - Clean & Care PRO");
   const emailBody = encodeURIComponent(
@@ -33,98 +33,107 @@ const Footer: React.FC = () => {
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 py-14 md:grid-cols-2 lg:grid-cols-[1.3fr_0.8fr_1fr_1fr_1.2fr] text-center md:text-left">
 
         {/* Column 1: Brand / Logo */}
-        <div className="space-y-6 flex flex-col items-center md:items-start">
-          <a href="#home" className="inline-block">
-            <img
-              src="/images/logo1.png"
-              alt="Clean & Care PRO Cleaning Services"
-              className="h-16 md:h-20 w-auto object-contain"
-            />
-          </a>
-          <p className="text-slate-600 text-sm leading-relaxed max-w-xs">
-            {t.footer.desc}
-          </p>
-          <div className="flex gap-4 pt-2">
-            <a 
-              href="https://www.facebook.com/cleankarinaservices" 
-              target="_blank"
-              rel="noreferrer"
-              className="flex h-11 w-11 items-center justify-center rounded-full bg-white border border-green-100 text-green-600 hover:bg-green-600 hover:text-white transition-colors shadow-sm"
-              aria-label="Facebook"
-            >
-              <FaFacebookF className="w-4 h-4" />
+        <div className="flex flex-col justify-between h-full items-center md:items-start">
+          <div className="space-y-6 flex flex-col items-center md:items-start">
+            <a href="#home" className="inline-block">
+              <img
+                src="/images/logo1.png"
+                alt="Clean & Care PRO Cleaning Services"
+                className="h-16 md:h-20 w-auto object-contain"
+              />
             </a>
-            <a 
-              href="https://www.instagram.com/casitaslimpias2?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
-              target="_blank"
-              rel="noreferrer"
-              className="flex h-11 w-11 items-center justify-center rounded-full bg-white border border-green-100 text-green-600 hover:bg-green-600 hover:text-white transition-colors shadow-sm"
-              aria-label="Instagram"
-            >
-              <FaInstagram className="w-4 h-4" />
-            </a>
-            <a 
-              href="https://www.tiktok.com/@cleancare.resident" 
-              target="_blank"
-              rel="noreferrer"
-              className="flex h-11 w-11 items-center justify-center rounded-full bg-white border border-green-100 text-green-600 hover:bg-green-600 hover:text-white transition-colors shadow-sm"
-              aria-label="TikTok"
-            >
-              <FaTiktok className="w-4 h-4" />
-            </a>
+            <p className="text-slate-600 text-sm leading-relaxed max-w-xs">
+              {t.footer.desc}
+            </p>
+            <div className="flex gap-4 pt-2">
+              <a 
+                href="https://www.facebook.com/cleankarinaservices" 
+                target="_blank"
+                rel="noreferrer"
+                className="flex h-11 w-11 items-center justify-center rounded-full bg-white border border-green-100 text-green-600 hover:bg-green-600 hover:text-white transition-colors shadow-sm"
+                aria-label="Facebook"
+              >
+                <FaFacebookF className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.instagram.com/casitaslimpias2?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
+                target="_blank"
+                rel="noreferrer"
+                className="flex h-11 w-11 items-center justify-center rounded-full bg-white border border-green-100 text-green-600 hover:bg-green-600 hover:text-white transition-colors shadow-sm"
+                aria-label="Instagram"
+              >
+                <FaInstagram className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.tiktok.com/@cleancare.resident" 
+                target="_blank"
+                rel="noreferrer"
+                className="flex h-11 w-11 items-center justify-center rounded-full bg-white border border-green-100 text-green-600 hover:bg-green-600 hover:text-white transition-colors shadow-sm"
+                aria-label="TikTok"
+              >
+                <FaTiktok className="w-4 h-4" />
+              </a>
+            </div>
           </div>
           
-          {/* Call CTA Button */}
-          <a
-            href="tel:7144731140"
-            className="mt-6 inline-flex items-center gap-3 rounded-2xl bg-[#5FE873] hover:bg-[#4cd260] px-5 py-3 text-slate-950 font-bold text-sm shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
-          >
-            <Phone className="w-4 h-4 shrink-0 text-slate-950" />
-            <span>{language === 'en' ? 'Call 714-473-1140' : 'Llamar 714-473-1140'}</span>
-          </a>
+          <div className="mt-8 w-full flex justify-center md:justify-start">
+            <a
+              href="tel:7144731140"
+              className="inline-flex h-12 w-full max-w-[220px] md:w-auto md:max-w-none md:min-w-[190px] items-center justify-center gap-2 rounded-2xl bg-[#5FE873] hover:bg-[#4cd260] px-5 text-sm font-bold text-slate-950 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+            >
+              <Phone className="w-4 h-4 shrink-0 text-slate-950" />
+              <span>{t.footer.cta.call}</span>
+            </a>
+          </div>
         </div>
 
         {/* Column 2: Quick Links */}
-        <div className="flex flex-col items-center md:items-start">
-          <h4 className="text-xl font-bold text-slate-900 mb-6">{t.footer.quickLinks}</h4>
-          <ul className="space-y-3">
-            <li><a href="#home" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.home}</a></li>
-            <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.services}</a></li>
-            <li><a href="#about" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.about}</a></li>
-            <li><a href="#contact" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.contact}</a></li>
-          </ul>
+        <div className="flex flex-col justify-between h-full items-center md:items-start">
+          <div className="flex flex-col items-center md:items-start">
+            <h4 className="text-xl font-bold text-slate-900 mb-6">{t.footer.quickLinks}</h4>
+            <ul className="space-y-3">
+              <li><a href="#home" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.home}</a></li>
+              <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.services}</a></li>
+              <li><a href="#about" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.about}</a></li>
+              <li><a href="#contact" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.contact}</a></li>
+            </ul>
+          </div>
 
-          {/* WhatsApp CTA Button */}
-          <a
-            href="https://wa.me/message/NZGNL4QE5S6OD1"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center gap-3 rounded-2xl bg-[#5FE873] hover:bg-[#4cd260] px-5 py-3 text-slate-950 font-bold text-sm shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
-          >
-            <FaWhatsapp className="w-4 h-4 shrink-0 text-slate-950" />
-            <span>{language === 'en' ? 'Message on WhatsApp' : 'Mensaje por WhatsApp'}</span>
-          </a>
+          <div className="mt-8 w-full flex justify-center md:justify-start">
+            <a
+              href="https://wa.me/message/NZGNL4QE5S6OD1"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-12 w-full max-w-[220px] md:w-auto md:min-w-[160px] md:max-w-[190px] items-center justify-center gap-2 rounded-2xl bg-[#5FE873] hover:bg-[#4cd260] px-5 text-sm font-bold text-slate-950 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+            >
+              <FaWhatsapp className="w-4 h-4 shrink-0 text-slate-950" />
+              <span>{t.footer.cta.whatsapp}</span>
+            </a>
+          </div>
         </div>
 
         {/* Column 3: Services */}
-        <div className="flex flex-col items-center md:items-start">
-          <h4 className="text-xl font-bold text-slate-900 mb-6">{t.footer.services}</h4>
-          <ul className="space-y-3">
-            <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[0].title}</a></li>
-            <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[1].title}</a></li>
-            <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[2].title}</a></li>
-            <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[3].title}</a></li>
-            <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[5].title}</a></li>
-          </ul>
+        <div className="flex flex-col justify-between h-full items-center md:items-start">
+          <div className="flex flex-col items-center md:items-start">
+            <h4 className="text-xl font-bold text-slate-900 mb-6">{t.footer.services}</h4>
+            <ul className="space-y-3">
+              <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[0].title}</a></li>
+              <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[1].title}</a></li>
+              <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[2].title}</a></li>
+              <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[3].title}</a></li>
+              <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[5].title}</a></li>
+            </ul>
+          </div>
 
-          {/* Email CTA Button */}
-          <a
-            href={emailHref}
-            className="mt-6 inline-flex items-center gap-3 rounded-2xl bg-[#5FE873] hover:bg-[#4cd260] px-5 py-3 text-slate-950 font-bold text-sm shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
-          >
-            <Mail className="w-4 h-4 shrink-0 text-slate-950" />
-            <span>{language === 'en' ? 'Send Email' : 'Enviar Correo'}</span>
-          </a>
+          <div className="mt-8 w-full flex justify-center md:justify-start">
+            <a
+              href={emailHref}
+              className="inline-flex h-12 w-full max-w-[220px] md:w-auto md:min-w-[160px] md:max-w-[190px] items-center justify-center gap-2 rounded-2xl bg-[#5FE873] hover:bg-[#4cd260] px-5 text-sm font-bold text-slate-950 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+            >
+              <Mail className="w-4 h-4 shrink-0 text-slate-950" />
+              <span>{t.footer.cta.email}</span>
+            </a>
+          </div>
         </div>
 
         {/* Column 4: Locations */}
