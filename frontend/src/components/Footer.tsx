@@ -27,193 +27,195 @@ const Footer: React.FC = () => {
   const emailHref = `mailto:cleancareproservices2@gmail.com?subject=${emailSubject}&body=${emailBody}`;
 
   return (
-    <footer className="bg-[#ECFDF3] text-slate-800 pt-20 pb-8 border-t border-green-200">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        
-        {/* 5-Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1.2fr_1.1fr_1.4fr] gap-10 mb-12 text-center md:text-left">
+    <footer className="bg-[#ECFDF3] text-slate-800 border-t border-green-200">
+      
+      {/* 1. Main Footer Columns */}
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 py-14 md:grid-cols-2 lg:grid-cols-[1.3fr_0.8fr_1fr_1fr_1.2fr] text-center md:text-left">
 
-          {/* Column 1: Brand / Logo */}
-          <div className="space-y-6 flex flex-col items-center md:items-start">
-            <a href="#home" className="inline-block">
-              <img
-                src="/images/logo1.png"
-                alt="Clean & Care PRO Cleaning Services"
-                className="h-16 md:h-20 w-auto object-contain"
-              />
+        {/* Column 1: Brand / Logo */}
+        <div className="space-y-6 flex flex-col items-center md:items-start">
+          <a href="#home" className="inline-block">
+            <img
+              src="/images/logo1.png"
+              alt="Clean & Care PRO Cleaning Services"
+              className="h-16 md:h-20 w-auto object-contain"
+            />
+          </a>
+          <p className="text-slate-600 text-sm leading-relaxed max-w-xs">
+            {t.footer.desc}
+          </p>
+          <div className="flex gap-4 pt-2">
+            <a 
+              href="https://www.facebook.com/cleankarinaservices" 
+              target="_blank"
+              rel="noreferrer"
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-white border border-green-100 text-green-600 hover:bg-green-600 hover:text-white transition-colors shadow-sm"
+              aria-label="Facebook"
+            >
+              <FaFacebookF className="w-4 h-4" />
             </a>
-            <p className="text-slate-600 text-sm leading-relaxed max-w-xs">
-              {t.footer.desc}
-            </p>
-            <div className="flex gap-4 pt-2">
-              <a 
-                href="https://www.facebook.com/cleankarinaservices" 
-                target="_blank"
-                rel="noreferrer"
-                className="flex h-11 w-11 items-center justify-center rounded-full bg-white border border-green-100 text-green-600 hover:bg-green-600 hover:text-white transition-colors shadow-sm"
-                aria-label="Facebook"
-              >
-                <FaFacebookF className="w-4 h-4" />
-              </a>
-              <a 
-                href="https://www.instagram.com/casitaslimpias2?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
-                target="_blank"
-                rel="noreferrer"
-                className="flex h-11 w-11 items-center justify-center rounded-full bg-white border border-green-100 text-green-600 hover:bg-green-600 hover:text-white transition-colors shadow-sm"
-                aria-label="Instagram"
-              >
-                <FaInstagram className="w-4 h-4" />
-              </a>
-              <a 
-                href="https://www.tiktok.com/@cleancare.resident" 
-                target="_blank"
-                rel="noreferrer"
-                className="flex h-11 w-11 items-center justify-center rounded-full bg-white border border-green-100 text-green-600 hover:bg-green-600 hover:text-white transition-colors shadow-sm"
-                aria-label="TikTok"
-              >
-                <FaTiktok className="w-4 h-4" />
-              </a>
-            </div>
+            <a 
+              href="https://www.instagram.com/casitaslimpias2?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
+              target="_blank"
+              rel="noreferrer"
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-white border border-green-100 text-green-600 hover:bg-green-600 hover:text-white transition-colors shadow-sm"
+              aria-label="Instagram"
+            >
+              <FaInstagram className="w-4 h-4" />
+            </a>
+            <a 
+              href="https://www.tiktok.com/@cleancare.resident" 
+              target="_blank"
+              rel="noreferrer"
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-white border border-green-100 text-green-600 hover:bg-green-600 hover:text-white transition-colors shadow-sm"
+              aria-label="TikTok"
+            >
+              <FaTiktok className="w-4 h-4" />
+            </a>
           </div>
-
-          {/* Column 2: Quick Links */}
-          <div className="flex flex-col items-center md:items-start">
-            <h4 className="text-xl font-bold text-slate-900 mb-6">{t.footer.quickLinks}</h4>
-            <ul className="space-y-3">
-              <li><a href="#home" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.home}</a></li>
-              <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.services}</a></li>
-              <li><a href="#about" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.about}</a></li>
-              <li><a href="#contact" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.contact}</a></li>
-            </ul>
-          </div>
-
-          {/* Column 3: Services */}
-          <div className="flex flex-col items-center md:items-start">
-            <h4 className="text-xl font-bold text-slate-900 mb-6">{t.footer.services}</h4>
-            <ul className="space-y-3">
-              <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[0].title}</a></li>
-              <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[1].title}</a></li>
-              <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[2].title}</a></li>
-              <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[3].title}</a></li>
-              <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[5].title}</a></li>
-            </ul>
-          </div>
-
-          {/* Column 4: Locations */}
-          <div className="flex flex-col items-center md:items-start">
-            <h4 className="text-xl font-bold text-slate-900 mb-6">{t.footer.locations}</h4>
-            <ul className="space-y-3 text-center md:text-left">
-              {locations.map((loc, idx) => (
-                <li key={idx} className="text-slate-700 text-sm font-medium">{loc}</li>
-              ))}
-              <li className="pt-2">
-                <a href="#contact" className="font-semibold text-green-600 hover:text-green-700 text-sm transition-colors">
-                  {t.footer.seeAllLocations}
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 5: Contact Info */}
-          <div className="flex flex-col items-center md:items-start">
-            <h4 className="text-xl font-bold text-slate-900 mb-6">{t.footer.contactInfo}</h4>
-            <ul className="space-y-4">
-              <li className="flex flex-col md:flex-row items-center gap-3">
-                <Phone className="h-5 w-5 text-green-600 shrink-0" />
-                <span className="text-slate-700 text-sm font-medium">714-473-1140</span>
-              </li>
-              <li className="flex flex-col md:flex-row items-center gap-3">
-                <Mail className="h-5 w-5 text-green-600 shrink-0" />
-                <span className="text-slate-700 text-sm font-medium">cleancareproservices2@gmail.com</span>
-              </li>
-              <li className="flex flex-col md:flex-row items-center gap-3 text-center md:text-left">
-                <MapPin className="h-5 w-5 text-green-600 shrink-0" />
-                <span className="text-slate-700 text-sm font-medium">{t.footer.servingAreas}</span>
-              </li>
-            </ul>
-          </div>
-
         </div>
 
-        {/* Premium Bottom Contact Cards */}
-        <div className="mt-16 grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <a
-            href="tel:7144731140"
-            className="group rounded-3xl bg-green-500 px-8 py-7 flex items-center justify-between shadow-sm hover:shadow-md transition-all"
-          >
-            <div className="flex items-center gap-5">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/20 shrink-0">
-                <Phone className="h-7 w-7 text-white" />
-              </div>
-
-              <div className="text-left">
-                <p className="text-sm font-bold uppercase tracking-widest text-white/80">
-                  {t.footer.callUsNow}
-                </p>
-                <p className="mt-2 text-2xl font-bold text-white">
-                  714-473-1140
-                </p>
-              </div>
-            </div>
-
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-green-600 group-hover:translate-x-1 transition-transform shrink-0">
-              <ArrowRight className="h-5 w-5" />
-            </div>
-          </a>
-
-          <a
-            href="https://wa.me/message/NZGNL4QE5S6OD1"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group rounded-3xl bg-[#25D366] px-8 py-7 flex items-center justify-between shadow-sm hover:shadow-md transition-all"
-          >
-            <div className="flex items-center gap-5">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/20 shrink-0">
-                <FaWhatsapp className="h-7 w-7 text-white" />
-              </div>
-
-              <div className="text-left">
-                <p className="text-sm font-bold uppercase tracking-widest text-white/80">
-                  {t.footer.messageUsWhatsApp}
-                </p>
-                <p className="mt-2 text-2xl font-bold text-white">
-                  WhatsApp
-                </p>
-              </div>
-            </div>
-
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-green-600 group-hover:translate-x-1 transition-transform shrink-0">
-              <ArrowRight className="h-5 w-5" />
-            </div>
-          </a>
-
-          <a
-            href={emailHref}
-            className="group rounded-3xl bg-white px-8 py-7 flex items-center justify-between border border-green-100 shadow-sm hover:shadow-md transition-all"
-          >
-            <div className="flex items-center gap-5">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-green-100 shrink-0">
-                <Mail className="h-7 w-7 text-green-600" />
-              </div>
-
-              <div className="text-left">
-                <p className="text-sm font-bold uppercase tracking-widest text-green-700">
-                  {t.footer.sendUsEmail}
-                </p>
-                <p className="mt-2 text-2xl font-bold text-slate-700 break-all md:break-normal">
-                  cleancareproservices2@gmail.com
-                </p>
-              </div>
-            </div>
-
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-green-500 text-white group-hover:translate-x-1 transition-transform shrink-0">
-              <ArrowRight className="h-5 w-5" />
-            </div>
-          </a>
+        {/* Column 2: Quick Links */}
+        <div className="flex flex-col items-center md:items-start">
+          <h4 className="text-xl font-bold text-slate-900 mb-6">{t.footer.quickLinks}</h4>
+          <ul className="space-y-3">
+            <li><a href="#home" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.home}</a></li>
+            <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.services}</a></li>
+            <li><a href="#about" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.about}</a></li>
+            <li><a href="#contact" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.contact}</a></li>
+          </ul>
         </div>
 
-        {/* Bottom Copyright Row */}
-        <div className="mt-16 border-t border-green-200 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-center">
+        {/* Column 3: Services */}
+        <div className="flex flex-col items-center md:items-start">
+          <h4 className="text-xl font-bold text-slate-900 mb-6">{t.footer.services}</h4>
+          <ul className="space-y-3">
+            <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[0].title}</a></li>
+            <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[1].title}</a></li>
+            <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[2].title}</a></li>
+            <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[3].title}</a></li>
+            <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[5].title}</a></li>
+          </ul>
+        </div>
+
+        {/* Column 4: Locations */}
+        <div className="flex flex-col items-center md:items-start">
+          <h4 className="text-xl font-bold text-slate-900 mb-6">{t.footer.locations}</h4>
+          <ul className="space-y-3 text-center md:text-left">
+            {locations.map((loc, idx) => (
+              <li key={idx} className="text-slate-700 text-sm font-medium">{loc}</li>
+            ))}
+            <li className="pt-2">
+              <a href="#contact" className="font-semibold text-green-600 hover:text-green-700 text-sm transition-colors">
+                {t.footer.seeAllLocations}
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        {/* Column 5: Contact Info */}
+        <div className="flex flex-col items-center md:items-start">
+          <h4 className="text-xl font-bold text-slate-900 mb-6">{t.footer.contactInfo}</h4>
+          <ul className="space-y-4">
+            <li className="flex flex-col md:flex-row items-center gap-3">
+              <Phone className="h-5 w-5 text-green-600 shrink-0" />
+              <span className="text-slate-700 text-sm font-medium">714-473-1140</span>
+            </li>
+            <li className="flex flex-col md:flex-row items-center gap-3">
+              <Mail className="h-5 w-5 text-green-600 shrink-0" />
+              <span className="text-slate-700 text-sm font-medium break-all text-center md:text-left">cleancareproservices2@gmail.com</span>
+            </li>
+            <li className="flex flex-col md:flex-row items-center gap-3 text-center md:text-left">
+              <MapPin className="h-5 w-5 text-green-600 shrink-0" />
+              <span className="text-slate-700 text-sm font-medium">{t.footer.servingAreas}</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      {/* 2. Contact CTA Cards Section */}
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-5 px-6 pb-12 md:grid-cols-3">
+        
+        {/* Card 1: Call Us */}
+        <a
+          href="tel:7144731140"
+          className="group flex min-h-[120px] items-center justify-between gap-4 rounded-3xl bg-green-500 p-6 text-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
+        >
+          <div className="flex items-center gap-5 min-w-0">
+            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/20 shrink-0">
+              <Phone className="h-7 w-7 text-white" />
+            </div>
+            <div className="text-left min-w-0">
+              <p className="text-xs font-bold uppercase tracking-widest text-white/80">
+                {t.footer.callUsNow}
+              </p>
+              <p className="mt-1 text-xl font-bold text-white truncate">
+                714-473-1140
+              </p>
+            </div>
+          </div>
+
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-green-600 group-hover:translate-x-1 transition-transform shrink-0">
+            <ArrowRight className="h-5 w-5" />
+          </div>
+        </a>
+
+        {/* Card 2: Message Us on WhatsApp */}
+        <a
+          href="https://wa.me/message/NZGNL4QE5S6OD1"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group flex min-h-[120px] items-center justify-between gap-4 rounded-3xl bg-green-500 p-6 text-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
+        >
+          <div className="flex items-center gap-5 min-w-0">
+            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/20 shrink-0">
+              <FaWhatsapp className="h-7 w-7 text-white" />
+            </div>
+            <div className="text-left min-w-0">
+              <p className="text-xs font-bold uppercase tracking-widest text-white/80">
+                {t.footer.messageUsWhatsApp}
+              </p>
+              <p className="mt-1 text-xl font-bold text-white truncate">
+                WhatsApp
+              </p>
+            </div>
+          </div>
+
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-green-600 group-hover:translate-x-1 transition-transform shrink-0">
+            <ArrowRight className="h-5 w-5" />
+          </div>
+        </a>
+
+        {/* Card 3: Send Us Email */}
+        <a
+          href={emailHref}
+          className="group flex min-h-[120px] items-center justify-between gap-4 rounded-3xl bg-white p-6 border border-green-100 text-slate-800 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
+        >
+          <div className="flex items-center gap-5 min-w-0">
+            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-green-100 shrink-0">
+              <Mail className="h-7 w-7 text-green-600" />
+            </div>
+            <div className="text-left min-w-0">
+              <p className="text-xs font-bold uppercase tracking-widest text-green-700">
+                {t.footer.sendUsEmail}
+              </p>
+              <p className="mt-1 text-base font-bold leading-tight break-all xl:text-lg text-slate-700">
+                cleancareproservices2@gmail.com
+              </p>
+            </div>
+          </div>
+
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-green-500 text-white group-hover:translate-x-1 transition-transform shrink-0">
+            <ArrowRight className="h-5 w-5" />
+          </div>
+        </a>
+
+      </div>
+
+      {/* 3. Bottom Copyright / Legal Area */}
+      <div className="border-t border-green-200 py-8 bg-[#ECFDF3]">
+        <div className="mx-auto max-w-7xl px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-center">
           <p className="text-sm text-slate-500 font-medium">
             &copy; {currentYear} {t.footer.rights}
           </p>
@@ -236,8 +238,8 @@ const Footer: React.FC = () => {
             <a href="#" className="hover:text-slate-800 transition-colors">{t.footer.termsOfService}</a>
           </div>
         </div>
-
       </div>
+
     </footer>
   );
 };
