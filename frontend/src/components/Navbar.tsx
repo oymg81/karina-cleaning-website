@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useLanguage } from '../LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 
 const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { language, setLanguage, t } = useLanguage();
   const [activeSection, setActiveSection] = useState('home');
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
+    if (location.pathname !== '/') {
+      return;
+    }
+
     const observerOptions = {
       root: null,
       rootMargin: '-50% 0px -50% 0px',
@@ -37,7 +44,7 @@ const Navbar: React.FC = () => {
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [location.pathname]);
 
   const navLinks = [
     { name: t.navbar.home, href: '#home' },
@@ -48,12 +55,24 @@ const Navbar: React.FC = () => {
 
   const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    const element = document.querySelector(href);
-    if (element) {
-      const y = element.getBoundingClientRect().top + window.scrollY - 80;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    }
     setMobileMenuOpen(false);
+
+    if (location.pathname !== '/') {
+      navigate('/' + href);
+      return;
+    }
+
+    setTimeout(() => {
+      if (href === '#home') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+      const element = document.querySelector(href);
+      if (element) {
+        const y = element.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    }, 50);
   };
 
 
@@ -77,7 +96,7 @@ const Navbar: React.FC = () => {
         <div className="hidden lg:flex items-center gap-3">
           <ul className="flex items-center gap-2">
             {navLinks.map((link, index) => {
-              const isActive = activeSection === link.href.slice(1);
+              const isActive = location.pathname === '/' && activeSection === link.href.slice(1);
               return (
                 <li key={index}>
                   <a
@@ -160,7 +179,7 @@ const Navbar: React.FC = () => {
             <div className="px-6 py-6 flex flex-col gap-4">
               <ul className="flex flex-col gap-3">
                 {navLinks.map((link, index) => {
-                  const isActive = activeSection === link.href.slice(1);
+                  const isActive = location.pathname === '/' && activeSection === link.href.slice(1);
                   return (
                     <li key={index}>
                       <a

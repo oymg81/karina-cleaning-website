@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Home, Building2, Sparkles, Truck, Briefcase, Key, ArrowRight, X, Check } from 'lucide-react';
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
-import { useLanguage } from '../LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 
 const icons = [Home, Sparkles, Truck, Briefcase, Building2, Key];
 

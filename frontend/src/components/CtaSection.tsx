@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Phone, Send } from 'lucide-react';
-import { useLanguage } from '../LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 import emailjs from '@emailjs/browser';
 
 const serviceId = (import.meta.env.VITE_EMAILJS_SERVICE_ID as string | undefined)?.trim();
 const templateId = (import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string | undefined)?.trim();
 const publicKey = (import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string | undefined)?.trim();
+
+interface EmailJsErrorLike {
+  status?: number;
+  text?: string;
+}
 
 const CtaSection: React.FC = () => {
   const { language, t } = useLanguage();
@@ -116,13 +121,14 @@ const CtaSection: React.FC = () => {
         // Auto-clear success message after 5 seconds
         setTimeout(() => setSubmitStatus('idle'), 5000);
       })
-      .catch((error) => {
+      .catch((error: unknown) => {
         console.error("EmailJS send failed:", error);
 
         if (error && typeof error === "object") {
+          const errObj = error as EmailJsErrorLike;
           console.error("EmailJS error details:", {
-            status: (error as any).status,
-            text: (error as any).text,
+            status: errObj.status,
+            text: errObj.text,
           });
         }
 

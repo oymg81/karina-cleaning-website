@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle } from 'lucide-react';
-import { useLanguage } from '../LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 
 const Hero: React.FC = () => {
   const { t } = useLanguage();

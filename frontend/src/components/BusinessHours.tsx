@@ -1,7 +1,7 @@
 import React from 'react';
 import { Clock, Calendar, Phone, Building2 } from 'lucide-react';
 import { motion, type Variants } from 'framer-motion';
-import { useLanguage } from '../LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },

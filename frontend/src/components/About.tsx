@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ShieldCheck, Users, ThumbsUp, Leaf } from 'lucide-react';
-import { useLanguage } from '../LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 
 const icons = [Users, ShieldCheck, ThumbsUp, Leaf];
 

@@ -1,7 +1,8 @@
 import React from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { FaFacebookF, FaInstagram, FaTiktok, FaWhatsapp } from 'react-icons/fa';
-import { useLanguage } from '../LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 
 const locations = [
   'Los Angeles',
@@ -19,6 +20,24 @@ const locations = [
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
   const { t } = useLanguage();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (location.pathname === '/') {
+      e.preventDefault();
+      const element = document.querySelector(href);
+      if (element) {
+        const y = element.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      } else if (href === '#home') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    } else {
+      e.preventDefault();
+      navigate('/' + href);
+    }
+  };
 
   const emailSubject = encodeURIComponent("Cleaning Service Inquiry - Clean & Care PRO");
   const emailBody = encodeURIComponent(
@@ -35,7 +54,7 @@ const Footer: React.FC = () => {
         {/* Column 1: Brand / Logo */}
         <div className="flex flex-col justify-between h-full items-center md:items-start">
           <div className="space-y-6 flex flex-col items-center md:items-start">
-            <a href="#home" className="inline-block">
+            <a href="#home" onClick={(e) => handleAnchorClick(e, '#home')} className="inline-block">
               <img
                 src="/images/logo1.png"
                 alt="Clean & Care PRO Cleaning Services"
@@ -92,10 +111,10 @@ const Footer: React.FC = () => {
           <div className="flex flex-col items-center md:items-start">
             <h4 className="text-xl font-bold text-slate-900 mb-6">{t.footer.quickLinks}</h4>
             <ul className="space-y-3">
-              <li><a href="#home" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.home}</a></li>
-              <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.services}</a></li>
-              <li><a href="#about" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.about}</a></li>
-              <li><a href="#contact" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.contact}</a></li>
+              <li><a href="#home" onClick={(e) => handleAnchorClick(e, '#home')} className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.home}</a></li>
+              <li><a href="#services" onClick={(e) => handleAnchorClick(e, '#services')} className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.services}</a></li>
+              <li><a href="#about" onClick={(e) => handleAnchorClick(e, '#about')} className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.about}</a></li>
+              <li><a href="#contact" onClick={(e) => handleAnchorClick(e, '#contact')} className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.contact}</a></li>
             </ul>
           </div>
 
@@ -117,11 +136,11 @@ const Footer: React.FC = () => {
           <div className="flex flex-col items-center md:items-start">
             <h4 className="text-xl font-bold text-slate-900 mb-6">{t.footer.services}</h4>
             <ul className="space-y-3">
-              <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[0].title}</a></li>
-              <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[1].title}</a></li>
-              <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[2].title}</a></li>
-              <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[3].title}</a></li>
-              <li><a href="#services" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[5].title}</a></li>
+              <li><a href="#services" onClick={(e) => handleAnchorClick(e, '#services')} className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[0].title}</a></li>
+              <li><a href="#services" onClick={(e) => handleAnchorClick(e, '#services')} className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[1].title}</a></li>
+              <li><a href="#services" onClick={(e) => handleAnchorClick(e, '#services')} className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[2].title}</a></li>
+              <li><a href="#services" onClick={(e) => handleAnchorClick(e, '#services')} className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[3].title}</a></li>
+              <li><a href="#services" onClick={(e) => handleAnchorClick(e, '#services')} className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.services.list[5].title}</a></li>
             </ul>
           </div>
 
@@ -144,7 +163,7 @@ const Footer: React.FC = () => {
               <li key={idx} className="text-slate-700 text-sm font-medium">{loc}</li>
             ))}
             <li className="pt-2">
-              <a href="#contact" className="font-semibold text-green-600 hover:text-green-700 text-sm transition-colors">
+              <a href="#contact" onClick={(e) => handleAnchorClick(e, '#contact')} className="font-semibold text-green-600 hover:text-green-700 text-sm transition-colors">
                 {t.footer.seeAllLocations}
               </a>
             </li>

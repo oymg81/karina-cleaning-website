@@ -1,31 +1,33 @@
-
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import BusinessHours from './components/BusinessHours';
-import Services from './components/Services';
-import About from './components/About';
-import CtaSection from './components/CtaSection';
 import Footer from './components/Footer';
 import WhatsAppFloatingButton from './components/WhatsAppFloatingButton';
+import ScrollToTop from './components/ScrollToTop';
+import HomePage from './pages/HomePage';
+import ServiceAreaPage from './pages/ServiceAreaPage';
+import NotFoundPage from './pages/NotFoundPage';
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <ScrollToTop />
       <Navbar />
-      
-      <main className="flex-grow">
-        <Hero />
-        <BusinessHours />
-        <Services />
-        <About />
-        <CtaSection />
-      </main>
-      
-      <Footer />
 
+      <main className="flex-grow">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/service-areas/orange-county" element={<ServiceAreaPage slug="orange-county" />} />
+          <Route path="/service-areas/glendale" element={<ServiceAreaPage slug="glendale" />} />
+          <Route path="/service-areas/rosemead" element={<ServiceAreaPage slug="rosemead" />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </main>
+
+      <Footer />
       <WhatsAppFloatingButton />
     </div>
   );
-}
+};
 
 export default App;
