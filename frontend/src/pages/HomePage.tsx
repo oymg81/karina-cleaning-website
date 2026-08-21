@@ -3,6 +3,7 @@ import Hero from '../components/Hero';
 import BusinessHours from '../components/BusinessHours';
 import Services from '../components/Services';
 import About from '../components/About';
+import ReviewsSection from '../components/ReviewsSection';
 import CtaSection from '../components/CtaSection';
 import SEOHead from '../components/SEOHead';
 import { useLanguage } from '../hooks/useLanguage';
@@ -30,6 +31,7 @@ const HomePage: React.FC = () => {
       <BusinessHours />
       <Services />
       <About />
+      <ReviewsSection />
       <CtaSection />
     </>
   );

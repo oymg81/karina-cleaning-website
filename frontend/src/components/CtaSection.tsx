@@ -3,14 +3,21 @@ import { motion } from 'framer-motion';
 import { Phone, Send } from 'lucide-react';
 import { useLanguage } from '../hooks/useLanguage';
 import emailjs from '@emailjs/browser';
+import { getAttribution } from '../utils/attribution';
 
 const serviceId = (import.meta.env.VITE_EMAILJS_SERVICE_ID as string | undefined)?.trim();
 const templateId = (import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string | undefined)?.trim();
 const publicKey = (import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string | undefined)?.trim();
 
-interface EmailJsErrorLike {
-  status?: number;
-  text?: string;
+function generateUUID(): string {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return crypto.randomUUID();
+  }
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0;
+    const v = c === 'x' ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
 }
 
 const CtaSection: React.FC = () => {
@@ -20,7 +27,8 @@ const CtaSection: React.FC = () => {
     email: '',
     phone: '',
     service: 'residential',
-    message: ''
+    message: '',
+    website_url: '' // Honeypot
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
@@ -32,20 +40,19 @@ const CtaSection: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
+
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
-    // Validate EmailJS environment variables
-    if (!serviceId || !templateId || !publicKey) {
-      console.error(
-        "EmailJS configuration error: Missing environment variable(s). " +
-        "Please check that VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, " +
-        "and VITE_EMAILJS_PUBLIC_KEY are defined in .env.local or production settings."
-      );
+    // Honeypot check: If filled by bot, silently succeed
+    if (formData.website_url.trim()) {
       setIsSubmitting(false);
-      setSubmitStatus('error');
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', phone: '', service: 'residential', message: '', website_url: '' });
+      setTimeout(() => setSubmitStatus('idle'), 5000);
       return;
     }
 
@@ -56,8 +63,8 @@ const CtaSection: React.FC = () => {
     const service = formData.service.trim();
     const message = formData.message.trim();
 
-    if (!name) {
-      console.warn("Validation failed: Name is required.");
+    if (!name || name.length < 2 || name.length > 120) {
+      console.warn("Validation failed: Name is required and must be 2-120 characters.");
       setIsSubmitting(false);
       setSubmitStatus('error');
       return;
@@ -71,8 +78,8 @@ const CtaSection: React.FC = () => {
       return;
     }
 
-    if (!phone) {
-      console.warn("Validation failed: Phone is required.");
+    if (!phone || phone.length < 3) {
+      console.warn("Validation failed: Phone is required (min 3 characters).");
       setIsSubmitting(false);
       setSubmitStatus('error');
       return;
@@ -85,56 +92,96 @@ const CtaSection: React.FC = () => {
       return;
     }
 
-    const templateParams = {
-      name: name || "N/A",
-      email: email || "N/A",
-      phone: phone || "N/A",
-      service: service || "N/A",
-      property_type: "N/A",
-      bedrooms: "N/A",
-      bathrooms: "N/A",
-      frequency: "N/A",
-      message: message || "N/A",
-    };
+    // Capture submission id and attribution
+    const submissionId = generateUUID();
+    const attribution = getAttribution();
 
-    // Required Test 1: Confirm Runtime Env Values
-    console.log("EmailJS env check:", {
-      serviceId,
-      templateId,
-      publicKey,
-      serviceIdLength: serviceId?.length,
-      templateIdLength: templateId?.length,
-      publicKeyLength: publicKey?.length,
-    });
-
-    // Required Test 4: Try EmailJS Init
-    if (publicKey) {
+    // 1. EmailJS Dispatch Promise
+    const emailJsPromise = (async () => {
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error('EmailJS environment configuration missing');
+      }
       emailjs.init(publicKey);
-    }
+      const templateParams = {
+        name: name || "N/A",
+        email: email || "N/A",
+        phone: phone || "N/A",
+        service: service || "N/A",
+        property_type: "N/A",
+        bedrooms: "N/A",
+        bathrooms: "N/A",
+        frequency: "N/A",
+        message: message || "N/A",
+      };
+      return emailjs.send(serviceId, templateId, templateParams);
+    })();
 
-    emailjs.send(serviceId || '', templateId || '', templateParams)
-      .then((response) => {
-        console.log('EmailJS Success:', response.status, response.text);
-        setIsSubmitting(false);
-        setSubmitStatus('success');
-        setFormData({ name: '', email: '', phone: '', service: 'residential', message: '' });
-        // Auto-clear success message after 5 seconds
-        setTimeout(() => setSubmitStatus('idle'), 5000);
-      })
-      .catch((error: unknown) => {
-        console.error("EmailJS send failed:", error);
+    // 2. FOES Leads Proxy Dispatch Promise
+    const foesPromise = (async () => {
+      const payload = {
+        name,
+        email: email || undefined,
+        phone: phone || undefined,
+        service: service || undefined,
+        message: message || undefined,
+        locale: language === 'es' ? ('es' as const) : ('en' as const),
+        landing_page: attribution.landing_page,
+        referrer: attribution.referrer,
+        utm_source: attribution.utm_source,
+        utm_medium: attribution.utm_medium,
+        utm_campaign: attribution.utm_campaign,
+        utm_content: attribution.utm_content,
+        utm_term: attribution.utm_term,
+        submission_id: submissionId,
+        website_url: formData.website_url || undefined,
+      };
 
-        if (error && typeof error === "object") {
-          const errObj = error as EmailJsErrorLike;
-          console.error("EmailJS error details:", {
-            status: errObj.status,
-            text: errObj.text,
-          });
+      const res = await fetch('/api/foes/leads', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const errJson = await res.json().catch(() => ({}));
+        throw new Error(errJson.error || `HTTP ${res.status}`);
+      }
+
+      return res.json();
+    })();
+
+    try {
+      // Execute both dispatches in parallel
+      const [emailResult, foesResult] = await Promise.allSettled([emailJsPromise, foesPromise]);
+
+      const emailSucceeded = emailResult.status === 'fulfilled';
+      const foesSucceeded = foesResult.status === 'fulfilled';
+
+      if (emailSucceeded || foesSucceeded) {
+        // Tolerant dual-dispatch: At least one succeeded
+        if (!emailSucceeded) {
+          console.warn('[Dual-Dispatch] EmailJS delivery failed; lead captured successfully via FOES.');
+        }
+        if (!foesSucceeded) {
+          console.warn('[Dual-Dispatch] FOES proxy dispatch failed; notification delivered successfully via EmailJS.');
         }
 
-        setIsSubmitting(false);
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', phone: '', service: 'residential', message: '', website_url: '' });
+        setTimeout(() => setSubmitStatus('idle'), 5000);
+      } else {
+        // Both destinations failed
+        console.error('[Dual-Dispatch] Both EmailJS and FOES submission failed.');
         setSubmitStatus('error');
-      });
+      }
+    } catch {
+      console.error('[Dual-Dispatch] Unexpected failure in dispatch runner.');
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -224,13 +271,27 @@ const CtaSection: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 className="p-4 mb-4 rounded-xl bg-red-50 text-red-800 border border-red-200 text-sm font-semibold"
               >
-                {language === 'en' 
-                  ? 'Sorry, something went wrong. Please try again or contact us directly.' 
-                  : 'Lo sentimos, algo salió mal. Por favor, inténtelo de nuevo o contáctenos directamente.'}
+                {language === 'en'
+                  ? 'Sorry, something went wrong. Please try again or contact us directly at (714) 473-1140.'
+                  : 'Lo sentimos, algo salió mal. Por favor, inténtelo de nuevo o contáctenos directamente al (714) 473-1140.'}
               </motion.div>
             )}
             
             <form onSubmit={handleSubmit} className="space-y-4">
+              {/* Honeypot Field */}
+              <div style={{ display: 'none', position: 'absolute', left: '-9999px', opacity: 0 }} aria-hidden="true">
+                <label htmlFor="cta_website_url">Website</label>
+                <input
+                  type="text"
+                  id="cta_website_url"
+                  name="website_url"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={formData.website_url}
+                  onChange={handleChange}
+                />
+              </div>
+
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-1">{t.cta.fullName}</label>
                 <input
@@ -239,6 +300,7 @@ const CtaSection: React.FC = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
+                  maxLength={120}
                   required
                   className="w-full rounded-xl border border-slate-300 px-4 py-3 focus:ring-2 focus:ring-[#5FE873] outline-none"
                   placeholder="John Doe"
@@ -254,6 +316,7 @@ const CtaSection: React.FC = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
+                    maxLength={255}
                     required
                     className="w-full rounded-xl border border-slate-300 px-4 py-3 focus:ring-2 focus:ring-[#5FE873] outline-none"
                     placeholder="john@example.com"
@@ -267,6 +330,7 @@ const CtaSection: React.FC = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
+                    maxLength={30}
                     required
                     className="w-full rounded-xl border border-slate-300 px-4 py-3 focus:ring-2 focus:ring-[#5FE873] outline-none"
                     placeholder="(714) 473-1140"
@@ -300,6 +364,7 @@ const CtaSection: React.FC = () => {
                   value={formData.message}
                   onChange={handleChange}
                   rows={3}
+                  maxLength={600}
                   className="w-full rounded-xl border border-slate-300 px-4 py-3 focus:ring-2 focus:ring-[#5FE873] outline-none resize-none"
                   placeholder={t.cta.messagePlaceholder}
                 ></textarea>

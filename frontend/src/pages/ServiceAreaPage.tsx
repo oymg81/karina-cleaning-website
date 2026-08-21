@@ -5,6 +5,7 @@ import { ShieldCheck, Phone, CheckCircle, HelpCircle, ChevronDown, MapPin, Spark
 import { serviceAreas } from '../data/serviceAreas';
 import { useLanguage } from '../hooks/useLanguage';
 import SEOHead from '../components/SEOHead';
+import ReviewsSection from '../components/ReviewsSection';
 import CtaSection from '../components/CtaSection';
 
 interface ServiceAreaPageProps {
@@ -232,6 +233,9 @@ const ServiceAreaPage: React.FC<ServiceAreaPageProps> = ({ slug: propSlug }) => 
           </div>
         </div>
       </section>
+
+      {/* Customer Reviews Section */}
+      <ReviewsSection />
 
       {/* Embedded Quote Form Section */}
       <CtaSection />
