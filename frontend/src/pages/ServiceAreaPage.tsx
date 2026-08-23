@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ShieldCheck, Phone, CheckCircle, HelpCircle, ChevronDown, MapPin, Sparkles } from 'lucide-react';
@@ -7,6 +7,7 @@ import { useLanguage } from '../hooks/useLanguage';
 import SEOHead from '../components/SEOHead';
 import ReviewsSection from '../components/ReviewsSection';
 import CtaSection from '../components/CtaSection';
+import { getRouteMetadata, getRouteJsonLd } from '../utils/seo';
 
 interface ServiceAreaPageProps {
   slug?: string;
@@ -18,12 +19,23 @@ const ServiceAreaPage: React.FC<ServiceAreaPageProps> = ({ slug: propSlug }) => 
   const { language } = useLanguage();
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
-  if (!activeSlug || !serviceAreas[activeSlug]) {
+  const data = activeSlug ? serviceAreas[activeSlug] : undefined;
+  const content = data ? (data[language] || data.en) : undefined;
+  const currentPath = data ? `/service-areas/${data.slug}` : '';
+
+  const metadata = useMemo(() => {
+    if (!data) return undefined;
+    return getRouteMetadata(currentPath, language);
+  }, [data, currentPath, language]);
+
+  const jsonLd = useMemo(() => {
+    if (!data) return undefined;
+    return getRouteJsonLd(currentPath, language);
+  }, [data, currentPath, language]);
+
+  if (!activeSlug || !serviceAreas[activeSlug] || !data || !content || !metadata) {
     return <Navigate to="/404" replace />;
   }
-
-  const data = serviceAreas[activeSlug];
-  const content = data[language] || data.en;
 
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
@@ -32,36 +44,41 @@ const ServiceAreaPage: React.FC<ServiceAreaPageProps> = ({ slug: propSlug }) => 
   return (
     <>
       <SEOHead
-        title={content.seoTitle}
-        description={content.seoDescription}
-        canonicalUrl={data.canonicalPath}
-        robots="noindex, nofollow"
+        title={metadata.title}
+        description={metadata.description}
+        canonicalUrl={metadata.canonicalUrl}
+        ogImage={metadata.ogImage}
+        ogType={metadata.ogType}
+        twitterCard={metadata.twitterCard}
+        locale={metadata.locale}
+        robots={metadata.robots}
+        jsonLd={jsonLd}
       />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-white relative overflow-hidden border-b border-slate-100">
+      <section className="relative overflow-hidden bg-gradient-to-b from-blue-50/50 via-white to-white pt-12 pb-20">
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
 
           <motion.div
-            initial={{ opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
+            className="space-y-6"
           >
-            {/* Preparation Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 text-blue-700 font-semibold text-xs md:text-sm mb-6 border border-blue-100 shadow-sm">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100/80 text-blue-800 font-semibold text-xs tracking-wide">
               <Sparkles className="w-4 h-4 text-blue-600" />
               <span>{content.heroBadge}</span>
             </div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
               {content.heroTitle}
             </h1>
 
-            <p className="text-slate-600 text-lg md:text-xl leading-relaxed mb-8">
+            <p className="text-lg md:text-xl text-slate-600 font-normal leading-relaxed max-w-xl">
               {content.heroSubtitle}
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 mb-8">
+            <div className="flex flex-col sm:flex-row gap-4 pt-2">
               <a
                 href="#contact"
                 className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-2xl font-bold transition-all shadow-lg hover:shadow-xl hover:shadow-blue-600/20 text-center text-base"

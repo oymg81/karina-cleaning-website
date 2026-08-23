@@ -4,6 +4,7 @@ import { Phone, Send } from 'lucide-react';
 import { useLanguage } from '../hooks/useLanguage';
 import emailjs from '@emailjs/browser';
 import { getAttribution } from '../utils/attribution';
+import { trackLeadConversion } from '../utils/analytics';
 
 const serviceId = (import.meta.env.VITE_EMAILJS_SERVICE_ID as string | undefined)?.trim();
 const templateId = (import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string | undefined)?.trim();
@@ -167,6 +168,12 @@ const CtaSection: React.FC = () => {
         if (!foesSucceeded) {
           console.warn('[Dual-Dispatch] FOES proxy dispatch failed; notification delivered successfully via EmailJS.');
         }
+
+        // Fire analytics conversion event (deduplicated & zero PII)
+        trackLeadConversion({
+          service,
+          locale: language,
+        });
 
         setSubmitStatus('success');
         setFormData({ name: '', email: '', phone: '', service: 'residential', message: '', website_url: '' });

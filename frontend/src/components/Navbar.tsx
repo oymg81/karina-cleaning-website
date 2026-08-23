@@ -85,11 +85,18 @@ const Navbar: React.FC = () => {
           onClick={(e) => handleScrollTo(e, '#home')}
           className="flex items-center"
         >
-          <img
-            src="/images/logo1.png"
-            alt="Clean & Care PRO Cleaning Services"
-            className="h-16 md:h-20 w-auto object-contain"
-          />
+          <picture>
+            <source srcSet="/images/logo1.webp" type="image/webp" />
+            <img
+              src="/images/logo1.png"
+              alt="Clean & Care PRO Cleaning Services"
+              width="187"
+              height="80"
+              className="h-16 md:h-20 w-auto object-contain"
+              loading="eager"
+              decoding="async"
+            />
+          </picture>
         </a>
 
         {/* Desktop Navigation */}

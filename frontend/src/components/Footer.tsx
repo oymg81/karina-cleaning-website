@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { FaFacebookF, FaInstagram, FaTiktok, FaWhatsapp } from 'react-icons/fa';
 import { useLanguage } from '../hooks/useLanguage';
@@ -55,11 +55,18 @@ const Footer: React.FC = () => {
         <div className="flex flex-col justify-between h-full items-center md:items-start">
           <div className="space-y-6 flex flex-col items-center md:items-start">
             <a href="#home" onClick={(e) => handleAnchorClick(e, '#home')} className="inline-block">
-              <img
-                src="/images/logo1.png"
-                alt="Clean & Care PRO Cleaning Services"
-                className="h-16 md:h-20 w-auto object-contain"
-              />
+              <picture>
+                <source srcSet="/images/logo1.webp" type="image/webp" />
+                <img
+                  src="/images/logo1.png"
+                  alt="Clean & Care PRO Cleaning Services"
+                  width="187"
+                  height="80"
+                  className="h-16 md:h-20 w-auto object-contain"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
             </a>
             <p className="text-slate-600 text-sm leading-relaxed max-w-xs">
               {t.footer.desc}
@@ -212,8 +219,8 @@ const Footer: React.FC = () => {
             </a>
           </div>
           <div className="flex gap-6 text-sm text-slate-500 font-medium">
-            <a href="#" className="hover:text-slate-800 transition-colors">{t.footer.privacyPolicy}</a>
-            <a href="#" className="hover:text-slate-800 transition-colors">{t.footer.termsOfService}</a>
+            <Link to="/privacy" className="hover:text-slate-800 transition-colors">{t.footer.privacyPolicy}</Link>
+            <Link to="/terms" className="hover:text-slate-800 transition-colors">{t.footer.termsOfService}</Link>
           </div>
         </div>
       </div>

@@ -429,21 +429,17 @@ describe('Frontend Bundle Security Verification', () => {
 // 6. Vercel Configuration Verification
 // ----------------------------------------------------
 describe('Vercel Routing Configuration Verification', () => {
-  test('Ensures vercel.json uses standard Vite SPA catch-all rewrite without self-referential API rewrite', () => {
+  test('Ensures vercel.json uses cleanUrls and serverless API routing without self-referential API rewrite', () => {
     const vercelConfigPath = join(process.cwd(), 'vercel.json');
     assert.ok(existsSync(vercelConfigPath), 'vercel.json must exist');
 
     const config = JSON.parse(readFileSync(vercelConfigPath, 'utf8'));
-    assert.ok(Array.isArray(config.rewrites), 'rewrites must be an array');
-    assert.equal(config.rewrites.length, 1);
+    assert.equal(config.cleanUrls, true, 'cleanUrls must be enabled');
 
-    // Verify standard catch-all rewrite
-    assert.equal(config.rewrites[0].source, '/(.*)');
-    assert.equal(config.rewrites[0].destination, '/index.html');
-
-    // Verify no self-referential /api rewrite exists
-    const hasSelfReferentialApi = config.rewrites.some((r) => r.source?.startsWith('/api') && r.destination?.startsWith('/api'));
-    assert.equal(hasSelfReferentialApi, false, 'No self-referential /api rewrite should exist');
+    if (config.rewrites) {
+      const hasSelfReferentialApi = config.rewrites.some((r) => r.source?.startsWith('/api') && r.destination?.startsWith('/api'));
+      assert.equal(hasSelfReferentialApi, false, 'No self-referential /api rewrite should exist');
+    }
 
     // Verify serverless files exist under frontend/api
     const leadsPath = join(process.cwd(), 'api/foes/leads.ts');
