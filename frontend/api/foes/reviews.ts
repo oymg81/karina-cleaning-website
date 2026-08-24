@@ -95,7 +95,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       const limitParam = typeof req.query?.limit === 'string' ? parseInt(req.query.limit, 10) : 20;
       const limit = Math.min(Math.max(isNaN(limitParam) ? 20 : limitParam, 1), 50);
 
-      const targetUrl = `${apiUrl}/api/public/reviews?formKey=${encodeURIComponent(formKey)}&limit=${limit}`;
+      const targetUrl = `${apiUrl}/api/public/reviews?key=${encodeURIComponent(formKey)}&limit=${limit}`;
 
       const response = await fetch(targetUrl, {
         method: 'GET',

@@ -137,9 +137,10 @@ describe('FOES Reviews Proxy Endpoint Contract', () => {
     assert.equal(res.headers['X-Content-Type-Options'], 'nosniff');
   });
 
-  test('GET: Strips private review fields and sorts featured reviews first', async () => {
+  test('GET: Strips private review fields and sorts featured reviews first with canonical key parameter', async () => {
     globalThis.fetch = async (url) => {
-      assert.ok(url.includes('formKey=test_form_key_123'));
+      assert.ok(url.includes('key=test_form_key_123'));
+      assert.ok(!url.includes('formKey='));
       return {
         ok: true,
         status: 200,
@@ -192,11 +193,15 @@ describe('FOES Reviews Proxy Endpoint Contract', () => {
   });
 
   test('GET: Gracefully handles authentic zero-review response with 200 and empty array', async () => {
-    globalThis.fetch = async () => ({
-      ok: true,
-      status: 200,
-      json: async () => ({ reviews: [] }),
-    });
+    globalThis.fetch = async (url) => {
+      assert.ok(url.includes('key=test_form_key_123'));
+      assert.ok(!url.includes('formKey='));
+      return {
+        ok: true,
+        status: 200,
+        json: async () => ({ reviews: [] }),
+      };
+    };
 
     const req = createMockReq({ method: 'GET' });
     const res = createMockRes();
@@ -204,6 +209,24 @@ describe('FOES Reviews Proxy Endpoint Contract', () => {
     await reviewsHandler(req, res);
     assert.equal(res.statusCode, 200);
     assert.deepEqual(res.data, { reviews: [] });
+  });
+
+  test('GET: Handles genuine upstream error with 503 and safe empty fallback', async () => {
+    globalThis.fetch = async () => ({
+      ok: false,
+      status: 500,
+      json: async () => ({ error: 'Internal server error' }),
+    });
+
+    const req = createMockReq({ method: 'GET' });
+    const res = createMockRes();
+
+    await reviewsHandler(req, res);
+    assert.equal(res.statusCode, 503);
+    assert.deepEqual(res.data, {
+      error: 'Review service temporarily unavailable',
+      reviews: [],
+    });
   });
 
   test('POST: Reviewer name of 1 character is rejected (400), 2 characters accepted', async () => {
