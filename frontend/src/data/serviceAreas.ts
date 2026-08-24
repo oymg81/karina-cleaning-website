@@ -9,7 +9,7 @@ export const serviceAreas: Record<string, ServiceAreaData> = {
     en: {
       seoTitle: 'Cleaning Services in Orange County, CA | Clean & Care PRO',
       seoDescription: 'Professional residential and commercial cleaning services available throughout Orange County, CA by Clean & Care PRO. Licensed, insured, and free estimates.',
-      heroBadge: 'Service Area Hub — In Preparation',
+      heroBadge: 'Proudly Serving Orange County, CA',
       heroTitle: 'Professional Cleaning Services in Orange County',
       heroSubtitle: 'Clean & Care PRO delivers dependable residential and commercial cleaning solutions tailored to your schedule and space.',
       introHeading: 'Trusted Cleaning Care for Orange County Homes & Workspaces',
@@ -53,12 +53,12 @@ export const serviceAreas: Record<string, ServiceAreaData> = {
           answer: 'Yes. We offer Monday through Friday residential hours as well as evening, overnight, and weekend commercial appointments.'
         }
       ],
-      statusNotice: 'This dedicated location page is currently in preparation. Our cleaning services are actively operating — contact us today for scheduling and free estimates.'
+      statusNotice: 'Professional residential and commercial cleaning services are available throughout Orange County and surrounding communities. Contact us to schedule your service and receive a free estimate.'
     },
     es: {
       seoTitle: 'Servicios de Limpieza en Orange County, CA | Clean & Care PRO',
       seoDescription: 'Servicios profesionales de limpieza residencial y comercial en Orange County, CA por Clean & Care PRO. Con licencia, seguro y estimados gratuitos.',
-      heroBadge: 'Área de Servicio — En Preparación',
+      heroBadge: 'Atendemos con orgullo en Orange County, CA',
       heroTitle: 'Servicios de Limpieza Profesional en Orange County',
       heroSubtitle: 'Clean & Care PRO ofrece soluciones confiables de limpieza residencial y comercial adaptadas a su horario y espacio.',
       introHeading: 'Limpieza de Confianza para Hogares y Oficinas en Orange County',
@@ -102,7 +102,7 @@ export const serviceAreas: Record<string, ServiceAreaData> = {
           answer: 'Sí. Contamos con atención de lunes a viernes en horario residencial y horarios vespertinos, nocturnos o fines de semana para servicios comerciales.'
         }
       ],
-      statusNotice: 'Esta página de ubicación está en preparación. Nuestros servicios de limpieza están activos — contáctenos hoy para agendar y solicitar su estimado gratis.'
+      statusNotice: 'Ofrecemos servicios profesionales de limpieza residencial y comercial en Orange County y comunidades cercanas. Contáctenos para programar su servicio y recibir un estimado gratuito.'
     }
   },
   'glendale': {
@@ -113,7 +113,7 @@ export const serviceAreas: Record<string, ServiceAreaData> = {
     en: {
       seoTitle: 'Cleaning Services in Glendale, CA | Clean & Care PRO',
       seoDescription: 'Professional residential and commercial cleaning services available in Glendale, CA by Clean & Care PRO. Licensed, insured, and free estimates.',
-      heroBadge: 'Service Area Hub — In Preparation',
+      heroBadge: 'Proudly Serving Glendale, CA',
       heroTitle: 'Professional Cleaning Services in Glendale',
       heroSubtitle: 'Reliable, high-standard residential and commercial cleaning services delivered with precision and care in Glendale, CA.',
       introHeading: 'Quality Cleaning Solutions for Glendale Properties',
@@ -157,12 +157,12 @@ export const serviceAreas: Record<string, ServiceAreaData> = {
           answer: 'Yes, evening and overnight commercial cleaning schedules are available to prevent workflow interruptions.'
         }
       ],
-      statusNotice: 'This dedicated location page is currently in preparation. Our cleaning services are actively operating — contact us today for scheduling and free estimates.'
+      statusNotice: 'Professional residential and commercial cleaning services are available in Glendale and surrounding areas. Contact us to schedule your service and receive a free estimate.'
     },
     es: {
       seoTitle: 'Servicios de Limpieza en Glendale, CA | Clean & Care PRO',
       seoDescription: 'Servicios profesionales de limpieza residencial y comercial en Glendale, CA por Clean & Care PRO. Con licencia, seguro y estimados gratuitos.',
-      heroBadge: 'Área de Servicio — En Preparación',
+      heroBadge: 'Atendemos con orgullo en Glendale, CA',
       heroTitle: 'Servicios de Limpieza Profesional en Glendale',
       heroSubtitle: 'Servicios confiables de limpieza residencial y comercial con altos estándares de calidad en Glendale, CA.',
       introHeading: 'Soluciones de Limpieza de Calidad en Glendale',
@@ -206,7 +206,7 @@ export const serviceAreas: Record<string, ServiceAreaData> = {
           answer: 'Sí, ofrecemos disponibilidad en horarios nocturnos y fines de semana para locales comerciales y oficinas.'
         }
       ],
-      statusNotice: 'Esta página de ubicación está en preparación. Nuestros servicios de limpieza están activos — contáctenos hoy para agendar y solicitar su estimado gratis.'
+      statusNotice: 'Ofrecemos servicios profesionales de limpieza residencial y comercial en Glendale y áreas cercanas. Contáctenos para programar su servicio y recibir un estimado gratuito.'
     }
   },
   'rosemead': {
@@ -217,7 +217,7 @@ export const serviceAreas: Record<string, ServiceAreaData> = {
     en: {
       seoTitle: 'Cleaning Services in Rosemead, CA | Clean & Care PRO',
       seoDescription: 'Professional residential and commercial cleaning services available in Rosemead, CA by Clean & Care PRO. Licensed, insured, and free estimates.',
-      heroBadge: 'Service Area Hub — In Preparation',
+      heroBadge: 'Proudly Serving Rosemead, CA',
       heroTitle: 'Professional Cleaning Services in Rosemead',
       heroSubtitle: 'Thorough, reliable home and business cleaning services designed to keep your spaces immaculate and welcoming.',
       introHeading: 'Dependable Cleaning Support for Rosemead Residents & Businesses',
@@ -261,12 +261,12 @@ export const serviceAreas: Record<string, ServiceAreaData> = {
           answer: 'Yes, our company is fully licensed and insured for your complete peace of mind.'
         }
       ],
-      statusNotice: 'This dedicated location page is currently in preparation. Our cleaning services are actively operating — contact us today for scheduling and free estimates.'
+      statusNotice: 'Professional residential and commercial cleaning services are available in Rosemead and surrounding areas. Contact us to schedule your service and receive a free estimate.'
     },
     es: {
       seoTitle: 'Servicios de Limpieza en Rosemead, CA | Clean & Care PRO',
       seoDescription: 'Servicios profesionales de limpieza residencial y comercial en Rosemead, CA por Clean & Care PRO. Con licencia, seguro y estimados gratuitos.',
-      heroBadge: 'Área de Servicio — En Preparación',
+      heroBadge: 'Atendemos con orgullo en Rosemead, CA',
       heroTitle: 'Servicios de Limpieza Profesional en Rosemead',
       heroSubtitle: 'Servicios de limpieza minuciosos y confiables para hogares y empresas en Rosemead, CA.',
       introHeading: 'Limpieza de Confianza para Hogares y Negocios en Rosemead',
@@ -310,7 +310,7 @@ export const serviceAreas: Record<string, ServiceAreaData> = {
           answer: 'Sí, nuestra empresa cuenta con licencia y póliza de seguro para su total tranquilidad.'
         }
       ],
-      statusNotice: 'Esta página de ubicación está en preparación. Nuestros servicios de limpieza están activos — contáctenos hoy para agendar y solicitar su estimado gratis.'
+      statusNotice: 'Ofrecemos servicios profesionales de limpieza residencial y comercial en Rosemead y áreas cercanas. Contáctenos para programar su servicio y recibir un estimado gratuito.'
     }
   }
 };

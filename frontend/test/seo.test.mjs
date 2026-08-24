@@ -90,6 +90,74 @@ describe('Shared SEO Utility & Metadata Matrix', () => {
       assert.strictEqual(serviceJsonLd.areaServed.name, `${data.name}, CA`);
     }
   });
+
+  it('verifies active service-area messaging and zero in-preparation copy across all locations', () => {
+    const forbiddenPhrases = [
+      /in preparation/i,
+      /en preparación/i,
+      /currently in preparation/i,
+      /actualmente en preparación/i,
+      /coming soon/i,
+      /próximamente/i,
+      /under construction/i,
+    ];
+
+    const expectedCopy = {
+      'orange-county': {
+        en: {
+          heroBadge: 'Proudly Serving Orange County, CA',
+          statusNotice: 'Professional residential and commercial cleaning services are available throughout Orange County and surrounding communities. Contact us to schedule your service and receive a free estimate.',
+        },
+        es: {
+          heroBadge: 'Atendemos con orgullo en Orange County, CA',
+          statusNotice: 'Ofrecemos servicios profesionales de limpieza residencial y comercial en Orange County y comunidades cercanas. Contáctenos para programar su servicio y recibir un estimado gratuito.',
+        },
+      },
+      'glendale': {
+        en: {
+          heroBadge: 'Proudly Serving Glendale, CA',
+          statusNotice: 'Professional residential and commercial cleaning services are available in Glendale and surrounding areas. Contact us to schedule your service and receive a free estimate.',
+        },
+        es: {
+          heroBadge: 'Atendemos con orgullo en Glendale, CA',
+          statusNotice: 'Ofrecemos servicios profesionales de limpieza residencial y comercial en Glendale y áreas cercanas. Contáctenos para programar su servicio y recibir un estimado gratuito.',
+        },
+      },
+      'rosemead': {
+        en: {
+          heroBadge: 'Proudly Serving Rosemead, CA',
+          statusNotice: 'Professional residential and commercial cleaning services are available in Rosemead and surrounding areas. Contact us to schedule your service and receive a free estimate.',
+        },
+        es: {
+          heroBadge: 'Atendemos con orgullo en Rosemead, CA',
+          statusNotice: 'Ofrecemos servicios profesionales de limpieza residencial y comercial en Rosemead y áreas cercanas. Contáctenos para programar su servicio y recibir un estimado gratuito.',
+        },
+      },
+    };
+
+    for (const [slug, expected] of Object.entries(expectedCopy)) {
+      const data = serviceAreas[slug];
+      assert.ok(data, `Service area data must exist for ${slug}`);
+
+      // English assertions
+      assert.strictEqual(data.en.heroBadge, expected.en.heroBadge);
+      assert.strictEqual(data.en.statusNotice, expected.en.statusNotice);
+
+      // Spanish assertions
+      assert.strictEqual(data.es.heroBadge, expected.es.heroBadge);
+      assert.strictEqual(data.es.statusNotice, expected.es.statusNotice);
+
+      // Verify no forbidden phrases in entire data object
+      const serialized = JSON.stringify(data);
+      for (const pattern of forbiddenPhrases) {
+        assert.strictEqual(
+          pattern.test(serialized),
+          false,
+          `Service area ${slug} must not contain forbidden pattern ${pattern} in data: ${serialized}`
+        );
+      }
+    }
+  });
 });
 
 describe('Indexing Environment & Preview Protection', () => {
@@ -206,6 +274,10 @@ describe('Single Flat-File Prerendered HTML & Artifact Strategy', () => {
         const parsed = JSON.parse(jsonLdMatch[1]);
         assert.ok(parsed['@context'] === 'https://schema.org', 'JSON-LD context must be schema.org');
       }
+
+      // 8. Verify no temporary "in preparation" wording in HTML
+      assert.strictEqual(/in preparation/i.test(content), false, `Must not contain "in preparation" in ${url}`);
+      assert.strictEqual(/en preparación/i.test(content), false, `Must not contain "en preparación" in ${url}`);
     });
   }
 });
