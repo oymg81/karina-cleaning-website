@@ -3,9 +3,25 @@ export interface ServiceAreaFaq {
   answer: string;
 }
 
-export interface ServiceAreaHighlight {
+export interface ServiceAreaServiceItem {
   title: string;
   description: string;
+  image: string;
+  imageAlt: string;
+  badge?: string;
+  features: string[];
+}
+
+export interface ServiceAreaProcessStep {
+  step: string;
+  title: string;
+  description: string;
+}
+
+export interface ServiceAreaWhyChooseItem {
+  title: string;
+  description: string;
+  icon: 'shield' | 'sparkles' | 'calendar' | 'leaf' | 'check' | 'clock';
 }
 
 export interface ServiceAreaContent {
@@ -14,12 +30,22 @@ export interface ServiceAreaContent {
   heroBadge: string;
   heroTitle: string;
   heroSubtitle: string;
+  heroImageAlt: string;
   introHeading: string;
   introText: string;
-  highlightsHeading: string;
-  highlights: ServiceAreaHighlight[];
+  servicesHeading: string;
+  servicesSubtitle: string;
+  servicesList: ServiceAreaServiceItem[];
+  whyChooseHeading: string;
+  whyChooseSubtitle: string;
+  whyChooseItems: ServiceAreaWhyChooseItem[];
+  processHeading: string;
+  processSubtitle: string;
+  processSteps: ServiceAreaProcessStep[];
   coverageHeading: string;
   coverageText: string;
+  communitiesList: string[];
+  otherAreasHeading: string;
   trustPointsHeading: string;
   trustPoints: string[];
   faqHeading: string;
@@ -32,6 +58,7 @@ export interface ServiceAreaData {
   name: string;
   canonicalPath: string;
   heroImage: string;
+  heroImageAlt: string;
   en: ServiceAreaContent;
   es: ServiceAreaContent;
 }
