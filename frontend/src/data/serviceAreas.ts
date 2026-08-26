@@ -73,8 +73,8 @@ export const serviceAreas: Record<string, ServiceAreaData> = {
           icon: 'check'
         },
         {
-          title: 'Family & Eco-Friendly Products',
-          description: 'We prioritize safe, high-efficacy cleaning agents that protect your indoor air quality, pets, and family members.',
+          title: 'Eco-Friendly Product Options',
+          description: 'Eco-friendly product options may be available depending on the service. During your estimate, let us know about allergies, preferences, and pets.',
           icon: 'leaf'
         },
         {
@@ -129,7 +129,7 @@ export const serviceAreas: Record<string, ServiceAreaData> = {
         'Fully licensed and insured cleaning professionals',
         'Transparent communication and prompt free estimates',
         'Customized cleaning plans for homes and commercial facilities',
-        'Eco-friendly and effective cleaning supplies available upon request'
+        'Eco-friendly product options available upon request depending on service'
       ],
       faqHeading: 'Frequently Asked Questions in Orange County',
       faqs: [
@@ -143,11 +143,11 @@ export const serviceAreas: Record<string, ServiceAreaData> = {
         },
         {
           question: 'Do you offer flexible scheduling?',
-          answer: 'Yes. We offer Monday through Friday residential hours as well as evening and weekend commercial appointments upon request.'
+          answer: 'Yes. Residential cleaning is available Monday through Friday, and commercial cleaning is available by appointment, including Saturdays and Sundays. Evening service may be available depending on the scope and requirements of the job.'
         },
         {
           question: 'Do I need to supply cleaning products or equipment?',
-          answer: 'No. Our team arrives fully equipped with professional cleaning supplies, vacuums, microfiber materials, and equipment. If you prefer specific products, just let us know.'
+          answer: 'No. Our team arrives fully equipped with professional cleaning supplies, vacuums, microfiber materials, and equipment. If you have specific brand preferences, allergies, or pets, let us know during your estimate to discuss suitable product options.'
         }
       ],
       statusNotice: 'Professional residential and commercial cleaning services are available throughout Orange County and surrounding communities. Contact us to schedule your service and receive a free estimate.'
@@ -218,8 +218,8 @@ export const serviceAreas: Record<string, ServiceAreaData> = {
           icon: 'check'
         },
         {
-          title: 'Productos Seguros para la Familia',
-          description: 'Utilizamos productos eficaces que cuidan la calidad del aire de su hogar y la salud de sus mascotas.',
+          title: 'Opciones de Productos Ecológicos',
+          description: 'Podemos conversar sobre opciones de productos ecológicos según el servicio. Infórmenos sobre alergias, preferencias y mascotas durante su estimado.',
           icon: 'leaf'
         },
         {
@@ -274,7 +274,7 @@ export const serviceAreas: Record<string, ServiceAreaData> = {
         'Personal de limpieza con licencia y seguro',
         'Comunicación clara y estimados gratuitos rápidos',
         'Planes de limpieza personalizados para hogares y negocios',
-        'Uso de productos seguros y eficaces'
+        'Opciones de productos ecológicos disponibles previa solicitud según el servicio'
       ],
       faqHeading: 'Preguntas Frecuentes en Orange County',
       faqs: [
@@ -288,11 +288,11 @@ export const serviceAreas: Record<string, ServiceAreaData> = {
         },
         {
           question: '¿Tienen horarios flexibles?',
-          answer: 'Sí. Contamos con atención de lunes a viernes en horario residencial y horarios vespertinos o fines de semana para servicios comerciales.'
+          answer: 'Sí. La atención residencial se realiza de lunes a viernes y la limpieza comercial está disponible con cita previa, incluidos sábados y domingos. El servicio nocturno puede estar disponible según el alcance y los requisitos del trabajo.'
         },
         {
           question: '¿Debo proporcionar los suministros de limpieza?',
-          answer: 'No. Nuestro equipo llega equipado con materiales, aspiradoras y herramientas profesionales. Si desea que usemos algún producto específico, con gusto lo hacemos.'
+          answer: 'No. Nuestro equipo llega equipado con materiales, aspiradoras y herramientas profesionales. Si tiene preferencias de marcas o productos, alergias o mascotas, infórmenos durante su estimado para evaluar las opciones adecuadas.'
         }
       ],
       statusNotice: 'Ofrecemos servicios profesionales de limpieza residencial y comercial en Orange County y comunidades cercanas. Contáctenos para programar su servicio y recibir un estimado gratuito.'
@@ -344,14 +344,14 @@ export const serviceAreas: Record<string, ServiceAreaData> = {
         },
         {
           title: 'Professional Equipment & Safe Supplies',
-          description: 'We bring verified commercial-grade equipment and eco-safe supplies to eliminate dirt, allergens, and grime effectively.',
+          description: 'We bring verified commercial-grade equipment and can accommodate eco-friendly product options depending on the service.',
           image: '/images/material.png',
           imageAlt: 'Professional cleaning supplies, microfiber towels, and commercial sanitizing materials',
           badge: 'Equipped & Ready',
           features: [
             'HEPA filtration vacuum systems for cleaner indoor air',
             'Color-coded microfiber towels to prevent cross-contamination',
-            'Eco-friendly, non-abrasive surface cleansers',
+            'Eco-friendly product options available upon request',
             'Full compliance with property protection standards'
           ]
         }
@@ -370,8 +370,8 @@ export const serviceAreas: Record<string, ServiceAreaData> = {
           icon: 'check'
         },
         {
-          title: 'Flexible Business Hours',
-          description: 'Commercial appointments scheduled during off-peak hours so your team works without interruption.',
+          title: 'Flexible Commercial Schedules',
+          description: 'Commercial appointments are scheduled by appointment, with evening service subject to evaluation.',
           icon: 'clock'
         },
         {
@@ -438,7 +438,7 @@ export const serviceAreas: Record<string, ServiceAreaData> = {
         },
         {
           question: 'Can I schedule commercial cleaning outside business hours?',
-          answer: 'Yes, evening and weekend commercial cleaning schedules are available to prevent workflow interruptions.'
+          answer: 'Commercial cleaning is available by appointment, including Saturdays and Sundays. Evening service may be available depending on the scope and requirements of the job.'
         },
         {
           question: 'Do you clean both apartments and detached houses in Glendale?',
@@ -487,14 +487,14 @@ export const serviceAreas: Record<string, ServiceAreaData> = {
         },
         {
           title: 'Materiales y Equipo Profesional',
-          description: 'Llegamos con equipo de grado comercial y suministros seguros que eliminan suciedad y alérgenos con eficacia.',
+          description: 'Llegamos con equipo y materiales profesionales, y podemos evaluar opciones de productos ecológicos según el servicio.',
           image: '/images/material.png',
           imageAlt: 'Suministros y materiales profesionales de limpieza y sanitización',
           badge: 'Equipo Completo',
           features: [
             'Aspiradoras con filtración HEPA para un aire más limpio',
             'Microfibras codificadas por color para evitar contaminación cruzada',
-            'Productos de limpieza ecológicos y no abrasivos',
+            'Opciones de productos ecológicos disponibles a solicitud',
             'Cuidado estricto del mobiliario y pisos'
           ]
         }
@@ -514,7 +514,7 @@ export const serviceAreas: Record<string, ServiceAreaData> = {
         },
         {
           title: 'Horarios Comerciales Flexibles',
-          description: 'Servicios en horarios no laborables para no interrumpir las actividades de su empresa.',
+          description: 'La limpieza comercial se coordina con cita previa, con servicio nocturno sujeto a evaluación.',
           icon: 'clock'
         },
         {
@@ -581,7 +581,7 @@ export const serviceAreas: Record<string, ServiceAreaData> = {
         },
         {
           question: '¿Se puede programar limpieza comercial fuera del horario laboral?',
-          answer: 'Sí, ofrecemos disponibilidad en horarios nocturnos y fines de semana para locales comerciales y oficinas.'
+          answer: 'La limpieza comercial está disponible con cita previa, incluidos sábados y domingos. El servicio nocturno puede estar disponible según el alcance y los requisitos del trabajo.'
         },
         {
           question: '¿Atienden apartamentos y casas particulares en Glendale?',
@@ -654,7 +654,7 @@ export const serviceAreas: Record<string, ServiceAreaData> = {
       whyChooseItems: [
         {
           title: 'Licensed & Fully Insured',
-          description: 'Your home is protected with our comprehensive liability coverage and certified cleaning practices.',
+          description: 'Your home is protected with our comprehensive liability coverage and professional cleaning standards.',
           icon: 'shield'
         },
         {
@@ -663,8 +663,8 @@ export const serviceAreas: Record<string, ServiceAreaData> = {
           icon: 'check'
         },
         {
-          title: 'Family & Pet-Friendly Care',
-          description: 'We use non-toxic, eco-conscious cleaning options safe for children, seniors, and pets.',
+          title: 'Eco-Friendly & Pet Considerations',
+          description: 'Eco-friendly product options may be available depending on the service. During your estimate, let us know about allergies, brand preferences, or pets.',
           icon: 'leaf'
         },
         {
@@ -714,7 +714,7 @@ export const serviceAreas: Record<string, ServiceAreaData> = {
       trustPoints: [
         'Vetted, insured, and detail-driven cleaning crews',
         'Free, no-obligation quotes with clear pricing',
-        'Eco-friendly product options safe for families and pets',
+        'Eco-friendly product options discussed during your estimate',
         'Flexible scheduling to suit your busy routine'
       ],
       faqHeading: 'Frequently Asked Questions in Rosemead',
@@ -804,8 +804,8 @@ export const serviceAreas: Record<string, ServiceAreaData> = {
           icon: 'check'
         },
         {
-          title: 'Productos Seguros para Mascotas',
-          description: 'Utilizamos opciones ecológicas y no tóxicas seguras para niños y mascotas.',
+          title: 'Opciones Ecológicas y Mascotas',
+          description: 'Podemos conversar sobre opciones de productos ecológicos según el servicio. Infórmenos sobre alergias, preferencias y mascotas durante su estimado.',
           icon: 'leaf'
         },
         {
@@ -855,7 +855,7 @@ export const serviceAreas: Record<string, ServiceAreaData> = {
       trustPoints: [
         'Equipos de limpieza evaluados, asegurados y enfocados en el detalle',
         'Cotizaciones gratuitas y sin compromiso',
-        'Opciones de productos ecológicos seguros para su familia',
+        'Opciones de productos ecológicos evaluadas durante su estimado',
         'Horarios adaptables a su rutina diaria'
       ],
       faqHeading: 'Preguntas Frecuentes en Rosemead',

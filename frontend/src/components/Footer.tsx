@@ -4,18 +4,13 @@ import { Phone, Mail, MapPin } from 'lucide-react';
 import { FaFacebookF, FaInstagram, FaTiktok, FaWhatsapp } from 'react-icons/fa';
 import { useLanguage } from '../hooks/useLanguage';
 
-const locations = [
-  'Los Angeles',
-  'Beverly Hills',
-  'Bel Air',
-  'Brentwood',
-  'Culver City',
-  'Glendale',
-  'Hollywood',
-  'Malibu',
-  'Manhattan Beach',
-  'Pasadena'
-];
+const serviceAreaLinks: Record<string, string> = {
+  'Orange County': '/service-areas/orange-county',
+  'Glendale and surrounding areas': '/service-areas/glendale',
+  'Glendale y áreas cercanas': '/service-areas/glendale',
+  'Rosemead and surrounding areas': '/service-areas/rosemead',
+  'Rosemead y áreas cercanas': '/service-areas/rosemead',
+};
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -166,9 +161,20 @@ const Footer: React.FC = () => {
         <div className="flex flex-col items-center md:items-start">
           <h4 className="text-xl font-bold text-slate-900 mb-6">{t.footer.locations}</h4>
           <ul className="space-y-3 text-center md:text-left">
-            {locations.map((loc, idx) => (
-              <li key={idx} className="text-slate-700 text-sm font-medium">{loc}</li>
-            ))}
+            {t.footer.locationsList.map((loc, idx) => {
+              const link = serviceAreaLinks[loc];
+              return (
+                <li key={idx} className="text-slate-700 text-sm font-medium">
+                  {link ? (
+                    <Link to={link} className="hover:text-green-600 transition-colors">
+                      {loc}
+                    </Link>
+                  ) : (
+                    <span>{loc}</span>
+                  )}
+                </li>
+              );
+            })}
             <li className="pt-2">
               <a href="#contact" onClick={(e) => handleAnchorClick(e, '#contact')} className="font-semibold text-green-600 hover:text-green-700 text-sm transition-colors">
                 {t.footer.seeAllLocations}
@@ -200,27 +206,32 @@ const Footer: React.FC = () => {
 
       {/* 3. Bottom Copyright / Legal Area */}
       <div className="border-t border-green-200 py-8 bg-[#ECFDF3]">
-        <div className="mx-auto max-w-7xl px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-center">
-          <p className="text-sm text-slate-500 font-medium">
-            &copy; {currentYear} {t.footer.rights}
+        <div className="mx-auto max-w-7xl px-6 flex flex-col gap-4 text-center">
+          <p className="text-xs text-slate-500 font-medium tracking-wide">
+            {t.footer.legalNotice}
           </p>
-          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 font-medium">
-            <span>{t.footer.designedBy}</span>
-            <a 
-              href="https://www.codingsoft.tech/" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="flex items-center gap-1.5 text-green-600 hover:text-green-700 font-bold transition-colors"
-            >
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/>
-              </svg>
-              CodingSoft
-            </a>
-          </div>
-          <div className="flex gap-6 text-sm text-slate-500 font-medium">
-            <Link to="/privacy" className="hover:text-slate-800 transition-colors">{t.footer.privacyPolicy}</Link>
-            <Link to="/terms" className="hover:text-slate-800 transition-colors">{t.footer.termsOfService}</Link>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-slate-500 font-medium">
+              &copy; {currentYear} {t.footer.rights}
+            </p>
+            <div className="flex items-center justify-center gap-2 text-sm text-slate-500 font-medium">
+              <span>{t.footer.designedBy}</span>
+              <a 
+                href="https://www.codingsoft.tech/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="flex items-center gap-1.5 text-green-600 hover:text-green-700 font-bold transition-colors"
+              >
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/>
+                </svg>
+                CodingSoft
+              </a>
+            </div>
+            <div className="flex gap-6 text-sm text-slate-500 font-medium">
+              <Link to="/privacy" className="hover:text-slate-800 transition-colors">{t.footer.privacyPolicy}</Link>
+              <Link to="/terms" className="hover:text-slate-800 transition-colors">{t.footer.termsOfService}</Link>
+            </div>
           </div>
         </div>
       </div>

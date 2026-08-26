@@ -141,7 +141,7 @@ export const translations = {
           title: 'Commercial Cleaning',
           description: 'Professional cleaning solutions for businesses, retail stores, and commercial facilities to impress your clients.',
           modal: {
-            intro: 'Our commercial cleaning services help businesses maintain a clean, organized, and professional environment without adding stress to daily operations. We offer flexible schedules, including evenings, overnight service, weekends, and customized cleaning plans.',
+            intro: 'Our commercial cleaning services help businesses maintain a clean, organized, and professional environment without adding stress to daily operations. Commercial cleaning is available by appointment, including Saturdays and Sundays. Evening service may be available depending on the scope and requirements of the job.',
             whatsIncludedTitle: "What's Included",
             whatsIncluded: [
               'Cleaning floors, windows, blinds, desks, and furniture',
@@ -210,30 +210,30 @@ export const translations = {
           description: 'Our cleaners are rigorously vetted, highly trained, and dedicated to delivering exceptional results.'
         },
         {
-          title: 'Fully Licensed & Insured',
-          description: 'Enjoy complete peace of mind knowing our company is fully licensed, bonded, and insured.'
+          title: 'City of Pomona Business Licensed • Insured',
+          description: 'Clean & Care PRO is operated by Clean & Care Residential and Commercial Cleaning and carries liability insurance.'
         },
         {
           title: 'Satisfaction Guaranteed',
           description: 'We stand behind our work. If you are not completely satisfied, we will make it right.'
         },
         {
-          title: 'Eco-Friendly Products',
-          description: 'We use safe, environmentally friendly cleaning products that are tough on dirt but safe for your family and pets.'
+          title: 'Eco-Friendly Options',
+          description: 'Eco-friendly product options may be available depending on the service. During your estimate, let us know about allergies, product or brand preferences, and any pets in the property so we can discuss suitable options.'
         }
       ]
     },
     schedule: {
       subtitle: 'FLEXIBLE SCHEDULES',
       title: '🏢 Cleaning That Fits Your Business Hours',
-      desc: 'We provide flexible commercial cleaning schedules designed to minimize interruptions to your operations.',
+      desc: 'Commercial cleaning is available by appointment, including Saturdays and Sundays. Evening service may be available depending on the scope and requirements of the job.',
       residentialTitle: 'Residential Cleaning',
       residentialDays: 'Monday – Friday',
       residentialHours: '8:00 AM – 6:00 PM',
       commercialTitle: 'Commercial Cleaning',
-      commercialHours: 'Evenings & Overnight Available',
+      commercialHours: 'By Appointment (Evenings Subject to Evaluation)',
       weekendTitle: 'Weekend Service',
-      weekendHours: 'Available By Appointment',
+      weekendHours: 'Saturdays & Sundays by Appointment',
       customPlans: 'Customized cleaning plans available for offices, businesses, and commercial spaces.'
     },
     reviews: {
@@ -284,9 +284,18 @@ export const translations = {
       quickLinks: 'Quick Links',
       services: 'Services',
       locations: 'Locations',
+      locationsList: [
+        'Orange County',
+        'Glendale and surrounding areas',
+        'Rosemead and surrounding areas',
+        'Los Angeles',
+        'Upland',
+        'Fontana',
+        'Corona'
+      ],
       seeAllLocations: 'See All Locations',
       contactInfo: 'Contact Info',
-      serving: 'Serving all major areas in California',
+      serving: 'Serving Orange County, Glendale, Rosemead, Los Angeles, Upland, Fontana, and Corona',
       rights: 'Clean & Care PRO. All rights reserved.',
       privacy: 'Privacy Policy',
       terms: 'Terms of Service',
@@ -294,7 +303,9 @@ export const translations = {
       callUsNow: 'CALL US NOW',
       sendUsEmail: 'SEND US AN EMAIL',
       messageUsWhatsApp: 'MESSAGE US ON WHATSAPP',
-      servingAreas: 'Serving all major areas in California',
+      servingAreas: 'Orange County, Glendale, Rosemead, Los Angeles, Upland, Fontana, Corona',
+      coverageNotice: 'We proudly serve Orange County, Glendale and surrounding areas, Rosemead and surrounding areas, Los Angeles, Upland, Fontana, and Corona. Contact us to confirm availability for your location.',
+      legalNotice: 'Clean & Care PRO is operated by Clean & Care Residential and Commercial Cleaning.',
       privacyPolicy: 'Privacy Policy',
       termsOfService: 'Terms of Service',
       designedBy: 'Designed & Developed by',
@@ -445,7 +456,7 @@ export const translations = {
           title: 'Limpieza Comercial',
           description: 'Soluciones de limpieza profesional para empresas, tiendas minoristas y locales comerciales para impresionar a sus clientes.',
           modal: {
-            intro: 'Nuestros servicios de limpieza comercial ayudan a los negocios a mantener un ambiente limpio, organizado y profesional sin agregar estrés a sus operaciones diarias. Ofrecemos horarios flexibles, incluyendo tardes, servicio nocturno, fines de semana y planes personalizados.',
+            intro: 'Nuestros servicios de limpieza comercial ayudan a los negocios a mantener un ambiente limpio, organizado y profesional sin agregar estrés a sus operaciones diarias. La limpieza comercial está disponible con cita previa, incluidos sábados y domingos. El servicio nocturno puede estar disponible según el alcance y los requisitos del trabajo.',
             whatsIncludedTitle: 'Qué incluye',
             whatsIncluded: [
               'Limpieza de pisos, ventanas, persianas, escritorios y muebles',
@@ -514,30 +525,30 @@ export const translations = {
           description: 'Nuestros limpiadores son rigurosamente evaluados, altamente capacitados y dedicados a ofrecer resultados excepcionales.'
         },
         {
-          title: 'Licenciados y Asegurados',
-          description: 'Disfrute de total tranquilidad sabiendo que nuestra empresa cuenta con licencia, fianza y seguro.'
+          title: 'Licencia comercial de la Ciudad de Pomona • Asegurada',
+          description: 'Clean & Care PRO es operada por Clean & Care Residential and Commercial Cleaning y cuenta con seguro de responsabilidad civil.'
         },
         {
           title: 'Satisfacción Garantizada',
           description: 'Respaldamos nuestro trabajo. Si no está completamente satisfecho, lo solucionaremos.'
         },
         {
-          title: 'Productos Ecológicos',
-          description: 'Utilizamos productos de limpieza seguros y ecológicos que son duros con la suciedad pero seguros para su familia y mascotas.'
+          title: 'Opciones de Productos Ecológicos',
+          description: 'Podemos conversar sobre opciones de productos ecológicos según el servicio. Durante el estimado, infórmanos sobre alergias, preferencias de productos o marcas y mascotas en la propiedad para evaluar las opciones apropiadas.'
         }
       ]
     },
     schedule: {
       subtitle: 'HORARIOS FLEXIBLES',
       title: '🏢 Limpieza Que Se Adapta al Horario de Tu Negocio',
-      desc: 'Ofrecemos horarios flexibles de limpieza comercial diseñados para minimizar interrupciones en tus operaciones.',
+      desc: 'La limpieza comercial está disponible con cita previa, incluidos sábados y domingos. El servicio nocturno puede estar disponible según el alcance y los requisitos del trabajo.',
       residentialTitle: 'Limpieza Residencial',
       residentialDays: 'Lunes – Viernes',
       residentialHours: '8:00 AM – 6:00 PM',
       commercialTitle: 'Limpieza Comercial',
-      commercialHours: 'Disponible en las tardes y durante la noche',
+      commercialHours: 'Con cita previa (tardes/noches según evaluación)',
       weekendTitle: 'Servicio de Fin de Semana',
-      weekendHours: 'Disponible con cita previa',
+      weekendHours: 'Sábados y domingos con cita previa',
       customPlans: 'Planes de limpieza personalizados disponibles para oficinas, negocios y espacios comerciales.'
     },
     reviews: {
@@ -588,9 +599,18 @@ export const translations = {
       quickLinks: 'Enlaces Rápidos',
       services: 'Servicios',
       locations: 'Ubicaciones',
+      locationsList: [
+        'Orange County',
+        'Glendale y áreas cercanas',
+        'Rosemead y áreas cercanas',
+        'Los Angeles',
+        'Upland',
+        'Fontana',
+        'Corona'
+      ],
       seeAllLocations: 'Ver Todas las Ubicaciones',
       contactInfo: 'Información de Contacto',
-      serving: 'Sirviendo todas las áreas principales de California',
+      serving: 'Atendemos Orange County, Glendale, Rosemead, Los Angeles, Upland, Fontana y Corona',
       rights: 'Clean & Care PRO. Todos los derechos reservados.',
       privacy: 'Política de Privacidad',
       terms: 'Términos de Servicio',
@@ -598,7 +618,9 @@ export const translations = {
       callUsNow: 'LLÁMENOS AHORA',
       sendUsEmail: 'ENVÍENOS UN EMAIL',
       messageUsWhatsApp: 'ENVÍENOS UN WHATSAPP',
-      servingAreas: 'Sirviendo todas las áreas principales de California',
+      servingAreas: 'Orange County, Glendale, Rosemead, Los Angeles, Upland, Fontana, Corona',
+      coverageNotice: 'Atendemos Orange County, Glendale y áreas cercanas, Rosemead y áreas cercanas, Los Angeles, Upland, Fontana y Corona. Contáctanos para confirmar la disponibilidad en tu ubicación.',
+      legalNotice: 'Clean & Care PRO es operada por Clean & Care Residential and Commercial Cleaning.',
       privacyPolicy: 'Política de Privacidad',
       termsOfService: 'Términos de Servicio',
       designedBy: 'Diseñado y desarrollado por',

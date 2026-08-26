@@ -66,8 +66,8 @@ const TermsPage: React.FC = () => {
               </h2>
               <p>
                 {isEn
-                  ? 'By requesting, scheduling, or receiving cleaning services from Clean & Care PRO, you agree to these Terms of Service. Clean & Care PRO provides professional residential, commercial, deep cleaning, and move in/out turnover services in Southern California.'
-                  : 'Al solicitar, programar o recibir servicios de limpieza de Clean & Care PRO, usted acepta estos Términos de Servicio. Clean & Care PRO ofrece servicios profesionales de limpieza residencial, comercial, profunda y de mudanza en el sur de California.'}
+                  ? 'By requesting, scheduling, or receiving cleaning services from Clean & Care PRO (operated by Clean & Care Residential and Commercial Cleaning), you agree to these Terms of Service. Clean & Care PRO provides professional residential, commercial, deep cleaning, and move in/out turnover services in Southern California.'
+                  : 'Al solicitar, programar o recibir servicios de limpieza de Clean & Care PRO (operada por Clean & Care Residential and Commercial Cleaning), usted acepta estos Términos de Servicio. Clean & Care PRO ofrece servicios profesionales de limpieza residencial, comercial, profunda y de mudanza en el sur de California.'}
               </p>
             </section>
 
@@ -90,7 +90,7 @@ const TermsPage: React.FC = () => {
               </h2>
               <ul className="list-disc pl-6 space-y-1.5 text-slate-600">
                 <li><strong>{isEn ? 'Property Access:' : 'Acceso a la propiedad:'}</strong> {isEn ? 'Clients must ensure safe and timely access to the property at the agreed appointment time.' : 'El cliente debe garantizar el acceso seguro y oportuno a la propiedad a la hora acordada.'}</li>
-                <li><strong>{isEn ? 'Rescheduling:' : 'Reprogramaciones:'}</strong> {isEn ? 'We kindly request at least 24 hours advance notice for cancellations or appointment rescheduling.' : 'Agradecemos notificar con al menos 24 horas de anticipación cualquier cancelación o cambio de cita.'}</li>
+                <li><strong>{isEn ? 'Rescheduling:' : 'Reprogramación:'}</strong> {isEn ? "Please provide at least 48 hours' notice if you need to cancel, change, or reschedule an appointment." : 'Si necesitas cancelar, cambiar o reprogramar una cita, avísanos con al menos 48 horas de anticipación.'}</li>
               </ul>
             </section>
 
@@ -106,22 +106,10 @@ const TermsPage: React.FC = () => {
               </p>
             </section>
 
-            {/* 5. Insurance & Liability */}
+            {/* 5. Contact */}
             <section className="space-y-3">
               <h2 className="text-xl md:text-2xl font-bold text-slate-900">
-                {isEn ? '5. Insurance & Safety Standards' : '5. Seguro y Estándares de Seguridad'}
-              </h2>
-              <p>
-                {isEn
-                  ? 'Clean & Care PRO is fully licensed and insured. Our cleaning professionals follow strict safety protocols. Clients are encouraged to secure valuable personal belongings and fragile items prior to service.'
-                  : 'Clean & Care PRO cuenta con licencia y seguro completos. Nuestros profesionales siguen estrictos protocolos de seguridad. Se recomienda a los clientes resguardar objetos de alto valor y artículos frágiles antes del servicio.'}
-              </p>
-            </section>
-
-            {/* 6. Contact */}
-            <section className="space-y-3">
-              <h2 className="text-xl md:text-2xl font-bold text-slate-900">
-                {isEn ? '6. Contact Clean & Care PRO' : '6. Contacto Clean & Care PRO'}
+                {isEn ? '5. Contact Clean & Care PRO' : '5. Contacto Clean & Care PRO'}
               </h2>
               <div className="p-6 bg-slate-50 rounded-2xl border border-slate-200 mt-2 space-y-2 text-sm font-medium text-slate-800">
                 <p><strong>Clean & Care PRO</strong></p>
