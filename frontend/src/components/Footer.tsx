@@ -99,8 +99,8 @@ const Footer: React.FC = () => {
           
           <div className="mt-8 w-full flex justify-center md:justify-start">
             <a
-              href="tel:7144731140"
-              className="inline-flex h-12 w-full max-w-[220px] md:w-auto md:max-w-none md:min-w-[190px] items-center justify-center gap-2 rounded-2xl bg-[#5FE873] hover:bg-[#4cd260] px-5 text-sm font-bold text-slate-950 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+              href="tel:+17144731140"
+              className="inline-flex h-12 w-full max-w-[220px] md:w-auto md:max-w-none md:min-w-[190px] items-center justify-center gap-2 rounded-2xl bg-[#5FE873] hover:bg-[#4cd260] px-5 text-sm font-bold text-slate-950 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2"
             >
               <Phone className="w-4 h-4 shrink-0 text-slate-950" />
               <span>{t.footer.cta.call}</span>
@@ -166,7 +166,10 @@ const Footer: React.FC = () => {
               return (
                 <li key={idx} className="text-slate-700 text-sm font-medium">
                   {link ? (
-                    <Link to={link} className="hover:text-green-600 transition-colors">
+                    <Link
+                      to={link}
+                      className="hover:text-green-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2 rounded-md transition-colors"
+                    >
                       {loc}
                     </Link>
                   ) : (
@@ -176,7 +179,7 @@ const Footer: React.FC = () => {
               );
             })}
             <li className="pt-2">
-              <a href="#contact" onClick={(e) => handleAnchorClick(e, '#contact')} className="font-semibold text-green-600 hover:text-green-700 text-sm transition-colors">
+              <a href="#contact" onClick={(e) => handleAnchorClick(e, '#contact')} className="font-semibold text-green-600 hover:text-green-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2 rounded-md text-sm transition-colors">
                 {t.footer.seeAllLocations}
               </a>
             </li>
@@ -187,13 +190,25 @@ const Footer: React.FC = () => {
         <div className="flex flex-col items-center md:items-start">
           <h4 className="text-xl font-bold text-slate-900 mb-6">{t.footer.contactInfo}</h4>
           <ul className="space-y-4">
-            <li className="flex flex-col md:flex-row items-center gap-3">
-              <Phone className="h-5 w-5 text-green-600 shrink-0" />
-              <span className="text-slate-700 text-sm font-medium">714-473-1140</span>
+            <li>
+              <a
+                href="tel:+17144731140"
+                aria-label="Call Clean & Care PRO at 714-473-1140"
+                className="group inline-flex flex-col md:flex-row items-center gap-3 text-slate-700 hover:text-green-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2 rounded-lg transition-colors font-medium text-sm text-center md:text-left"
+              >
+                <Phone className="h-5 w-5 text-green-600 shrink-0 group-hover:text-green-700 transition-colors" />
+                <span>714-473-1140</span>
+              </a>
             </li>
-            <li className="flex flex-col md:flex-row items-center gap-3">
-              <Mail className="h-5 w-5 text-green-600 shrink-0" />
-              <span className="text-slate-700 text-sm font-medium break-all text-center md:text-left">cleancareproservices2@gmail.com</span>
+            <li>
+              <a
+                href="mailto:cleancareproservices2@gmail.com"
+                aria-label="Email Clean & Care PRO"
+                className="group inline-flex flex-col md:flex-row items-center gap-3 text-slate-700 hover:text-green-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2 rounded-lg transition-colors font-medium text-sm break-all text-center md:text-left"
+              >
+                <Mail className="h-5 w-5 text-green-600 shrink-0 group-hover:text-green-700 transition-colors" />
+                <span>cleancareproservices2@gmail.com</span>
+              </a>
             </li>
             <li className="flex flex-col md:flex-row items-center gap-3 text-center md:text-left">
               <MapPin className="h-5 w-5 text-green-600 shrink-0" />
