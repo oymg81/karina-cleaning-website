@@ -152,6 +152,7 @@ Production deployment:
 - Mobile responsiveness is critical
 - Optimize for Lighthouse performance
 - Use semantic HTML and accessibility best practices
+- Google Reviews automatic synchronization remains pending because Google Business Profile APIs currently return a quota of 0 requests per minute for project codingsoft-foes-gbp-prod. Google Support case: 8-0821000041757. Completion remains included once Google restores API access.
 
 ---
 
