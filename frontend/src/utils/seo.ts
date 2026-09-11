@@ -53,6 +53,15 @@ export function getRobotsForEnvironment(path: string): string {
   return isVercelProduction ? 'index, follow' : 'noindex, nofollow';
 }
 
+export function findServiceAreaByPath(normalizedPath: string) {
+  const matchServiceArea = normalizedPath.match(/^\/service-areas\/([^/]+)$/);
+  if (matchServiceArea) {
+    const slug = matchServiceArea[1];
+    return serviceAreas[slug];
+  }
+  return Object.values(serviceAreas).find(area => area.canonicalPath === normalizedPath);
+}
+
 export function getRouteMetadata(path: string, lang: 'en' | 'es' = 'en'): RouteMetadata {
   const normalizedPath = path.replace(/\/$/, '') || '/';
   const robots = getRobotsForEnvironment(normalizedPath);
@@ -74,25 +83,21 @@ export function getRouteMetadata(path: string, lang: 'en' | 'es' = 'en'): RouteM
     };
   }
 
-  const matchServiceArea = normalizedPath.match(/^\/service-areas\/([^/]+)$/);
-  if (matchServiceArea) {
-    const slug = matchServiceArea[1];
-    const data = serviceAreas[slug];
-    if (data) {
-      const content = data[lang] || data.en;
-      return {
-        title: content.seoTitle,
-        description: content.seoDescription,
-        canonicalUrl: `${CANONICAL_ORIGIN}${data.canonicalPath}`,
-        ogImage: data.heroImage.startsWith('http')
-          ? data.heroImage
-          : `${CANONICAL_ORIGIN}${data.heroImage.startsWith('/') ? data.heroImage : `/${data.heroImage}`}`,
-        ogType: 'website',
-        twitterCard: 'summary_large_image',
-        locale: lang === 'en' ? 'en_US' : 'es_US',
-        robots,
-      };
-    }
+  const data = findServiceAreaByPath(normalizedPath);
+  if (data) {
+    const content = data[lang] || data.en;
+    return {
+      title: content.seoTitle,
+      description: content.seoDescription,
+      canonicalUrl: `${CANONICAL_ORIGIN}${data.canonicalPath}`,
+      ogImage: data.heroImage.startsWith('http')
+        ? data.heroImage
+        : `${CANONICAL_ORIGIN}${data.heroImage.startsWith('/') ? data.heroImage : `/${data.heroImage}`}`,
+      ogType: 'website',
+      twitterCard: 'summary_large_image',
+      locale: lang === 'en' ? 'en_US' : 'es_US',
+      robots,
+    };
   }
 
   if (normalizedPath === '/privacy') {
@@ -160,29 +165,25 @@ export function getRouteJsonLd(path: string, lang: 'en' | 'es' = 'en'): Record<s
     };
   }
 
-  const matchServiceArea = normalizedPath.match(/^\/service-areas\/([^/]+)$/);
-  if (matchServiceArea) {
-    const slug = matchServiceArea[1];
-    const data = serviceAreas[slug];
-    if (data) {
-      const content = data[lang] || data.en;
-      const canonicalUrl = `${CANONICAL_ORIGIN}${data.canonicalPath}`;
-      const serviceDescription = lang === 'en'
-        ? `Residential and commercial cleaning services serving ${data.name}, California.`
-        : `Servicios de limpieza residencial y comercial para ${data.name}, California.`;
+  const data = findServiceAreaByPath(normalizedPath);
+  if (data) {
+    const content = data[lang] || data.en;
+    const canonicalUrl = `${CANONICAL_ORIGIN}${data.canonicalPath}`;
+    const serviceDescription = lang === 'en'
+      ? `Residential and commercial cleaning services serving ${data.name}, California.`
+      : `Servicios de limpieza residencial y comercial para ${data.name}, California.`;
 
-      return {
-        '@context': 'https://schema.org',
-        '@type': 'Service',
-        '@id': `${canonicalUrl}#service`,
-        name: content.heroTitle,
-        description: serviceDescription,
-        provider: {
-          '@id': BUSINESS_ID,
-        },
-        areaServed: getServiceAreaSchemaEntity(data.slug, data.name),
-      };
-    }
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      '@id': `${canonicalUrl}#service`,
+      name: content.heroTitle,
+      description: serviceDescription,
+      provider: {
+        '@id': BUSINESS_ID,
+      },
+      areaServed: getServiceAreaSchemaEntity(data.slug, data.name),
+    };
   }
 
   if (normalizedPath === '/privacy') {

@@ -5,11 +5,11 @@ import { FaFacebookF, FaInstagram, FaTiktok, FaWhatsapp } from 'react-icons/fa';
 import { useLanguage } from '../hooks/useLanguage';
 
 const serviceAreaLinks: Record<string, string> = {
-  'Orange County': '/service-areas/orange-county',
-  'Glendale and surrounding areas': '/service-areas/glendale',
-  'Glendale y áreas cercanas': '/service-areas/glendale',
-  'Rosemead and surrounding areas': '/service-areas/rosemead',
-  'Rosemead y áreas cercanas': '/service-areas/rosemead',
+  'Orange County': '/orange-county-cleaning-services',
+  'Glendale and surrounding areas': '/glendale-cleaning-services',
+  'Glendale y áreas cercanas': '/glendale-cleaning-services',
+  'Rosemead and surrounding areas': '/rosemead-cleaning-services',
+  'Rosemead y áreas cercanas': '/rosemead-cleaning-services',
 };
 
 const Footer: React.FC = () => {

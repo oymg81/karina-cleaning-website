@@ -36,9 +36,9 @@ describe('Search Engine Assets: robots.txt and sitemap.xml', () => {
 
     const expectedUrls = [
       'https://cleancareproservice.com/',
-      'https://cleancareproservice.com/service-areas/orange-county',
-      'https://cleancareproservice.com/service-areas/glendale',
-      'https://cleancareproservice.com/service-areas/rosemead',
+      'https://cleancareproservice.com/orange-county-cleaning-services',
+      'https://cleancareproservice.com/glendale-cleaning-services',
+      'https://cleancareproservice.com/rosemead-cleaning-services',
       'https://cleancareproservice.com/privacy',
       'https://cleancareproservice.com/terms',
     ];
@@ -52,9 +52,9 @@ describe('Search Engine Assets: robots.txt and sitemap.xml', () => {
 describe('Shared SEO Utility & Metadata Matrix', () => {
   it('derives service area metadata directly from serviceAreas.ts canonical source', () => {
     for (const slug of Object.keys(serviceAreas)) {
-      const enMeta = getRouteMetadata(`/service-areas/${slug}`, 'en');
-      const esMeta = getRouteMetadata(`/service-areas/${slug}`, 'es');
       const data = serviceAreas[slug];
+      const enMeta = getRouteMetadata(data.canonicalPath, 'en');
+      const esMeta = getRouteMetadata(data.canonicalPath, 'es');
 
       assert.strictEqual(enMeta.title, data.en.seoTitle);
       assert.strictEqual(enMeta.description, data.en.seoDescription);
@@ -81,7 +81,7 @@ describe('Shared SEO Utility & Metadata Matrix', () => {
 
     for (const slug of Object.keys(serviceAreas)) {
       const data = serviceAreas[slug];
-      const serviceJsonLd = getRouteJsonLd(`/service-areas/${slug}`, 'en');
+      const serviceJsonLd = getRouteJsonLd(data.canonicalPath, 'en');
       assert.ok(serviceJsonLd, `JSON-LD must exist for ${slug}`);
       assert.strictEqual(serviceJsonLd['@type'], 'Service');
       assert.strictEqual(serviceJsonLd['@id'], `https://cleancareproservice.com${data.canonicalPath}#service`);
@@ -170,11 +170,11 @@ describe('Indexing Environment & Preview Protection', () => {
 
     process.env.VERCEL_ENV = 'production';
     assert.strictEqual(getRobotsForEnvironment('/'), 'index, follow');
-    assert.strictEqual(getRobotsForEnvironment('/service-areas/orange-county'), 'index, follow');
+    assert.strictEqual(getRobotsForEnvironment('/orange-county-cleaning-services'), 'index, follow');
 
     process.env.VERCEL_ENV = 'preview';
     assert.strictEqual(getRobotsForEnvironment('/'), 'noindex, nofollow');
-    assert.strictEqual(getRobotsForEnvironment('/service-areas/orange-county'), 'noindex, nofollow');
+    assert.strictEqual(getRobotsForEnvironment('/orange-county-cleaning-services'), 'noindex, nofollow');
 
     delete process.env.VERCEL_ENV;
     assert.strictEqual(getRobotsForEnvironment('/'), 'noindex, nofollow');
@@ -189,7 +189,7 @@ describe('Indexing Environment & Preview Protection', () => {
     try {
       global.window = { location: { hostname: 'cleancareproservice.com' } };
       assert.strictEqual(getRobotsForEnvironment('/'), 'index, follow');
-      assert.strictEqual(getRobotsForEnvironment('/service-areas/glendale'), 'index, follow');
+      assert.strictEqual(getRobotsForEnvironment('/glendale-cleaning-services'), 'index, follow');
 
       global.window = { location: { hostname: 'www.cleancareproservice.com' } };
       assert.strictEqual(getRobotsForEnvironment('/'), 'index, follow');
@@ -210,9 +210,9 @@ describe('Indexing Environment & Preview Protection', () => {
 describe('Single Flat-File Prerendered HTML & Artifact Strategy', () => {
   const routes = [
     { url: '/', file: path.resolve(distDir, 'index.html'), expectedH1: 'Professional Cleaning Services in California' },
-    { url: '/service-areas/orange-county', file: path.resolve(distDir, 'service-areas/orange-county.html'), expectedH1: 'Professional Cleaning Services in Orange County' },
-    { url: '/service-areas/glendale', file: path.resolve(distDir, 'service-areas/glendale.html'), expectedH1: 'Professional Cleaning Services in Glendale' },
-    { url: '/service-areas/rosemead', file: path.resolve(distDir, 'service-areas/rosemead.html'), expectedH1: 'Professional Cleaning Services in Rosemead' },
+    { url: '/orange-county-cleaning-services', file: path.resolve(distDir, 'orange-county-cleaning-services.html'), expectedH1: 'Professional Cleaning Services in Orange County' },
+    { url: '/glendale-cleaning-services', file: path.resolve(distDir, 'glendale-cleaning-services.html'), expectedH1: 'Professional Cleaning Services in Glendale' },
+    { url: '/rosemead-cleaning-services', file: path.resolve(distDir, 'rosemead-cleaning-services.html'), expectedH1: 'Professional Cleaning Services in Rosemead' },
     { url: '/privacy', file: path.resolve(distDir, 'privacy.html'), expectedH1: 'Privacy Policy' },
     { url: '/terms', file: path.resolve(distDir, 'terms.html'), expectedH1: 'Terms of Service' },
     { url: '/404', file: path.resolve(distDir, '404.html'), expectedH1: 'Page Not Found' },

@@ -40,9 +40,9 @@ describe('Footer Contact & Service Area Navigation - Rendered DOM & Attribute Ve
     { name: 'Home Page', file: path.resolve(distDir, 'index.html') },
     { name: 'Privacy Policy', file: path.resolve(distDir, 'privacy.html') },
     { name: 'Terms of Service', file: path.resolve(distDir, 'terms.html') },
-    { name: 'Orange County Area', file: path.resolve(distDir, 'service-areas/orange-county.html') },
-    { name: 'Glendale Area', file: path.resolve(distDir, 'service-areas/glendale.html') },
-    { name: 'Rosemead Area', file: path.resolve(distDir, 'service-areas/rosemead.html') },
+    { name: 'Orange County Area', file: path.resolve(distDir, 'orange-county-cleaning-services.html') },
+    { name: 'Glendale Area', file: path.resolve(distDir, 'glendale-cleaning-services.html') },
+    { name: 'Rosemead Area', file: path.resolve(distDir, 'rosemead-cleaning-services.html') },
   ];
 
   for (const { name, file } of routes) {
@@ -79,25 +79,25 @@ describe('Footer Contact & Service Area Navigation - Rendered DOM & Attribute Ve
         assert.ok(fs.existsSync(file), `File ${file} must exist`);
         const content = fs.readFileSync(file, 'utf-8');
 
-        // 1. Orange County is linked to /service-areas/orange-county
+        // 1. Orange County is linked to /orange-county-cleaning-services
         assert.match(
           content,
-          /<a[^>]*href="\/service-areas\/orange-county"[^>]*>Orange County<\/a>/,
-          'Orange County must be linked to /service-areas/orange-county'
+          /<a[^>]*href="\/orange-county-cleaning-services"[^>]*>Orange County<\/a>/,
+          'Orange County must be linked to /orange-county-cleaning-services'
         );
 
-        // 2. Glendale is linked to /service-areas/glendale
+        // 2. Glendale is linked to /glendale-cleaning-services
         assert.match(
           content,
-          /<a[^>]*href="\/service-areas\/glendale"[^>]*>(?:Glendale and surrounding areas|Glendale y áreas cercanas)<\/a>/,
-          'Glendale must be linked to /service-areas/glendale'
+          /<a[^>]*href="\/glendale-cleaning-services"[^>]*>(?:Glendale and surrounding areas|Glendale y áreas cercanas)<\/a>/,
+          'Glendale must be linked to /glendale-cleaning-services'
         );
 
-        // 3. Rosemead is linked to /service-areas/rosemead
+        // 3. Rosemead is linked to /rosemead-cleaning-services
         assert.match(
           content,
-          /<a[^>]*href="\/service-areas\/rosemead"[^>]*>(?:Rosemead and surrounding areas|Rosemead y áreas cercanas)<\/a>/,
-          'Rosemead must be linked to /service-areas/rosemead'
+          /<a[^>]*href="\/rosemead-cleaning-services"[^>]*>(?:Rosemead and surrounding areas|Rosemead y áreas cercanas)<\/a>/,
+          'Rosemead must be linked to /rosemead-cleaning-services'
         );
 
         // 4. The other 4 locations must be rendered as <span> and NEVER as <a> links

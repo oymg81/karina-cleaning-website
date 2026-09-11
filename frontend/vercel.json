@@ -1,3 +1,8 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "redirects": [
+    { "source": "/service-areas/orange-county", "destination": "/orange-county-cleaning-services", "permanent": true },
+    { "source": "/service-areas/glendale", "destination": "/glendale-cleaning-services", "permanent": true },
+    { "source": "/service-areas/rosemead", "destination": "/rosemead-cleaning-services", "permanent": true }
+  ]
 }

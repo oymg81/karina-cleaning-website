@@ -4,7 +4,7 @@ export const serviceAreas: Record<string, ServiceAreaData> = {
   'orange-county': {
     slug: 'orange-county',
     name: 'Orange County',
-    canonicalPath: '/service-areas/orange-county',
+    canonicalPath: '/orange-county-cleaning-services',
     heroImage: '/images/comedor.png',
     heroImageAlt: 'Bright professionally cleaned home in Orange County, California',
     en: {
@@ -301,7 +301,7 @@ export const serviceAreas: Record<string, ServiceAreaData> = {
   'glendale': {
     slug: 'glendale',
     name: 'Glendale',
-    canonicalPath: '/service-areas/glendale',
+    canonicalPath: '/glendale-cleaning-services',
     heroImage: '/images/office.png',
     heroImageAlt: 'Professionally cleaned commercial office in Glendale, California',
     en: {
@@ -594,7 +594,7 @@ export const serviceAreas: Record<string, ServiceAreaData> = {
   'rosemead': {
     slug: 'rosemead',
     name: 'Rosemead',
-    canonicalPath: '/service-areas/rosemead',
+    canonicalPath: '/rosemead-cleaning-services',
     heroImage: '/images/room.png',
     heroImageAlt: 'Professional residential cleaning service in Rosemead, California',
     en: {

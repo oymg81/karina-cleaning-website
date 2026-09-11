@@ -35,7 +35,7 @@ const ServiceAreaPage: React.FC<ServiceAreaPageProps> = ({ slug: propSlug }) => 
 
   const data = activeSlug ? serviceAreas[activeSlug] : undefined;
   const content = data ? (data[language] || data.en) : undefined;
-  const currentPath = data ? `/service-areas/${data.slug}` : '';
+  const currentPath = data ? data.canonicalPath : '';
 
   const metadata = useMemo(() => {
     if (!data) return undefined;

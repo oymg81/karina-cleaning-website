@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import WhatsAppFloatingButton from './components/WhatsAppFloatingButton';
@@ -19,9 +19,17 @@ const App: React.FC = () => {
       <main className="flex-grow">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/service-areas/orange-county" element={<ServiceAreaPage slug="orange-county" />} />
-          <Route path="/service-areas/glendale" element={<ServiceAreaPage slug="glendale" />} />
-          <Route path="/service-areas/rosemead" element={<ServiceAreaPage slug="rosemead" />} />
+
+          {/* Target Canonical Local SEO Routes */}
+          <Route path="/orange-county-cleaning-services" element={<ServiceAreaPage slug="orange-county" />} />
+          <Route path="/glendale-cleaning-services" element={<ServiceAreaPage slug="glendale" />} />
+          <Route path="/rosemead-cleaning-services" element={<ServiceAreaPage slug="rosemead" />} />
+
+          {/* Legacy Service Area Redirects for Client Navigation */}
+          <Route path="/service-areas/orange-county" element={<Navigate to="/orange-county-cleaning-services" replace />} />
+          <Route path="/service-areas/glendale" element={<Navigate to="/glendale-cleaning-services" replace />} />
+          <Route path="/service-areas/rosemead" element={<Navigate to="/rosemead-cleaning-services" replace />} />
+
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/terms" element={<TermsPage />} />
           <Route path="*" element={<NotFoundPage />} />

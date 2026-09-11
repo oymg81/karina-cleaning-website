@@ -80,7 +80,7 @@ describe('Attribution Capture and Length Limits', () => {
   test('preserves valid standard UTMs and ignores empty strings', () => {
     const result = sanitizeAttribution(
       { utm_source: 'google', utm_medium: 'cpc', utm_campaign: 'summer_cleaning', utm_content: '', utm_term: '   ' },
-      'https://cleancareproservice.com/service-areas/orange-county',
+      'https://cleancareproservice.com/orange-county-cleaning-services',
       'https://www.google.com'
     );
     assert.equal(result.utm_source, 'google');
@@ -88,7 +88,7 @@ describe('Attribution Capture and Length Limits', () => {
     assert.equal(result.utm_campaign, 'summer_cleaning');
     assert.equal(result.utm_content, undefined);
     assert.equal(result.utm_term, undefined);
-    assert.equal(result.landing_page, 'https://cleancareproservice.com/service-areas/orange-county');
+    assert.equal(result.landing_page, 'https://cleancareproservice.com/orange-county-cleaning-services');
     assert.equal(result.referrer, 'https://www.google.com');
   });
 });
@@ -328,7 +328,7 @@ describe('FOES Leads Proxy Endpoint & Notes Length Strategy', () => {
       locale: 'es',
       submission_id: '123e4567-e89b-12d3-a456-426614174000',
       message: hugeMessage,
-      landing_page: 'https://cleancareproservice.com/service-areas/orange-county?utm_source=google&extra=' + 'x'.repeat(200),
+      landing_page: 'https://cleancareproservice.com/orange-county-cleaning-services?utm_source=google&extra=' + 'x'.repeat(200),
       referrer: 'https://www.google.com/search?q=cleaning+services+in+california&ref=' + 'y'.repeat(200),
       utm_source: 'google_ads_super_long_campaign_source_name',
       utm_medium: 'cpc_search_network',
