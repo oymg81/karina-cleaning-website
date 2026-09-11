@@ -106,10 +106,32 @@ const TermsPage: React.FC = () => {
               </p>
             </section>
 
-            {/* 5. Contact */}
+            {/* 5. Google Maps Platform Services */}
             <section className="space-y-3">
               <h2 className="text-xl md:text-2xl font-bold text-slate-900">
-                {isEn ? '5. Contact Clean & Care PRO' : '5. Contacto Clean & Care PRO'}
+                {isEn ? '5. Google Maps Platform & Third-Party Content' : '5. Google Maps Platform y Contenido de Terceros'}
+              </h2>
+              <p>
+                {isEn
+                  ? 'Our website displays customer ratings, reviews, and author information fetched via Google Maps Platform (Places API). By utilizing these features or following review links, you acknowledge and agree to be bound by the '
+                  : 'Nuestro sitio web muestra calificaciones, reseñas y datos de autor obtenidos a través de Google Maps Platform (Places API). Al utilizar estas funciones o seguir enlaces a reseñas, usted acepta estar sujeto a los '}
+                <a href="https://cloud.google.com/maps-platform/terms" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline font-semibold hover:text-blue-700">
+                  {isEn ? 'Google Maps Platform Terms of Service' : 'Términos de Servicio de Google Maps Platform'}
+                </a>
+                {isEn ? ' and the ' : ' y a la '}
+                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline font-semibold hover:text-blue-700">
+                  {isEn ? 'Google Privacy Policy' : 'Política de Privacidad de Google'}
+                </a>
+                {isEn
+                  ? '. Clean & Care PRO does not control, verify, or assume liability for third-party review submissions or external Google services. (Notice: This section details operational site terms regarding third-party service integration and does not constitute formal legal advice.)'
+                  : '. Clean & Care PRO no controla, verifica ni asume responsabilidad por publicaciones de reseñas de terceros ni servicios externos de Google. (Nota: Esta sección describe términos operacionales del sitio y no constituye asesoría jurídica formal.)'}
+              </p>
+            </section>
+
+            {/* 6. Contact */}
+            <section className="space-y-3">
+              <h2 className="text-xl md:text-2xl font-bold text-slate-900">
+                {isEn ? '6. Contact Clean & Care PRO' : '6. Contacto Clean & Care PRO'}
               </h2>
               <div className="p-6 bg-slate-50 rounded-2xl border border-slate-200 mt-2 space-y-2 text-sm font-medium text-slate-800">
                 <p><strong>Clean & Care PRO</strong></p>

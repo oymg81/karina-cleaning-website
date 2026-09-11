@@ -1,69 +1,45 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Star, MessageSquarePlus, Sparkles, X, ShieldCheck, RefreshCw, AlertCircle } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Star, Sparkles, ExternalLink, MessageSquarePlus } from 'lucide-react';
 import { useLanguage } from '../hooks/useLanguage';
-import type { PublicReview } from '../types/foes';
+import { translations } from '../translations';
+import type { PublicGoogleReview, GoogleReviewsData } from '../types/googleReviews';
 import ReviewsCarousel from './ReviewsCarousel';
-import LeaveReviewForm from './LeaveReviewForm';
+
+const LEAVE_REVIEW_URL = 'https://g.page/r/Cf7PwUqHKMc7EBM/review';
+const FALLBACK_REVIEWS_URL = 'https://share.google/PCz0f74BtOPSLcESV';
 
 export const ReviewsSection: React.FC = () => {
   const { language } = useLanguage();
-  const [reviews, setReviews] = useState<PublicReview[]>([]);
+  const [reviewsData, setReviewsData] = useState<GoogleReviewsData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const hasFetchedRef = useRef(false);
 
+  const t = translations[language].reviews;
   const isEn = language === 'en';
-  const triggerRef = useRef<HTMLButtonElement | null>(null);
-  const modalContentRef = useRef<HTMLDivElement | null>(null);
-
-  const loadReviews = useCallback(async () => {
-    try {
-      const res = await fetch('/api/foes/reviews');
-      if (res.ok) {
-        const data = await res.json();
-        if (Array.isArray(data.reviews)) {
-          setReviews(data.reviews);
-          setHasError(false);
-        } else {
-          setReviews([]);
-        }
-      } else {
-        setHasError(true);
-        setReviews([]);
-      }
-    } catch {
-      setHasError(true);
-      setReviews([]);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
 
   useEffect(() => {
     let ignore = false;
 
-    async function execute() {
+    async function loadGoogleReviews() {
+      if (hasFetchedRef.current) return;
+      hasFetchedRef.current = true;
+
       try {
-        const res = await fetch('/api/foes/reviews');
+        const res = await fetch('/api/google-reviews');
         if (!ignore) {
           if (res.ok) {
-            const data = await res.json();
-            if (Array.isArray(data.reviews)) {
-              setReviews(data.reviews);
-              setHasError(false);
-            } else {
-              setReviews([]);
-            }
+            const data: GoogleReviewsData = await res.json();
+            setReviewsData(data);
+            setHasError(false);
           } else {
             setHasError(true);
-            setReviews([]);
           }
         }
       } catch {
         if (!ignore) {
           setHasError(true);
-          setReviews([]);
         }
       } finally {
         if (!ignore) {
@@ -72,144 +48,87 @@ export const ReviewsSection: React.FC = () => {
       }
     }
 
-    execute();
+    // Lazy load reviews when section approaches viewport
+    if (typeof IntersectionObserver !== 'undefined' && sectionRef.current) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            loadGoogleReviews();
+            observer.disconnect();
+          }
+        },
+        { rootMargin: '200px' }
+      );
+      observer.observe(sectionRef.current);
 
-    return () => {
-      ignore = true;
-    };
+      return () => {
+        ignore = true;
+        observer.disconnect();
+      };
+    } else {
+      // Fallback load immediately if IntersectionObserver is unavailable
+      loadGoogleReviews();
+      return () => {
+        ignore = true;
+      };
+    }
   }, []);
 
-  const handleRetry = () => {
-    setIsLoading(true);
-    setHasError(false);
-    loadReviews();
-  };
-
-  // Manage modal accessibility: focus trapping, body scroll lock, and trigger restoration
-  useEffect(() => {
-    if (!isModalOpen) return;
-
-    // Lock body scroll safely
-    const originalOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-
-    // Focus initial interactive element inside modal
-    const focusableSelectors = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
-    const focusableElements = modalContentRef.current?.querySelectorAll<HTMLElement>(focusableSelectors);
-    if (focusableElements && focusableElements.length > 0) {
-      focusableElements[0].focus();
-    }
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setIsModalOpen(false);
-        return;
-      }
-
-      if (e.key === 'Tab' && modalContentRef.current) {
-        const focusables = modalContentRef.current.querySelectorAll<HTMLElement>(focusableSelectors);
-        if (!focusables || focusables.length === 0) return;
-
-        const firstEl = focusables[0];
-        const lastEl = focusables[focusables.length - 1];
-
-        if (e.shiftKey) {
-          if (document.activeElement === firstEl) {
-            e.preventDefault();
-            lastEl.focus();
-          }
-        } else {
-          if (document.activeElement === lastEl) {
-            e.preventDefault();
-            firstEl.focus();
-          }
-        }
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      document.body.style.overflow = originalOverflow;
-      window.removeEventListener('keydown', handleKeyDown);
-      // Restore focus to trigger
-      triggerRef.current?.focus();
-    };
-  }, [isModalOpen]);
-
-  const openModal = (e: React.MouseEvent<HTMLButtonElement>) => {
-    triggerRef.current = e.currentTarget;
-    setIsModalOpen(true);
-  };
-
-  const avgRating = reviews.length > 0
-    ? (reviews.reduce((acc, curr) => acc + curr.rating, 0) / reviews.length).toFixed(1)
-    : '5.0';
-
-  const strings = {
-    sectionBadge: isEn ? 'Verified Client Feedback' : 'Opiniones Verificadas',
-    title: isEn ? 'What Our Clients Say' : 'Lo Que Dicen Nuestros Clientes',
-    subtitle: isEn
-      ? 'Real feedback from homeowners, property managers, and businesses across California.'
-      : 'Comentarios reales de propietarios y empresas en California.',
-    leaveReviewBtn: isEn ? 'Leave a Review' : 'Dejar una Reseña',
-    emptyTitle: isEn ? 'Have you worked with Clean & Care PRO?' : '¿Ha trabajado con Clean & Care PRO?',
-    emptyDesc: isEn
-      ? 'Share your experience with our team. Reviews are verified and published to help our community.'
-      : 'Comparta su experiencia con nuestro equipo. Las reseñas son verificadas y publicadas para ayudar a nuestra comunidad.',
-    emptyAction: isEn ? 'Share Your Experience' : 'Comparta Su Experiencia',
-    verifiedNote: isEn ? 'Authentic Client Reviews' : 'Reseñas Auténticas de Clientes',
-    errorTitle: isEn ? 'Reviews Temporarily Unavailable' : 'Reseñas Temporalmente No Disponibles',
-    errorDesc: isEn
-      ? 'We are temporarily unable to load client reviews. Please try again shortly or leave a review below.'
-      : 'No podemos cargar las reseñas en este momento. Por favor, inténtelo de nuevo o deje una reseña.',
-    retryBtn: isEn ? 'Retry' : 'Reintentar',
-  };
+  const rating = reviewsData?.rating ?? 5.0;
+  const userRatingCount = reviewsData?.userRatingCount ?? 0;
+  const reviews: PublicGoogleReview[] = reviewsData?.reviews ?? [];
+  const reviewsUri = reviewsData?.reviewsUri || FALLBACK_REVIEWS_URL;
 
   return (
-    <section id="reviews" className="py-24 bg-slate-50 relative overflow-hidden border-t border-slate-200/60">
+    <section ref={sectionRef} id="reviews" className="py-24 bg-slate-50 relative overflow-hidden border-t border-slate-200/60">
       {/* Background ambient accents */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-blue-100/50 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#5FE873]/10 rounded-full blur-3xl pointer-events-none -ml-20 -mb-20" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 text-blue-700 font-bold text-xs uppercase tracking-wider mb-4 border border-blue-100">
             <Sparkles className="w-4 h-4 text-blue-600" />
-            <span>{strings.sectionBadge}</span>
+            <span>{t.sectionBadge}</span>
           </div>
 
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">
-            {strings.title}
+            {t.title}
           </h2>
 
           <p className="text-slate-600 text-base md:text-lg leading-relaxed mb-6">
-            {strings.subtitle}
+            {isEn
+              ? 'Real feedback from homeowners, property managers, and businesses across California.'
+              : 'Comentarios reales de propietarios y empresas en California.'}
           </p>
 
-          {/* Average rating indicator if reviews exist */}
-          {reviews.length > 0 && !hasError && (
-            <div className="inline-flex items-center gap-2 bg-white px-5 py-2.5 rounded-2xl shadow-sm border border-slate-200/80">
+          {/* Exact Google Maps Rating Badge Header */}
+          {!isLoading && !hasError && userRatingCount > 0 && (
+            <div className="inline-flex items-center gap-3 bg-white px-5 py-2.5 rounded-2xl shadow-sm border border-slate-200/80">
+              <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="#4285F4" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+              </svg>
+
               <span className="font-extrabold text-slate-900 text-lg flex items-center gap-1.5">
-                {avgRating} <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                {rating.toFixed(1)} <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
               </span>
               <span className="text-slate-300">|</span>
-              <span className="text-slate-600 text-sm font-semibold flex items-center gap-1">
-                <ShieldCheck className="w-4 h-4 text-green-600" />
-                {strings.verifiedNote}
+              <span className="text-slate-600 text-sm font-normal">
+                {userRatingCount} {t.reviewsCountLabel}
               </span>
+              <span className="text-slate-300">|</span>
+              <span translate="no" className="text-sm font-normal text-slate-800 whitespace-nowrap">Google Maps</span>
             </div>
           )}
         </div>
 
         {/* Content Area */}
         {isLoading ? (
-          /* Loading Skeleton */
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-pulse py-6">
+          /* Accessible Skeleton Loading State */
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-pulse py-6" aria-busy="true" aria-label={isEn ? 'Loading reviews' : 'Cargando reseñas'}>
             {[1, 2, 3].map((n) => (
-              <div key={n} className="bg-white rounded-3xl p-7 border border-slate-100 h-64 flex flex-col justify-between">
+              <div key={n} className="bg-white rounded-3xl p-7 border border-slate-100 h-64 flex flex-col justify-between shadow-sm">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 bg-slate-200 rounded-2xl"></div>
                   <div className="space-y-2 flex-1">
@@ -226,133 +145,75 @@ export const ReviewsSection: React.FC = () => {
               </div>
             ))}
           </div>
-        ) : hasError ? (
-          /* Temporary Service Failure State (Distinguished from authentic empty state) */
-          <div className="max-w-2xl mx-auto bg-white rounded-3xl p-8 md:p-10 text-center border border-slate-200/80 shadow-md">
-            <div className="w-14 h-14 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-amber-100">
-              <AlertCircle className="w-7 h-7" />
-            </div>
-            <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">
-              {strings.errorTitle}
-            </h3>
-            <p className="text-slate-600 text-sm md:text-base leading-relaxed mb-6 max-w-md mx-auto">
-              {strings.errorDesc}
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <button
-                type="button"
-                onClick={handleRetry}
-                className="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-800 px-6 py-3 rounded-xl font-bold transition-all text-sm"
-              >
-                <RefreshCw className="w-4 h-4 text-slate-600" />
-                <span>{strings.retryBtn}</span>
-              </button>
-              <button
-                type="button"
-                onClick={openModal}
-                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-bold shadow-md transition-all text-sm"
-              >
-                <MessageSquarePlus className="w-4 h-4" />
-                <span>{strings.leaveReviewBtn}</span>
-              </button>
-            </div>
-          </div>
-        ) : reviews.length > 0 ? (
-          /* Populated Carousel State */
+        ) : !hasError && reviews.length > 0 ? (
+          /* Populated Reviews Carousel */
           <div>
             <ReviewsCarousel reviews={reviews} />
-            <div className="mt-12 text-center">
-              <button
-                type="button"
-                onClick={openModal}
-                className="inline-flex items-center gap-2.5 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-2xl font-bold shadow-lg hover:shadow-xl hover:shadow-blue-600/20 transition-all text-base"
+
+            {/* Google CTAs */}
+            <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a
+                href={reviewsUri}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 px-7 py-3.5 rounded-2xl font-bold shadow-sm hover:shadow-md transition-all text-base"
+              >
+                <span>{t.readAllReviews}</span>
+                <ExternalLink className="w-4 h-4 text-slate-600" />
+              </a>
+
+              <a
+                href={LEAVE_REVIEW_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-blue-600 hover:bg-blue-700 text-white px-7 py-3.5 rounded-2xl font-bold shadow-lg hover:shadow-xl hover:shadow-blue-600/20 transition-all text-base"
               >
                 <MessageSquarePlus className="w-5 h-5" />
-                <span>{strings.leaveReviewBtn}</span>
-              </button>
+                <span>{t.leaveReview}</span>
+              </a>
             </div>
           </div>
         ) : (
-          /* Authentic Empty State (200 OK with 0 reviews) */
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="max-w-2xl mx-auto bg-white rounded-3xl p-8 md:p-12 text-center border border-slate-200/80 shadow-xl relative overflow-hidden"
-          >
+          /* Resilient Fallback UI */
+          <div className="max-w-2xl mx-auto bg-white rounded-3xl p-8 md:p-12 text-center border border-slate-200/80 shadow-md">
             <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-inner border border-blue-100">
-              <Sparkles className="w-8 h-8" />
+              <svg className="w-8 h-8" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="#4285F4" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+              </svg>
             </div>
 
             <h3 className="text-2xl md:text-3xl font-extrabold text-slate-900 mb-3 tracking-tight">
-              {strings.emptyTitle}
+              {t.fallbackTitle}
             </h3>
 
             <p className="text-slate-600 text-base md:text-lg leading-relaxed mb-8 max-w-lg mx-auto">
-              {strings.emptyDesc}
+              {t.fallbackDesc}
             </p>
 
-            <button
-              type="button"
-              onClick={openModal}
-              className="inline-flex items-center gap-2.5 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-2xl font-bold shadow-lg hover:shadow-xl hover:shadow-blue-600/20 transition-all text-base"
-            >
-              <MessageSquarePlus className="w-5 h-5" />
-              <span>{strings.emptyAction}</span>
-            </button>
-          </motion.div>
-        )}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a
+                href={reviewsUri}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 px-7 py-3.5 rounded-2xl font-bold shadow-sm hover:shadow-md transition-all text-base"
+              >
+                <span>{t.readAllReviews}</span>
+                <ExternalLink className="w-4 h-4 text-slate-600" />
+              </a>
 
-      </div>
-
-      {/* Accessible Review Submission Modal */}
-      <AnimatePresence>
-        {isModalOpen && (
-          <div
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="review-modal-title"
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto"
-          >
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsModalOpen(false)}
-              className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm"
-            />
-
-            {/* Modal Dialog Content with Focus Trap */}
-            <motion.div
-              ref={modalContentRef}
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ duration: 0.25 }}
-              className="relative z-10 w-full max-w-xl my-8 focus:outline-none"
-              tabIndex={-1}
-            >
-              <div className="relative">
-                <button
-                  type="button"
-                  onClick={() => setIsModalOpen(false)}
-                  aria-label={isEn ? 'Close review dialog' : 'Cerrar diálogo de reseña'}
-                  className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-all focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-                <LeaveReviewForm
-                  onSuccess={() => {
-                    loadReviews();
-                  }}
-                  onCancel={() => setIsModalOpen(false)}
-                />
-              </div>
-            </motion.div>
+              <a
+                href={LEAVE_REVIEW_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-blue-600 hover:bg-blue-700 text-white px-7 py-3.5 rounded-2xl font-bold shadow-lg hover:shadow-xl hover:shadow-blue-600/20 transition-all text-base"
+              >
+                <MessageSquarePlus className="w-5 h-5" />
+                <span>{t.leaveReview}</span>
+              </a>
+            </div>
           </div>
         )}
-      </AnimatePresence>
+      </div>
     </section>
   );
 };

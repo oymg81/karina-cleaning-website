@@ -239,8 +239,17 @@ export const translations = {
     reviews: {
       subtitle: 'Testimonials',
       title: 'What Our Clients Say',
-      ratingText: 'Average rating based on hundreds of reviews.',
-      leaveReview: 'Leave a Review',
+      ratingText: 'Average rating based on Google reviews.',
+      leaveReview: 'Leave a review',
+      readAllReviews: 'Read all reviews on Google',
+      sectionBadge: 'Verified Google Reviews',
+      relevanceNotice: 'Reviews are selected and ordered by Google based on relevance.',
+      fallbackTitle: 'Google Reviews',
+      fallbackDesc: 'Read authentic feedback from our clients or leave your review directly on Google.',
+      reviewsCountLabel: 'Google Reviews',
+      viewOnGoogle: 'View on Google',
+      verified: 'Verified',
+      googleAttribution: 'Google Maps Reviews',
       list: [
         {
           name: 'Sarah Johnson',
@@ -554,8 +563,17 @@ export const translations = {
     reviews: {
       subtitle: 'Testimonios',
       title: 'Lo Que Dicen Nuestros Clientes',
-      ratingText: 'Calificación promedio basada en cientos de reseñas.',
-      leaveReview: 'Dejar una Reseña',
+      ratingText: 'Calificación promedio basada en reseñas de Google.',
+      leaveReview: 'Dejar una reseña',
+      readAllReviews: 'Ver todas las reseñas en Google',
+      sectionBadge: 'Reseñas Verificadas de Google',
+      relevanceNotice: 'Google selecciona y ordena estas reseñas según su relevancia.',
+      fallbackTitle: 'Reseñas de Google',
+      fallbackDesc: 'Lea opiniones auténticas de nuestros clientes o deje su reseña directamente en Google.',
+      reviewsCountLabel: 'Reseñas en Google',
+      viewOnGoogle: 'Ver en Google',
+      verified: 'Verificado',
+      googleAttribution: 'Reseñas de Google Maps',
       list: [
         {
           name: 'Sarah Johnson',
