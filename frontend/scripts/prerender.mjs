@@ -36,6 +36,7 @@ const { render } = await import(pathToFileURL(serverEntryPath).href);
 // Clean single flat-file strategy for Vercel cleanUrls
 const routes = [
   { url: '/', outputPath: path.resolve(distDir, 'index.html') },
+  { url: '/quote', outputPath: path.resolve(distDir, 'quote.html') },
   { url: '/orange-county-cleaning-services', outputPath: path.resolve(distDir, 'orange-county-cleaning-services.html') },
   { url: '/glendale-cleaning-services', outputPath: path.resolve(distDir, 'glendale-cleaning-services.html') },
   { url: '/rosemead-cleaning-services', outputPath: path.resolve(distDir, 'rosemead-cleaning-services.html') },

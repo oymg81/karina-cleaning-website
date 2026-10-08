@@ -288,6 +288,24 @@ export const translations = {
       sendRequest: 'Send Request',
       successMessage: 'Thank you! Your request has been submitted. We will contact you shortly.'
     },
+    quotePage: {
+      badge: 'Top-Rated Cleaning Services in California',
+      title1: 'Request a',
+      title2: 'Free Cleaning Estimate',
+      subtitle: 'Tell us about your home or business. We will provide a fast, personalized quote tailored to your schedule and budget.',
+      trustTitle: 'Why Choose Clean & Care PRO?',
+      trustItems: [
+        { title: 'Fast & Free Quotes', desc: 'No hidden fees, no obligation. We respond promptly.' },
+        { title: 'Licensed & Insured', desc: 'City of Pomona Business Licensed and fully insured.' },
+        { title: '100% Satisfaction', desc: 'We stand behind our work to ensure a spotless clean every time.' },
+        { title: 'Flexible Scheduling', desc: 'Recurring, one-time, move-in/out, and commercial appointments.' }
+      ],
+      directContactTitle: 'Need Immediate Assistance?',
+      callUs: 'Call Us Directly',
+      whatsappUs: 'WhatsApp Chat',
+      phoneDisplay: '(714) 473-1140',
+      servingNotice: 'Serving Orange County, Glendale, Rosemead, Los Angeles, Upland, Fontana, and Corona.'
+    },
     footer: {
       desc: 'Providing top-quality residential and commercial cleaning services across California. We care about your space as much as you do.',
       quickLinks: 'Quick Links',
@@ -611,6 +629,24 @@ export const translations = {
       messagePlaceholder: 'Cuéntenos sobre su espacio y necesidades específicas...',
       sendRequest: 'Enviar Solicitud',
       successMessage: '¡Gracias! Su solicitud ha sido enviada. Nos pondremos en contacto con usted a la brevedad.'
+    },
+    quotePage: {
+      badge: 'Servicios de Limpieza de Máxima Calificación en California',
+      title1: 'Solicite un',
+      title2: 'Estimado de Limpieza Gratis',
+      subtitle: 'Cuéntenos sobre su hogar o negocio. Le proporcionaremos una cotización rápida y personalizada adaptada a su horario y presupuesto.',
+      trustTitle: '¿Por qué elegir Clean & Care PRO?',
+      trustItems: [
+        { title: 'Presupuestos Rápidos y Gratis', desc: 'Sin cargos ocultos ni compromiso. Respondemos con rapidez.' },
+        { title: 'Con Licencia y Asegurados', desc: 'Licencia comercial de la ciudad de Pomona y seguro de responsabilidad civil.' },
+        { title: '100% Satisfacción Garantizada', desc: 'Respaldamos nuestro trabajo para asegurar una limpieza impecable.' },
+        { title: 'Horarios Flexibles', desc: 'Servicios recurrentes, únicos, mudanzas y citas comerciales.' }
+      ],
+      directContactTitle: '¿Necesita Asistencia Inmediata?',
+      callUs: 'Llámenos Directamente',
+      whatsappUs: 'Chat de WhatsApp',
+      phoneDisplay: '(714) 473-1140',
+      servingNotice: 'Atendemos Orange County, Glendale, Rosemead, Los Angeles, Upland, Fontana y Corona.'
     },
     footer: {
       desc: 'Ofreciendo servicios de limpieza residencial y comercial de alta calidad en toda California. Nos preocupamos por su espacio tanto como usted.',

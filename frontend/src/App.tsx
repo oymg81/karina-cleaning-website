@@ -8,6 +8,7 @@ import HomePage from './pages/HomePage';
 import ServiceAreaPage from './pages/ServiceAreaPage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
+import QuotePage from './pages/QuotePage';
 import NotFoundPage from './pages/NotFoundPage';
 
 const App: React.FC = () => {
@@ -19,6 +20,7 @@ const App: React.FC = () => {
       <main className="flex-grow">
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/quote" element={<QuotePage />} />
 
           {/* Target Canonical Local SEO Routes */}
           <Route path="/orange-county-cleaning-services" element={<ServiceAreaPage slug="orange-county" />} />

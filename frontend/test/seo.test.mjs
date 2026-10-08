@@ -36,6 +36,7 @@ describe('Search Engine Assets: robots.txt and sitemap.xml', () => {
 
     const expectedUrls = [
       'https://cleancareproservice.com/',
+      'https://cleancareproservice.com/quote',
       'https://cleancareproservice.com/orange-county-cleaning-services',
       'https://cleancareproservice.com/glendale-cleaning-services',
       'https://cleancareproservice.com/rosemead-cleaning-services',
@@ -170,10 +171,12 @@ describe('Indexing Environment & Preview Protection', () => {
 
     process.env.VERCEL_ENV = 'production';
     assert.strictEqual(getRobotsForEnvironment('/'), 'index, follow');
+    assert.strictEqual(getRobotsForEnvironment('/quote'), 'index, follow');
     assert.strictEqual(getRobotsForEnvironment('/orange-county-cleaning-services'), 'index, follow');
 
     process.env.VERCEL_ENV = 'preview';
     assert.strictEqual(getRobotsForEnvironment('/'), 'noindex, nofollow');
+    assert.strictEqual(getRobotsForEnvironment('/quote'), 'noindex, nofollow');
     assert.strictEqual(getRobotsForEnvironment('/orange-county-cleaning-services'), 'noindex, nofollow');
 
     delete process.env.VERCEL_ENV;
@@ -189,6 +192,7 @@ describe('Indexing Environment & Preview Protection', () => {
     try {
       global.window = { location: { hostname: 'cleancareproservice.com' } };
       assert.strictEqual(getRobotsForEnvironment('/'), 'index, follow');
+      assert.strictEqual(getRobotsForEnvironment('/quote'), 'index, follow');
       assert.strictEqual(getRobotsForEnvironment('/glendale-cleaning-services'), 'index, follow');
 
       global.window = { location: { hostname: 'www.cleancareproservice.com' } };
@@ -210,6 +214,7 @@ describe('Indexing Environment & Preview Protection', () => {
 describe('Single Flat-File Prerendered HTML & Artifact Strategy', () => {
   const routes = [
     { url: '/', file: path.resolve(distDir, 'index.html'), expectedH1: 'Professional Cleaning Services in California' },
+    { url: '/quote', file: path.resolve(distDir, 'quote.html'), expectedH1: 'Free Cleaning Estimate' },
     { url: '/orange-county-cleaning-services', file: path.resolve(distDir, 'orange-county-cleaning-services.html'), expectedH1: 'Professional Cleaning Services in Orange County' },
     { url: '/glendale-cleaning-services', file: path.resolve(distDir, 'glendale-cleaning-services.html'), expectedH1: 'Professional Cleaning Services in Glendale' },
     { url: '/rosemead-cleaning-services', file: path.resolve(distDir, 'rosemead-cleaning-services.html'), expectedH1: 'Professional Cleaning Services in Rosemead' },

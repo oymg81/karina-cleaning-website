@@ -100,6 +100,23 @@ export function getRouteMetadata(path: string, lang: 'en' | 'es' = 'en'): RouteM
     };
   }
 
+  if (normalizedPath === '/quote') {
+    return {
+      title: lang === 'en'
+        ? 'Free Cleaning Estimate | Clean & Care PRO'
+        : 'Estimado de Limpieza Gratis | Clean & Care PRO',
+      description: lang === 'en'
+        ? 'Request a free cleaning estimate from Clean & Care PRO for professional residential or commercial cleaning services in California.'
+        : 'Solicite un estimado de limpieza gratuito de Clean & Care PRO para servicios profesionales de limpieza residencial o comercial en California.',
+      canonicalUrl: `${CANONICAL_ORIGIN}/quote`,
+      ogImage: `${CANONICAL_ORIGIN}/images/cta-cleaning.jpg`,
+      ogType: 'website',
+      twitterCard: 'summary_large_image',
+      locale: lang === 'en' ? 'en_US' : 'es_US',
+      robots,
+    };
+  }
+
   if (normalizedPath === '/privacy') {
     return {
       title: lang === 'en'
@@ -183,6 +200,22 @@ export function getRouteJsonLd(path: string, lang: 'en' | 'es' = 'en'): Record<s
         '@id': BUSINESS_ID,
       },
       areaServed: getServiceAreaSchemaEntity(data.slug, data.name),
+    };
+  }
+
+  if (normalizedPath === '/quote') {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'ContactPage',
+      '@id': `${CANONICAL_ORIGIN}/quote#webpage`,
+      name: lang === 'en' ? 'Free Cleaning Estimate' : 'Estimado de Limpieza Gratis',
+      url: `${CANONICAL_ORIGIN}/quote`,
+      description: lang === 'en'
+        ? 'Request a free cleaning estimate from Clean & Care PRO for residential and commercial cleaning services.'
+        : 'Solicite un estimado de limpieza gratuito de Clean & Care PRO para servicios de limpieza residencial y comercial.',
+      isPartOf: {
+        '@id': BUSINESS_ID,
+      },
     };
   }
 
