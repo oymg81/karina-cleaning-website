@@ -202,7 +202,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   });
 
   const foesPayload = {
-    key: formKey,
+    formKey,
     name,
     ...(email ? { email } : {}),
     ...(phone ? { phone } : {}),

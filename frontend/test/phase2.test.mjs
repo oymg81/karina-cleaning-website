@@ -448,9 +448,7 @@ describe('FOES Leads Proxy Endpoint & Notes Length Strategy', () => {
 
     assert.equal(res.statusCode, 200);
     assert.equal(capturedUrl, 'https://app.foes.pro/api/public/leads');
-    assert.equal(capturedBody.key, 'test_leads_key_456');
-    assert.equal(capturedBody.formKey, undefined);
-    assert.equal(capturedBody.form_key, undefined);
+    assert.equal(capturedBody.formKey, 'test_leads_key_456');
     assert.equal(capturedBody.name, 'Oscar Mochizaki');
     assert.ok(capturedBody.notes.includes('UTM Source: facebook'));
     assert.ok(capturedBody.notes.includes('UTM Campaign: foes_e2e_test'));
