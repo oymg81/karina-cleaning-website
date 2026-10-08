@@ -220,6 +220,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'User-Agent': 'CleanCarePro-LeadsProxy/1.0',
+        'Origin': 'https://cleancareproservice.com',
       },
       body: JSON.stringify(foesPayload),
       signal: AbortSignal.timeout(8000),
