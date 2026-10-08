@@ -48,11 +48,11 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
     website_url: '', // Honeypot
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'degraded' | 'error'>('idle');
 
-  // Smoothly ensure confirmation is in view when status changes to success or error
+  // Smoothly ensure confirmation is in view when status changes to success, degraded, or error
   useEffect(() => {
-    if (submitStatus === 'success' || submitStatus === 'error') {
+    if (submitStatus === 'success' || submitStatus === 'degraded' || submitStatus === 'error') {
       if (formContainerRef.current) {
         formContainerRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
@@ -200,16 +200,13 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
       const emailSucceeded = emailResult.status === 'fulfilled';
       const foesSucceeded = foesResult.status === 'fulfilled';
 
-      if (emailSucceeded || foesSucceeded) {
-        // Tolerant dual-dispatch: At least one succeeded
+      if (foesSucceeded) {
+        // Authoritative FOES capture succeeded!
         if (!emailSucceeded) {
-          console.warn('[Dual-Dispatch] EmailJS delivery failed; lead captured successfully via FOES.');
-        }
-        if (!foesSucceeded) {
-          console.warn('[Dual-Dispatch] FOES proxy dispatch failed; notification delivered successfully via EmailJS.');
+          console.warn('[Dual-Dispatch] EmailJS backup delivery failed, but FOES authoritative capture succeeded.');
         }
 
-        // Fire analytics conversion event strictly once per successful submit (deduplicated & zero PII)
+        // Fire analytics conversion event strictly once per authoritative capture
         trackLeadConversion({
           service,
           locale: language,
@@ -219,9 +216,17 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
         setSubmitStatus('success');
         setFormData({ name: '', email: '', phone: '', service: 'residential', message: '', website_url: '' });
         onSuccess?.();
+      } else if (emailSucceeded) {
+        // FOES authoritative capture failed, but EmailJS fallback notification succeeded
+        console.warn('[Dual-Dispatch] FOES authoritative capture failed; notification delivered via EmailJS backup.');
+
+        // Set degraded state notice & clear form fields
+        setSubmitStatus('degraded');
+        setFormData({ name: '', email: '', phone: '', service: 'residential', message: '', website_url: '' });
+        onSuccess?.();
       } else {
         // Both destinations failed
-        console.error('[Dual-Dispatch] Both EmailJS and FOES submission failed.');
+        console.error('[Dual-Dispatch] Both FOES lead capture and EmailJS notification failed.');
         setSubmitStatus('error');
       }
     } catch {
@@ -297,6 +302,71 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-slate-800 hover:text-green-700 transition-colors py-1.5 px-3 rounded-lg hover:bg-green-100"
+              >
+                <FaWhatsapp className="w-4 h-4 text-green-600" />
+                <span>WhatsApp</span>
+              </a>
+            </div>
+
+            {/* Button to Submit Another Request */}
+            <button
+              type="button"
+              onClick={handleResetForNewSubmission}
+              className="inline-flex items-center gap-2 bg-white hover:bg-slate-50 text-slate-700 hover:text-slate-900 text-xs sm:text-sm font-bold px-5 py-2.5 rounded-xl border border-slate-300 shadow-sm transition-all active:scale-[0.98]"
+            >
+              <RefreshCw className="w-3.5 h-3.5 text-slate-500" />
+              <span>{t.cta.sendAnother}</span>
+            </button>
+          </motion.div>
+        ) : submitStatus === 'degraded' ? (
+          /* ===================================================
+             DEGRADED BACKUP NOTIFICATION CONFIRMATION
+             =================================================== */
+          <motion.div
+            key="degraded-confirmation"
+            initial={{ opacity: 0, scale: 0.95, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.4 }}
+            className="rounded-2xl bg-amber-50/90 border-2 border-amber-300 p-6 sm:p-8 text-center shadow-lg"
+            role="status"
+            aria-live="polite"
+          >
+            {/* Visual Checkmark Icon Badge */}
+            <div className="w-16 h-16 mx-auto rounded-2xl bg-amber-500 text-white flex items-center justify-center shadow-md shadow-amber-200 mb-5">
+              <CheckCircle2 className="w-10 h-10" />
+            </div>
+
+            {/* Headline */}
+            <h4 className="text-2xl font-extrabold text-slate-900 mb-2 tracking-tight">
+              {t.cta.degradedTitle}
+            </h4>
+
+            {/* Message Body */}
+            <p className="text-base sm:text-lg text-slate-700 font-medium max-w-md mx-auto leading-relaxed mb-3">
+              {t.cta.degradedMessage}
+            </p>
+
+            {/* Response Time Reassurance */}
+            <p className="text-xs sm:text-sm text-amber-900 bg-amber-100/80 rounded-xl px-4 py-2 max-w-sm mx-auto font-medium border border-amber-200/60 mb-6">
+              {t.cta.degradedSubtext}
+            </p>
+
+            {/* Direct Contact Options */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6 pt-2 border-t border-amber-200/70">
+              <a
+                href="tel:714-473-1140"
+                className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-slate-800 hover:text-blue-700 transition-colors py-1.5 px-3 rounded-lg hover:bg-amber-100"
+              >
+                <Phone className="w-4 h-4 text-blue-600" />
+                <span>(714) 473-1140</span>
+              </a>
+              <span className="hidden sm:inline text-amber-300">•</span>
+              <a
+                href="https://wa.me/17144731140"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-slate-800 hover:text-green-700 transition-colors py-1.5 px-3 rounded-lg hover:bg-amber-100"
               >
                 <FaWhatsapp className="w-4 h-4 text-green-600" />
                 <span>WhatsApp</span>

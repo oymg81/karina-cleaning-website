@@ -202,7 +202,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   });
 
   const foesPayload = {
-    formKey,
+    key: formKey,
     name,
     ...(email ? { email } : {}),
     ...(phone ? { phone } : {}),
@@ -211,8 +211,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     notes,
   };
 
+  const targetUrl = `${apiUrl}/api/public/leads`;
+
   try {
-    const response = await fetch(`${apiUrl}/api/public/leads`, {
+    const response = await fetch(targetUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -223,17 +225,45 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       signal: AbortSignal.timeout(8000),
     });
 
-    if (response.status === 200 || response.status === 201) {
+    const isSuccess = response.status === 200 || response.status === 201;
+
+    // Structured server-side logging without PII or secrets
+    console.log(
+      JSON.stringify({
+        event: isSuccess ? 'foes_lead_captured' : 'foes_lead_rejected',
+        submission_id,
+        route: '/api/foes/leads',
+        timestamp: new Date().toISOString(),
+        upstream_status: response.status,
+        success: isSuccess,
+      })
+    );
+
+    if (isSuccess) {
       return res.status(200).json({
         success: true,
         message: 'Lead received successfully',
+        submission_id,
       });
     }
+
+    const errText = await response.text().catch(() => '');
+    console.warn(
+      JSON.stringify({
+        event: 'foes_upstream_error_detail',
+        submission_id,
+        route: '/api/foes/leads',
+        timestamp: new Date().toISOString(),
+        upstream_status: response.status,
+        error_summary: errText.slice(0, 150),
+      })
+    );
 
     if (response.status === 400) {
       return res.status(400).json({
         success: false,
         error: 'Lead submission could not be processed',
+        submission_id,
       });
     }
 
@@ -241,17 +271,30 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(429).json({
         success: false,
         error: 'Too many submissions. Please try again later.',
+        submission_id,
       });
     }
 
     return res.status(503).json({
       success: false,
       error: 'Lead service temporarily unavailable. Please try again later.',
+      submission_id,
     });
-  } catch {
+  } catch (err) {
+    console.error(
+      JSON.stringify({
+        event: 'foes_proxy_network_failure',
+        submission_id,
+        route: '/api/foes/leads',
+        timestamp: new Date().toISOString(),
+        error: err instanceof Error ? err.message : 'Unknown network failure',
+      })
+    );
+
     return res.status(503).json({
       success: false,
       error: 'Lead service temporarily unavailable. Please try again later.',
+      submission_id,
     });
   }
 }

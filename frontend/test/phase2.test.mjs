@@ -319,6 +319,8 @@ describe('FOES Leads Proxy Endpoint & Notes Length Strategy', () => {
     res = createMockRes();
     await leadsHandler(req, res);
     assert.equal(res.statusCode, 200);
+    assert.equal(res.data.success, true);
+    assert.equal(res.data.submission_id, 'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11');
   });
 
   test('Deterministic buildFoesNotes guarantees output <= 1000 characters with oversized messages', () => {
@@ -358,66 +360,171 @@ describe('FOES Leads Proxy Endpoint & Notes Length Strategy', () => {
     assert.equal(res.statusCode, 400);
     assert.match(res.data.error, /phone/i);
   });
+
+  test('Missing FOES_PUBLIC_FORM_KEY returns 503 without leaking configuration details', async () => {
+    delete process.env.FOES_PUBLIC_FORM_KEY;
+    const req = createMockReq({
+      method: 'POST',
+      body: {
+        name: 'Valid Name',
+        email: 'valid@example.com',
+        submission_id: '123e4567-e89b-12d3-a456-426614174000',
+      },
+    });
+    const res = createMockRes();
+    await leadsHandler(req, res);
+    assert.equal(res.statusCode, 503);
+    assert.equal(res.data.success, false);
+  });
+
+  test('Upstream FOES 400 validation error returns 400 with correlation ID', async () => {
+    globalThis.fetch = async () => ({
+      ok: false,
+      status: 400,
+      text: async () => JSON.stringify({ error: 'Invalid field structure' }),
+    });
+
+    const req = createMockReq({
+      method: 'POST',
+      body: {
+        name: 'Oscar Test',
+        email: 'oscar@example.com',
+        submission_id: '123e4567-e89b-12d3-a456-426614174000',
+      },
+    });
+    const res = createMockRes();
+    await leadsHandler(req, res);
+    assert.equal(res.statusCode, 400);
+    assert.equal(res.data.success, false);
+    assert.equal(res.data.submission_id, '123e4567-e89b-12d3-a456-426614174000');
+  });
+
+  test('Upstream FOES timeout / network failure returns 503 gracefully', async () => {
+    globalThis.fetch = async () => {
+      throw new Error('Network timeout connecting to FOES upstream');
+    };
+
+    const req = createMockReq({
+      method: 'POST',
+      body: {
+        name: 'Oscar Test',
+        email: 'oscar@example.com',
+        submission_id: '123e4567-e89b-12d3-a456-426614174000',
+      },
+    });
+    const res = createMockRes();
+    await leadsHandler(req, res);
+    assert.equal(res.statusCode, 503);
+    assert.equal(res.data.success, false);
+    assert.equal(res.data.submission_id, '123e4567-e89b-12d3-a456-426614174000');
+  });
+
+  test('Payload forwards canonical key and structured fields to FOES', async () => {
+    let capturedUrl = '';
+    let capturedBody = null;
+
+    globalThis.fetch = async (url, options) => {
+      capturedUrl = url;
+      capturedBody = JSON.parse(options.body);
+      return { ok: true, status: 201, json: async () => ({}) };
+    };
+
+    const req = createMockReq({
+      method: 'POST',
+      body: {
+        name: 'Oscar Mochizaki',
+        email: 'oscar@example.com',
+        phone: '(714) 555-0199',
+        service: 'Move-in/Move-out',
+        message: 'Facebook campaign test',
+        utm_source: 'facebook',
+        utm_medium: 'paid',
+        utm_campaign: 'foes_e2e_test',
+        submission_id: 'c56a4180-65aa-42ec-a945-5fd21dec0538',
+      },
+    });
+    const res = createMockRes();
+    await leadsHandler(req, res);
+
+    assert.equal(res.statusCode, 200);
+    assert.equal(capturedUrl, 'https://app.foes.pro/api/public/leads');
+    assert.equal(capturedBody.key, 'test_leads_key_456');
+    assert.equal(capturedBody.formKey, undefined);
+    assert.equal(capturedBody.form_key, undefined);
+    assert.equal(capturedBody.name, 'Oscar Mochizaki');
+    assert.ok(capturedBody.notes.includes('UTM Source: facebook'));
+    assert.ok(capturedBody.notes.includes('UTM Campaign: foes_e2e_test'));
+  });
 });
 
 // ----------------------------------------------------
 // 4. Dual-Dispatch Logic Matrix Tests
 // ----------------------------------------------------
-describe('Quote Form Dual-Dispatch Logic Matrix', () => {
-  async function simulateDualDispatch(emailJsFn, foesFn) {
+describe('Quote Form Authoritative Dispatch Logic Matrix', () => {
+  async function simulateAuthoritativeDispatch(emailJsFn, foesFn) {
     const [emailResult, foesResult] = await Promise.allSettled([emailJsFn(), foesFn()]);
     const emailSuccess = emailResult.status === 'fulfilled';
     const foesSuccess = foesResult.status === 'fulfilled';
 
-    if (emailSuccess || foesSuccess) {
+    if (foesSuccess) {
       return {
         status: 'success',
-        partial: !emailSuccess || !foesSuccess,
+        emailSuccess,
+        foesSuccess,
+      };
+    }
+    if (emailSuccess) {
+      return {
+        status: 'degraded',
         emailSuccess,
         foesSuccess,
       };
     }
     return {
       status: 'error',
-      partial: false,
-      emailSuccess: false,
-      foesSuccess: false,
+      emailSuccess,
+      foesSuccess,
     };
   }
 
-  test('Both EmailJS and FOES succeed -> Overall SUCCESS', async () => {
-    const res = await simulateDualDispatch(
+  test('Both EmailJS and FOES succeed -> Authoritative SUCCESS', async () => {
+    const res = await simulateAuthoritativeDispatch(
       async () => ({ status: 200, text: 'OK' }),
       async () => ({ success: true })
     );
     assert.equal(res.status, 'success');
-    assert.equal(res.partial, false);
+    assert.equal(res.foesSuccess, true);
+    assert.equal(res.emailSuccess, true);
   });
 
-  test('FOES succeeds, EmailJS fails -> Tolerant overall SUCCESS without customer error', async () => {
-    const res = await simulateDualDispatch(
+  test('FOES succeeds, EmailJS fails -> Authoritative SUCCESS', async () => {
+    const res = await simulateAuthoritativeDispatch(
       async () => { throw new Error('EmailJS Network Timeout'); },
       async () => ({ success: true })
     );
     assert.equal(res.status, 'success');
-    assert.equal(res.partial, true);
+    assert.equal(res.foesSuccess, true);
+    assert.equal(res.emailSuccess, false);
   });
 
-  test('EmailJS succeeds, FOES fails -> Tolerant overall SUCCESS without customer error', async () => {
-    const res = await simulateDualDispatch(
+  test('EmailJS succeeds, FOES fails -> DEGRADED (Backup notice, not silent full success)', async () => {
+    const res = await simulateAuthoritativeDispatch(
       async () => ({ status: 200, text: 'OK' }),
       async () => { throw new Error('FOES 503 Unavailable'); }
     );
-    assert.equal(res.status, 'success');
-    assert.equal(res.partial, true);
+    assert.equal(res.status, 'degraded');
+    assert.equal(res.foesSuccess, false);
+    assert.equal(res.emailSuccess, true);
   });
 
   test('Both EmailJS and FOES fail -> Actionable ERROR', async () => {
-    const res = await simulateDualDispatch(
+    const res = await simulateAuthoritativeDispatch(
       async () => { throw new Error('EmailJS Fail'); },
       async () => { throw new Error('FOES Fail'); }
     );
     assert.equal(res.status, 'error');
+    assert.equal(res.foesSuccess, false);
+    assert.equal(res.emailSuccess, false);
   });
 });
 
