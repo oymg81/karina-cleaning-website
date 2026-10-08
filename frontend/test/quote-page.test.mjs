@@ -97,3 +97,31 @@ describe('Dedicated /quote Route & Conversion Architecture', () => {
     assert.ok(notes.length <= 1000);
   });
 });
+
+describe('QuoteForm Success & Error UX Contract', () => {
+  it('contains clear, unmistakable confirmation copy in English translations', async () => {
+    const { translations } = await import('../src/translations.ts');
+    assert.strictEqual(translations.en.cta.successTitle, 'Request Sent Successfully!');
+    assert.strictEqual(
+      translations.en.cta.successMessage,
+      'Thank you! We received your request and will contact you shortly.'
+    );
+    assert.ok(translations.en.cta.successSubtext.length > 10);
+    assert.ok(translations.en.cta.sendAnother.length > 3);
+    assert.strictEqual(translations.en.cta.errorTitle, "We couldn't send your request");
+    assert.ok(translations.en.cta.errorMessage.includes('(714) 473-1140'));
+  });
+
+  it('contains clear, unmistakable confirmation copy in Spanish translations', async () => {
+    const { translations } = await import('../src/translations.ts');
+    assert.strictEqual(translations.es.cta.successTitle, '¡Solicitud enviada correctamente!');
+    assert.strictEqual(
+      translations.es.cta.successMessage,
+      'Gracias. Recibimos tu solicitud y nos pondremos en contacto contigo pronto.'
+    );
+    assert.ok(translations.es.cta.successSubtext.length > 10);
+    assert.ok(translations.es.cta.sendAnother.length > 3);
+    assert.strictEqual(translations.es.cta.errorTitle, 'No pudimos enviar su solicitud');
+    assert.ok(translations.es.cta.errorMessage.includes('(714) 473-1140'));
+  });
+});

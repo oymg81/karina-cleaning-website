@@ -286,7 +286,13 @@ export const translations = {
       message: 'Message (Optional)',
       messagePlaceholder: 'Tell us about your space and specific needs...',
       sendRequest: 'Send Request',
-      successMessage: 'Thank you! Your request has been submitted. We will contact you shortly.'
+      sending: 'Sending...',
+      successTitle: 'Request Sent Successfully!',
+      successMessage: 'Thank you! We received your request and will contact you shortly.',
+      successSubtext: 'We typically respond within 1 business hour during operating hours.',
+      sendAnother: 'Send another request',
+      errorTitle: "We couldn't send your request",
+      errorMessage: 'Please try again or contact us directly by phone at (714) 473-1140 or via WhatsApp.',
     },
     quotePage: {
       badge: 'Top-Rated Cleaning Services in California',
@@ -628,7 +634,13 @@ export const translations = {
       message: 'Mensaje (Opcional)',
       messagePlaceholder: 'Cuéntenos sobre su espacio y necesidades específicas...',
       sendRequest: 'Enviar Solicitud',
-      successMessage: '¡Gracias! Su solicitud ha sido enviada. Nos pondremos en contacto con usted a la brevedad.'
+      sending: 'Enviando...',
+      successTitle: '¡Solicitud enviada correctamente!',
+      successMessage: 'Gracias. Recibimos tu solicitud y nos pondremos en contacto contigo pronto.',
+      successSubtext: 'Por lo general respondemos en menos de 1 hora hábil durante nuestro horario de atención.',
+      sendAnother: 'Enviar otra solicitud',
+      errorTitle: 'No pudimos enviar su solicitud',
+      errorMessage: 'Por favor, inténtelo de nuevo o contáctenos directamente por teléfono al (714) 473-1140 o por WhatsApp.',
     },
     quotePage: {
       badge: 'Servicios de Limpieza de Máxima Calificación en California',
