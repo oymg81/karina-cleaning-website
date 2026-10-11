@@ -110,6 +110,31 @@ export function initAnalytics(): void {
 }
 
 /**
+ * Fires virtual pageview tracking on SPA client-side route changes.
+ * Avoids duplicate hits by relying on GA4 config's send_page_view on initial load,
+ * and dispatching page_view events on subsequent navigation transitions.
+ */
+export function trackPageView(path: string): void {
+  if (typeof window === 'undefined') {
+    return;
+  }
+
+  const safePath = path ? String(path).slice(0, 500) : (window.location.pathname || '/');
+
+  if (typeof window.gtag === 'function') {
+    try {
+      window.gtag('event', 'page_view', {
+        page_path: safePath,
+        page_location: window.location.href,
+        page_title: typeof document !== 'undefined' ? document.title : undefined,
+      });
+    } catch {
+      // Safe no-op
+    }
+  }
+}
+
+/**
  * Fires conversion tracking events (GA4 generate_lead, Meta Lead).
  * Strictly excludes any Personally Identifiable Information (PII) like names, emails, phones, or messages.
  */

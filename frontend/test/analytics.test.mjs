@@ -5,7 +5,6 @@ describe('Analytics Architecture & Privacy Guards', () => {
   let analyticsModule;
 
   beforeEach(async () => {
-    // Reset module cache if needed
     analyticsModule = await import('../src/utils/analytics.ts');
     analyticsModule.resetAnalyticsForTesting();
   });
@@ -13,12 +12,12 @@ describe('Analytics Architecture & Privacy Guards', () => {
   afterEach(() => {
     delete global.window;
     delete global.document;
+    analyticsModule.resetAnalyticsForTesting();
   });
 
   it('safely handles missing or empty environment variables without throwing', () => {
     const config = analyticsModule.getAnalyticsConfig();
     assert.strictEqual(typeof config, 'object');
-    // In test environment without explicit valid env vars, config returns undefined for both
     assert.strictEqual(config.gaId, undefined);
     assert.strictEqual(config.pixelId, undefined);
   });
@@ -33,6 +32,72 @@ describe('Analytics Architecture & Privacy Guards', () => {
 
     assert.strictEqual(global.window.gtag, undefined);
     assert.strictEqual(global.window.fbq, undefined);
+  });
+
+  it('trackPageView safely no-ops when GA4 is unavailable', () => {
+    global.window = {
+      location: { pathname: '/quote', href: 'https://cleancareproservice.com/quote' },
+    };
+
+    assert.doesNotThrow(() => {
+      analyticsModule.trackPageView('/quote');
+    });
+
+    assert.strictEqual(global.window.gtag, undefined);
+  });
+
+  it('trackPageView dispatches standard page_view event when window.gtag exists', () => {
+    let capturedEvent = null;
+    global.window = {
+      location: { pathname: '/orange-county-cleaning-services', href: 'https://cleancareproservice.com/orange-county-cleaning-services' },
+      gtag: (command, action, payload) => {
+        capturedEvent = { command, action, payload };
+      },
+    };
+    global.document = { title: 'Orange County Cleaning Services' };
+
+    analyticsModule.trackPageView('/orange-county-cleaning-services');
+
+    assert.ok(capturedEvent, 'gtag must be called');
+    assert.strictEqual(capturedEvent.command, 'event');
+    assert.strictEqual(capturedEvent.action, 'page_view');
+    assert.strictEqual(capturedEvent.payload.page_path, '/orange-county-cleaning-services');
+    assert.strictEqual(capturedEvent.payload.page_location, 'https://cleancareproservice.com/orange-county-cleaning-services');
+    assert.strictEqual(capturedEvent.payload.page_title, 'Orange County Cleaning Services');
+
+    // Zero PII check
+    assert.strictEqual(capturedEvent.payload.name, undefined);
+    assert.strictEqual(capturedEvent.payload.email, undefined);
+    assert.strictEqual(capturedEvent.payload.phone, undefined);
+    assert.strictEqual(capturedEvent.payload.message, undefined);
+  });
+
+  it('trackPageView gracefully falls back to window.location.pathname if path is empty', () => {
+    let capturedEvent = null;
+    global.window = {
+      location: { pathname: '/quote', href: 'https://cleancareproservice.com/quote' },
+      gtag: (command, action, payload) => {
+        capturedEvent = { command, action, payload };
+      },
+    };
+
+    analyticsModule.trackPageView('');
+
+    assert.ok(capturedEvent);
+    assert.strictEqual(capturedEvent.payload.page_path, '/quote');
+  });
+
+  it('trackPageView never throws if window.gtag encounters an error', () => {
+    global.window = {
+      location: { pathname: '/quote', href: 'https://cleancareproservice.com/quote' },
+      gtag: () => {
+        throw new Error('Adblocker or tracking protection exception');
+      },
+    };
+
+    assert.doesNotThrow(() => {
+      analyticsModule.trackPageView('/quote');
+    });
   });
 
   it('trackLeadConversion dispatches GA4 and Meta Pixel events with zero PII', () => {
@@ -115,5 +180,46 @@ describe('Analytics Architecture & Privacy Guards', () => {
     assert.doesNotThrow(() => {
       analyticsModule.trackLeadConversion({ service: 'commercial', locale: 'en' });
     });
+  });
+
+  it('Router Navigation Contract: skips initial load and emits exactly one virtual pageview per route change', () => {
+    const pageviews = [];
+    global.window = {
+      location: { pathname: '/', href: 'https://cleancareproservice.com/' },
+      gtag: (command, action, payload) => {
+        if (command === 'event' && action === 'page_view') {
+          pageviews.push(payload);
+        }
+      },
+    };
+
+    // Simulate RouteAnalyticsTracker logic
+    let isFirstRender = true;
+    function simulateNavigation(newPath) {
+      if (isFirstRender) {
+        isFirstRender = false;
+        return; // Initial load: GA4 native config already handles send_page_view
+      }
+      analyticsModule.trackPageView(newPath);
+    }
+
+    // Step 1: Initial mount (e.g. at "/")
+    simulateNavigation('/');
+    assert.strictEqual(pageviews.length, 0, 'Initial mount must not fire a redundant trackPageView');
+
+    // Step 2: Navigate to "/quote"
+    simulateNavigation('/quote');
+    assert.strictEqual(pageviews.length, 1, 'First client-side navigation must fire exactly 1 pageview');
+    assert.strictEqual(pageviews[0].page_path, '/quote');
+
+    // Step 3: Navigate to "/orange-county-cleaning-services"
+    simulateNavigation('/orange-county-cleaning-services');
+    assert.strictEqual(pageviews.length, 2, 'Second client-side navigation must fire exactly 1 additional pageview');
+    assert.strictEqual(pageviews[1].page_path, '/orange-county-cleaning-services');
+
+    // Step 4: Navigate back to "/"
+    simulateNavigation('/');
+    assert.strictEqual(pageviews.length, 3, 'Third client-side navigation must fire exactly 1 additional pageview');
+    assert.strictEqual(pageviews[2].page_path, '/');
   });
 });

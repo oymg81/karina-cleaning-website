@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import WhatsAppFloatingButton from './components/WhatsAppFloatingButton';
 import ScrollToTop from './components/ScrollToTop';
+import RouteAnalyticsTracker from './components/RouteAnalyticsTracker';
 import HomePage from './pages/HomePage';
 import ServiceAreaPage from './pages/ServiceAreaPage';
 import PrivacyPage from './pages/PrivacyPage';
@@ -15,6 +16,7 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <ScrollToTop />
+      <RouteAnalyticsTracker />
       <Navbar />
 
       <main className="flex-grow">
