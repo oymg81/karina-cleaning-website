@@ -142,14 +142,13 @@ const ServiceAreaPage: React.FC<ServiceAreaPageProps> = ({ slug: propSlug }) => 
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-2">
-              <a
-                href="#contact"
-                onClick={handleScrollToContact}
+              <Link
+                to="/quote"
                 className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-2xl font-bold transition-all shadow-lg hover:shadow-xl hover:shadow-blue-600/25 text-center text-base inline-flex items-center justify-center gap-2"
               >
-                <span>{language === 'en' ? 'Request a Free Quote' : 'Solicitar Cotización Gratis'}</span>
+                <span>{language === 'en' ? 'Request a Free Cleaning Estimate' : 'Solicitar un Estimado de Limpieza'}</span>
                 <ArrowRight className="w-4 h-4" />
-              </a>
+              </Link>
               <a
                 href="tel:7144731140"
                 className="inline-flex items-center justify-center gap-3 bg-white hover:bg-slate-50 text-slate-900 border border-slate-200 px-8 py-4 rounded-2xl font-bold transition-all shadow-sm hover:shadow-md text-base"
@@ -431,7 +430,9 @@ const ServiceAreaPage: React.FC<ServiceAreaPageProps> = ({ slug: propSlug }) => 
                     >
                       <span className="flex items-center gap-2">
                         <MapPin className="w-4 h-4 text-blue-600" />
-                        {otherArea.name}, CA
+                        {language === 'en'
+                          ? `Cleaning Services in ${otherArea.name}`
+                          : `Servicios de Limpieza en ${otherArea.name}`}
                       </span>
                       <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-transform" />
                     </Link>

@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { CheckCircle } from 'lucide-react';
 import { useLanguage } from '../hooks/useLanguage';
 
 const Hero: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   return (
     <section id="home" className="pt-32 pb-24 bg-white">
@@ -33,8 +34,17 @@ const Hero: React.FC = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mb-8">
-            <a href="#contact" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-all text-center">
-              {t.navbar.quote}
+            <Link
+              to="/quote"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-7 py-3.5 rounded-xl font-bold transition-all text-center shadow-md hover:shadow-lg inline-flex items-center justify-center gap-2"
+            >
+              <span>{t.navbar.quote}</span>
+            </Link>
+            <a
+              href="#service-areas"
+              className="border border-slate-300 hover:border-slate-400 bg-white hover:bg-slate-50 text-slate-800 px-6 py-3.5 rounded-xl font-semibold transition-all text-center"
+            >
+              {language === 'en' ? 'View Service Areas' : 'Ver Áreas de Servicio'}
             </a>
           </div>
 

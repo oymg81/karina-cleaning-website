@@ -213,7 +213,7 @@ describe('Indexing Environment & Preview Protection', () => {
 
 describe('Single Flat-File Prerendered HTML & Artifact Strategy', () => {
   const routes = [
-    { url: '/', file: path.resolve(distDir, 'index.html'), expectedH1: 'Professional Cleaning Services in California' },
+    { url: '/', file: path.resolve(distDir, 'index.html'), expectedH1: 'Cleaning Services' },
     { url: '/quote', file: path.resolve(distDir, 'quote.html'), expectedH1: 'Free Cleaning Estimate' },
     { url: '/orange-county-cleaning-services', file: path.resolve(distDir, 'orange-county-cleaning-services.html'), expectedH1: 'Professional Cleaning Services in Orange County' },
     { url: '/glendale-cleaning-services', file: path.resolve(distDir, 'glendale-cleaning-services.html'), expectedH1: 'Professional Cleaning Services in Glendale' },

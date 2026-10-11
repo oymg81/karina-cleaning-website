@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import Hero from '../components/Hero';
 import BusinessHours from '../components/BusinessHours';
 import Services from '../components/Services';
+import HomeServiceAreas from '../components/HomeServiceAreas';
 import About from '../components/About';
 import ReviewsSection from '../components/ReviewsSection';
 import CtaSection from '../components/CtaSection';
@@ -31,6 +32,7 @@ const HomePage: React.FC = () => {
       <Hero />
       <BusinessHours />
       <Services />
+      <HomeServiceAreas />
       <About />
       <ReviewsSection />
       <CtaSection />

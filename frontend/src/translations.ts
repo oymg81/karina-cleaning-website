@@ -11,11 +11,11 @@ export const translations = {
       quote: 'Free Estimate'
     },
     hero: {
-      topRated: 'Top-Rated in Los Angeles - CA',
-      title1: 'Professional',
+      topRated: 'Top-Rated in Orange County & Los Angeles',
+      title1: 'House & Commercial',
       title2: 'Cleaning Services',
-      title3: 'in California',
-      subtitle: 'Clean & Care PRO provides top-quality residential and commercial cleaning services with attention to detail you can trust.',
+      title3: 'in Orange County & LA',
+      subtitle: 'Clean & Care PRO delivers dependable residential and commercial cleaning solutions tailored to your schedule across Orange County and Southern California communities.',
       bookNow: 'Book Now',
       trustText: 'Licensed • Insured • Satisfaction Guaranteed',
       guaranteed: 'Guaranteed'
@@ -362,11 +362,11 @@ export const translations = {
       quote: 'Estimado Gratis'
     },
     hero: {
-      topRated: 'Mejor Calificados en Los Angeles - CA',
+      topRated: 'Mejor Calificados en Orange County y Los Ángeles',
       title1: 'Servicios de',
-      title2: 'Limpieza Profesional',
-      title3: 'en California',
-      subtitle: 'Clean & Care PRO ofrece servicios de limpieza residencial y comercial de alta calidad con atención al detalle en la que puede confiar.',
+      title2: 'Limpieza Residencial y Comercial',
+      title3: 'en Orange County y LA',
+      subtitle: 'Clean & Care PRO ofrece soluciones confiables de limpieza residencial y comercial adaptadas a su espacio en Orange County y el sur de California.',
       bookNow: 'Reservar Ahora',
       trustText: 'Licenciados • Asegurados • Satisfacción Garantizada',
       guaranteed: 'Garantizado'

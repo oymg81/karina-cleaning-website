@@ -14,7 +14,7 @@ const serviceAreaLinks: Record<string, string> = {
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -116,6 +116,7 @@ const Footer: React.FC = () => {
               <li><a href="#home" onClick={(e) => handleAnchorClick(e, '#home')} className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.home}</a></li>
               <li><a href="#services" onClick={(e) => handleAnchorClick(e, '#services')} className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.services}</a></li>
               <li><a href="#about" onClick={(e) => handleAnchorClick(e, '#about')} className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.about}</a></li>
+              <li><Link to="/quote" className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{language === 'en' ? 'Free Estimate' : 'Estimado Gratis'}</Link></li>
               <li><a href="#contact" onClick={(e) => handleAnchorClick(e, '#contact')} className="text-slate-700 hover:text-green-600 transition-colors font-medium text-sm">{t.navbar.contact}</a></li>
             </ul>
           </div>
